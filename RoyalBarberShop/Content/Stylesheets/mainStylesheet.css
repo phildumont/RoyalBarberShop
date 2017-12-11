@@ -1,16 +1,13 @@
 html {height: 100%;}
-body {
-	height: 100%;
-    margin: 0;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-}
 .mainBackground {
 	background-color: #5b5a5e;
-	background: -webkit-linear-gradient(#5b5a5e, lightgrey);
-    background: -o-linear-gradient(#5b5a5e, lightgrey);
-    background: -moz-linear-gradient(#5b5a5e, lightgrey);
-    background: linear-gradient(#5b5a5e, lightgrey);
+	background: -webkit-linear-gradient(#5b5a5e, lightgrey) fixed;
+    background: -o-linear-gradient(#5b5a5e, lightgrey) fixed;
+    background: -moz-linear-gradient(#5b5a5e, lightgrey) fixed;
+    background: linear-gradient(#5b5a5e, lightgrey) fixed;
+	min-height: 100%;
+    margin: auto;
+    background-repeat: no-repeat;
 }
 .myTitle {
 	color: black;
@@ -43,3 +40,6 @@ a:active {color:white;}
 .no_margin_top {margin-top:0;}
 .no_margin_bottom {margin-bottom: 0;}
 .bold {font-weight: bold;}
+.carousel_picture {
+	width: 864px;
+}
