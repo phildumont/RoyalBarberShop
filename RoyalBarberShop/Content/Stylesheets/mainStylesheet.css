@@ -1,0 +1,45 @@
+html {height: 100%;}
+body {
+	height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+.mainBackground {
+	background-color: #5b5a5e;
+	background: -webkit-linear-gradient(#5b5a5e, lightgrey);
+    background: -o-linear-gradient(#5b5a5e, lightgrey);
+    background: -moz-linear-gradient(#5b5a5e, lightgrey);
+    background: linear-gradient(#5b5a5e, lightgrey);
+}
+.myTitle {
+	color: black;
+	margin-top: 15px;
+	margin-bottom:80px;
+	font-family: "Comic sans", Times, serif;
+	font-weight: bold;
+	font-size: 35pt;
+}
+.homePicture {
+	width:432px;
+	height: 288px;
+}
+.subTitle {
+	margin-top: 15px;
+}
+a {color: #333538;}
+a:hover {
+	color: white;
+	background-color:white;
+}
+a:visited {color: white;}
+a:active {color:white;}
+.inverted {filter: invert(87%);}
+
+.nav_logo {
+	height: 49.375px;
+	width: 76.25px;
+}
+.no_margin_top {margin-top:0;}
+.no_margin_bottom {margin-bottom: 0;}
+.bold {font-weight: bold;}
