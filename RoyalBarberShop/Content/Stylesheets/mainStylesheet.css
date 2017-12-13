@@ -1,0 +1,95 @@
+html {height: 100%;}
+.mainBackground {
+	background-color: #5b5a5e;
+	background: -webkit-linear-gradient(#5b5a5e, lightgrey) fixed;
+    background: -o-linear-gradient(#5b5a5e, lightgrey) fixed;
+    background: -moz-linear-gradient(#5b5a5e, lightgrey) fixed;
+    background: linear-gradient(#5b5a5e, lightgrey) fixed;
+	min-height: 100%;
+    margin: auto;
+    background-repeat: no-repeat;
+}
+.myTitle {
+	color: black;
+	margin-top: 15px;
+	margin-bottom:80px;
+	font-family: "Comic sans", Times, serif;
+	font-weight: bold;
+	font-size: 35pt;
+}
+.homePicture {
+	width:432px;
+	height: 288px;
+}
+.subTitle {
+	margin-top: 15px;
+}
+a {color: #333538;}
+a:hover {
+	color: white;
+	background-color:white;
+}
+a:visited {color: white;}
+a:active {color:white;}
+.inverted {filter: invert(87%);}
+
+.nav_logo {
+	height: 49.375px;
+	width: 76.25px;
+}
+.no_margin_top {margin-top:0;}
+.no_margin_bottom {margin-bottom: 0;}
+.margin_bottom_5 {margin-bottom: 5px;}
+.no_border_bottom {border-bottom: none;}
+.bold {font-weight: bold;}
+
+.custom_radio  {
+	transform: scale(2);
+	padding-left: 30px;
+}
+.app_ul {
+	list-style: none;
+	font-size: 15pt;
+}
+.select_barber_img {
+	width: 103.68px;
+	height: 103.68px;
+	border-radius: 50%;
+}
+li {padding-bottom:15px;}
+.selection {
+	background-color: #e6e9ef;
+	min-height: 405px;
+}
+.description {
+	font-size: 12pt;
+	padding-left: 10px;
+}
+.custom_button {
+	margin-top: 5px;
+	height: 45px;
+	width: 90px;
+	border-radius: 30%;
+	background-color: #e6e9ef;
+}
+.custom_button:hover {
+	background-color: black;
+	color: white;
+}
+td {
+	padding-bottom: 10px;
+	padding-right: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
