@@ -36,5 +36,32 @@
 	  </div>
 	</nav>
 	<!-- Nav bar end -->
+	
+	<!-- Body start -->
+		<h1 class="myTitle text-center margin_bottom_5">Royal Barber Shop</h1>
+		<h2 class="text-center">Log in</h2>
+		<div class="container">
+			<div class="col-sm-4"></div>
+			<form class="col-sm-4" action="../Controllers/loginController.php" method="post">
+				<table>
+			<form class="col-sm-4">
+				<table>
+					<tr>
+						<td><label for="fname">First Name:</label></td>
+						<td><input type="text" name="fname" /></td>
+					</tr>
+					<tr>
+						<td><label for="lname">Last Name:</label></td>
+						<td><input type="text" name="lname" /></td>
+					</tr>
+					<tr>
+						<td><label for="email"></label></td>
+						<td><input type="text" name="lname" /></td>
+					</tr>
+				</table>
+				<input type="submit" value="Login">
+			</form>
+		</div>
+	<!--Body end -->
 </body>
 </html>
