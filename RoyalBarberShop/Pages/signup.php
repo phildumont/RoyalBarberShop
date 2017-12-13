@@ -39,27 +39,35 @@
 	
 	<!-- Body start -->
 		<h1 class="myTitle text-center margin_bottom_5">Royal Barber Shop</h1>
-		<h2 class="text-center">Log in</h2>
+		<h2 class="text-center">Sign up</h2>
 		<div class="container">
 			<div class="col-sm-4"></div>
-			<form class="col-sm-4" action="../Controllers/loginController.php" method="post">
+			<form class="col-sm-4" action="../Controllers/signUpController.php" method="post">
 				<table>
 			<form class="col-sm-4">
 				<table>
 					<tr>
-						<td><label for="fname">First Name:</label></td>
-						<td><input type="text" name="fname" /></td>
+						<td><label for="fname">Prénom:</label></td>
+						<td><input type="text" name="fname" required /></td>
 					</tr>
 					<tr>
-						<td><label for="lname">Last Name:</label></td>
-						<td><input type="text" name="lname" /></td>
+						<td><label for="lname">Nom de famille:</label></td>
+						<td><input type="text" name="lname" required /></td>
 					</tr>
 					<tr>
-						<td><label for="email"></label></td>
-						<td><input type="text" name="lname" /></td>
+						<td><label for="email">Adresse courriel:</label></td>
+						<td><input type="text" name="email" required /></td>
+					</tr>
+					<tr>
+						<td><label for="password">Mot de passe:</label></td>
+						<td><input type="password" name="password" required /></td>
+					</tr>
+					<tr>
+						<td><label for="confirm">Confirmer le mot de passe:</label></td>
+						<td><input type="password" name="confirm" required /></td>
 					</tr>
 				</table>
-				<input type="submit" value="Login">
+				<center><input type="submit" value="Sign up" class="custom_button"></center>
 			</form>
 		</div>
 	<!--Body end -->
