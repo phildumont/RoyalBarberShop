@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<?php session_start() ?>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -36,15 +37,19 @@
 	  </div>
 	</nav>
 	<!-- Nav bar end -->
-	
+	<?php
+		$error_messages = [];
+		if (isset($_SESSION["error_messages"])){
+			$error_messages = $_SESSION["error_messages"];
+			unset($_SESSION["error_messages"]);
+		}
+	?>
 	<!-- Body start -->
 		<h1 class="myTitle text-center margin_bottom_5">Royal Barber Shop</h1>
 		<h2 class="text-center">Sign up</h2>
 		<div class="container">
 			<div class="col-sm-4"></div>
 			<form class="col-sm-4" action="../Controllers/signUpController.php" method="post">
-				<table>
-			<form class="col-sm-4">
 				<table>
 					<tr>
 						<td><label for="fname">Prénom:</label></td>
@@ -66,6 +71,11 @@
 						<td><label for="confirm">Confirmer le mot de passe:</label></td>
 						<td><input type="password" name="confirm" required /></td>
 					</tr>
+					<?php 
+						foreach($error_messages as $item){
+							echo "<tr><td>".$item."</td></tr>";
+						}
+					?>
 				</table>
 				<center><input type="submit" value="Sign up" class="custom_button"></center>
 			</form>
