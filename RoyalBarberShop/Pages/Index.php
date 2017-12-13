@@ -33,7 +33,7 @@
 		  </ul>
 		  <ul class="nav navbar-nav navbar-right">
 			<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-			<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+			<li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
 		  </ul>
 		</div>
 	  </div>
@@ -65,7 +65,7 @@
 					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque varius sapien at tincidunt cursus. In porttitor ante pretium nulla molestie, non auctor enim molestie. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque arcu eros, laoreet et magna ultrices, pharetra ultricies tellus. Morbi non consectetur sapien. Etiam id tempus tellus. Pellentesque id tempus odio. Proin ornare elit non ligula rhoncus, eu suscipit lorem eleifend. Aenean fermentum elit dignissim, cursus massa id, lobortis felis. Sed ullamcorper vulputate neque, ac posuere ex porttitor vitae. Aenean est elit, varius non tempus eget, egestas ac purus.</p>
 				</div>
 				<div class="col-sm-4">
-					<img src="../Content/Images/Index/IMG_3071.jpg" alt="aboutImage" class="homePicture img-responsive">
+					<img src="../Content/Images/Index/IMG_3071.jpg" alt="aboutImage" class="homePicture hidden-sm img-responsive">
 				</div>
 			</div>
 		</div>
