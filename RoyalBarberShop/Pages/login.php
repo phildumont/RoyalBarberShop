@@ -44,6 +44,8 @@
 			<div class="col-sm-4"></div>
 			<form class="col-sm-4" action="../Controllers/loginController.php" method="post">
 				<table>
+			<form class="col-sm-4">
+				<table>
 					<tr>
 						<td><label for="email">Email address:</label></td>
 						<td><input type="text" name="email" /></td>
