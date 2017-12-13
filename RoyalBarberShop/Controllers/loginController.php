@@ -13,5 +13,4 @@ if($user['email']==$email && $user['password']==$password){
 	header("Location:../Pages/home.php");
 	exit();
 }
-
 ?>
