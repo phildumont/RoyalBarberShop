@@ -13,10 +13,10 @@
 		<div class="row text-center">
 		
 			<div class="col-sm-6">
-				<img src="../Content/Images/Home/IMG_2875.jpg" alt="home_page_picture_1" class="homePicture">
+				<img src="../Content/Images/Home/IMG_2875.jpg" alt="home_page_picture_1" class="homePicture img-responsive">
 			</div>
 			<div class="col-sm-6">
-				<img src="../Content/Images/Home/IMG_3082.jpg" alt="home_page_picture_2" class="homePicture">
+				<img src="../Content/Images/Home/IMG_3082.jpg" alt="home_page_picture_2" class="homePicture img-responsive hidden-xsm">
 			</div>
 		</div>
 	</div>
