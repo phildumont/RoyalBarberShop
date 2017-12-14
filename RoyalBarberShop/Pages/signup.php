@@ -1,5 +1,15 @@
 <!DOCTYPE html>
-<?php session_start() ?>
+<?php 
+	session_start();
+	include("../Content/Display/hideElements.php"); 
+	
+	$signup_errors = [];
+	
+	if (isset($_SESSION["signup_errors"])){
+		$signup_errors = $_SESSION["signup_errors"];
+		unset($_SESSION["signup_errors"]);
+	}
+?>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -12,38 +22,8 @@
 </head>
 <body class="mainBackground">
 	<!-- Nav bar start-->
-	<nav class="navbar navbar-inverse">
-	  <div class="container-fluid">
-		<div class="navbar-header">
-		  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>                        
-		  </button>
-		  <a href="#"><img src="../Content/Images/logo.png" alt="logo" class="inverted  nav_logo"></a>
-		</div>
-		<div class="collapse navbar-collapse" id="myNavbar">
-		  <ul class="nav navbar-nav">
-			<li><a href="#">Home</a></li>
-			<li><a href="appointment.php">Rendez-vous</a></li>
-			<li><a href="#">Contact</a></li>
-			<li><a href="#">Mon compte/My Account</a></li>
-		  </ul>
-		  <ul class="nav navbar-nav navbar-right">
-			<li class="active"><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-			<li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-		  </ul>
-		</div>
-	  </div>
-	</nav>
+		<?php include("../Content/Display/navbar.php") ?>
 	<!-- Nav bar end -->
-	<?php
-		$error_messages = [];
-		if (isset($_SESSION["error_messages"])){
-			$error_messages = $_SESSION["error_messages"];
-			unset($_SESSION["error_messages"]);
-		}
-	?>
 	<!-- Body start -->
 		<h1 class="myTitle text-center margin_bottom_5">Royal Barber Shop</h1>
 		<h2 class="text-center">Sign up</h2>
@@ -72,7 +52,7 @@
 						<td><input type="password" name="confirm" required /></td>
 					</tr>
 					<?php 
-						foreach($error_messages as $item){
+						foreach($signup_errors as $item){
 							echo "<tr><td>".$item."</td></tr>";
 						}
 					?>

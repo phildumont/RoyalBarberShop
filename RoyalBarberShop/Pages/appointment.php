@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<?php
+	session_start();
+	include("../Content/Display/hideElements.php"); 
+?>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -11,30 +15,10 @@
 </head>
 <body class="mainBackground">
 	<!-- Nav bar start-->
-	<nav class="navbar navbar-inverse">
-	  <div class="container-fluid">
-		<div class="navbar-header">
-		  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>                        
-		  </button>
-		  <a href="#"><img src="../Content/Images/logo.png" alt="logo" class="inverted  nav_logo"></a>
-		</div>
-		<div class="collapse navbar-collapse" id="myNavbar">
-		  <ul class="nav navbar-nav">
-			<li><a href="Index.php">Home</a></li>
-			<li class="active"><a href="#">Rendez-vous</a></li>
-			<li><a href="#">Contact</a></li>
-			<li><a href="#">Mon compte/My Account</a></li>
-		  </ul>
-		  <ul class="nav navbar-nav navbar-right">
-			<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-			<li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-		  </ul>
-		</div>
-	  </div>
-	</nav>
+		<?php
+			$_SESSION["current"] = "appointment";
+			include("../Content/Display/navbar.php") 
+		?>
 	<!-- Nav bar end -->
 	<h1 class="myTitle text-center">Royal Barber Shop</h1>
 	
@@ -57,11 +41,11 @@
 				<h3 class="no_margin_top">Barbier</h3>
 				<ul class="app_ul">
 					<li><img src="../Content/Images/Appointment/_MG_3111.jpg" alt="image1" class="select_barber_img">
-						Barber1&nbsp;&nbsp;<input type="radio" name="service" class="custom_radio"/></li>
+						Barber1&nbsp;&nbsp;<input type="radio" name="barber" class="custom_radio"/></li>
 					<li><img src="../Content/Images/Appointment/_MG_3111.jpg" alt="image2" class="select_barber_img">
-						Barber2&nbsp;&nbsp;<input type="radio" name="service" class="custom_radio"/></li>
+						Barber2&nbsp;&nbsp;<input type="radio" name="barber" class="custom_radio"/></li>
 					<li><img src="../Content/Images/Appointment/_MG_3111.jpg" alt="image3" class="select_barber_img">
-						Barber3&nbsp;&nbsp;<input type="radio" name="service" class="custom_radio"/></li>
+						Barber3&nbsp;&nbsp;<input type="radio" name="barber" class="custom_radio"/></li>
 				</ul>
 			</div>
 		</div>
