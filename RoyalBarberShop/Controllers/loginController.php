@@ -4,6 +4,7 @@
 
 	$email=$_POST["email"];
 	$password=md5($_POST["password"]);
+	$pass2 = $_POST["password"];
 
 	$loginSql="SELECT email, password FROM customer WHERE email='".$email."'";
 	 
@@ -13,67 +14,62 @@
 	$passwordFlag = 0;
 
 	//Email validation
-	if (empty($email)){
-		$emptyEmailError = "Please enter your E-mail address";
+	if (empty($email) || $email == null){
+		$emptyEmailError = "Veuillez entrer votre adress courriel.";
 		$emailFlag = 0;
-		$invalidEmailError = "";
-		$emailNotFoundError  = "";
 	}
 	else if(!preg_match("/[-0-9a-zA-Z.+_]+@[-0-9a-zA-Z.+_]+.[a-zA-Z]{2,4}/",$email)){
-		$invalidEmailError = "Please enter a valid E-mail address";
+		$invalidEmailError = "Veuillez entrer une adresse courriel valide.";
 		$emailFlag = 0;
-		$emptyEmailError = "";
-		$emailNotFoundError = "";
 	}
 	else if($email!=$user['email'])	{
-		$emailNotFoundError = "$email , can not be found";
-		
+		$emailNotFoundError = "Aucun compte n'existe avec cette adresse courriel.";
 		$emailFlag = 0;
-		$emptyEmailError = "";
-		$invalidEmailError = "";
 	}
 	else {
-		$emptyEmailError = "";
-		$invalidEmailError = "";
-		$emailNotFoundError = "";
 		$emailFlag = 1;
 	}
 	
-	//Password
-	if($password == null){
-		$emptyPasswordError = "Please enter your password";
+	//Password validation
+	if(empty($pass2) || $pass2 == null){
+		$emptyPasswordError = "Veuillez entrer un mot de passe.";
 		$passwordFlag = 0;
-		$invalidPasswordError = "";
 	}
 	else if($password!=$user['password']){
-		$invalidPasswordError = "Password is not correct";
+		$invalidPasswordError = "Le mot de pass entré est incorrecte.";
 		$passwordFlag = 0;
-		$emptyPasswordError = "";
 	}
 	else {
-		$emptyPasswordError = "";
-		$invalidPasswordError = "";
 		$passwordFlag = 1;
 	}
 	
+	//Put error messages in array
+	$login_errors = [];
+	if (isset($emptyEmailError)){
+		$login_errors[] = $emptyEmailError;
+	}
+	if (isset($invalidEmailError)){
+		$login_errors[] = $invalidEmailError;
+	}
+	if (isset($emailNotFoundError)){
+		$login_errors[] = $emailNotFoundError;
+	}
+	if (isset($emptyPasswordError)){
+		$login_errors[] = $emptyPasswordError;
+	}
+	if (isset($invalidPasswordError)){
+		$login_errors[] = $invalidPasswordError;
+	}
+	
+	$_SESSION["login_errors"] = $login_errors;
+	
+	//Redirect
 	if ($emailFlag == 0 || $passwordFlag == 0){
-		
-		if (isset($emptyEmailError))
-			$_SESSION["emptyEmail"] = $emptyEmailError;
-		if (isset($invalidEmailError))
-			$_SESSION["invalidEmail"] = $invalidEmailError;
-		if (isset($emailNotFoundError))
-			$_SESSION["emailNotFound"] = $emailNotFoundError;
-		if (isset($emptyPasswordError))
-			$_SESSION["emptyPassword"] = $emptyPasswordError;
-		if (isset($invalidPasswordError))
-			$_SESSION["invalidPassword"] = $invalidPasswordError;
 		header("Location:../Pages/login.php");
-		exit();
 	}
 	else {
+		$_SESSION["loggedin"] = true;
 		header("Location:../Pages/appointment.php");
-		exit();
 	}
 ?>
 

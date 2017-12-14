@@ -26,7 +26,7 @@
 	//Check if valid email address
 	else if (!preg_match("/[-0-9a-zA-Z.+_]+@[-0-9a-zA-Z.+_]+.[a-zA-Z]{2,4}/",$email)){
 		$flag = 0;
-		$invalidEmailError = "Veuillez entrer une address courriel valide.";
+		$invalidEmailError = "Veuillez entrer une adresse courriel valide.";
 	}
 	//Check if passwords match
 	if ($password != $confirm){
@@ -42,21 +42,21 @@
 	}
 	
 	//Put error messages in array
-	$error_messages = [];
+	$signup_errors = [];
 	if (isset($emailExistsError)){
-		$error_messages[] = $emailExistsError;
+		$signup_errors[] = $emailExistsError;
 	}
 	if (isset($invalidEmailError)){
-		$error_messages[] = $invalidEmailError;
+		$signup_errors[] = $invalidEmailError;
 	}
 	if (isset($passwordNotMatchError)){
-		$error_messages[] = $passwordNotMatchError;
+		$signup_errors[] = $passwordNotMatchError;
 	}
 	if (isset($insertError)){
-		$error_messages[] = $insertError;
+		$signup_errors[] = $insertError;
 	}
 	
-	$_SESSION["error_messages"] = $error_messages;
+	$_SESSION["signup_errors"] = $signup_errors;
 	
 	//Redirect
 	if ($flag == 0){
