@@ -8,15 +8,15 @@
 	$email = $_POST["email"];
 	$password = $_POST["password"];
 	$confirm = $_POST["confirm"];
-	$md5Password = md5($password);
+	$hashcode = md5('thisguyisgood').md5($email).md5($password).md5('yesyesdovisio').md5('isthatsecureamin?');
 
 	//Sql statement to insert
-	$addUserSql = "INSERT INTO customer VALUES (0, '".$fname."', '".$lname."', "."'".$email."', '".$md5Password."')";
+	$addUserSql = "INSERT INTO customer VALUES (0, '".$fname."', '".$lname."', "."'".$email."', '".$hashcode."')";
 
 	$flag = 0;
 	
 	//Check if email exists
-	$checkEmailSql = "SELECT email FROM customer WHERE email ='".$email."'";
+	$checkEmailSql = "SELECT email, customer_fname, customer_lname FROM customer WHERE email ='".$email."'";
 	$checkEmailRes = $conn->query($checkEmailSql) or die("can't connect");
 	$checkEmail = mysqli_fetch_array($checkEmailRes);
 	
@@ -63,6 +63,8 @@
 		header("Location:../Pages/signup.php");
 	}
 	else if ($flag == 1){
+		$_SESSION["loggedin"] = "loggedin";
+		$_SESSION["fullname"] = $fname." ".$lname;
 		header("Location:../Pages/appointment.php");
 	}
 

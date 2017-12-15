@@ -1,6 +1,7 @@
 <?php
 	$index = "";
 	$appointment = "";
+	$contact = "";
 	if (!isset($_SESSION["current"])){
 		$_SESSION["current"] = "";
 		$current = $_SESSION["current"];
@@ -11,10 +12,18 @@
 	if ($current == "index"){
 		$index = "active";
 	}
-	if ($current == "appointment"){
+	else if ($current == "appointment"){
 		$appointment = "active";
 	}
-
+	else if ($current == "contact"){
+		$contact = "active";
+	}
+	if (isset($_SESSION["fullname"])){
+		$fullname = $_SESSION["fullname"];
+	}
+	else {
+		$fullname = "";
+	}
 	$navbar = "
 	<nav class='navbar navbar-inverse'>
 	  <div class='container-fluid'>
@@ -30,15 +39,15 @@
 		  <ul class='nav navbar-nav'>
 			<li class='".$index."'><a href='index.php'>Home</a></li>
 			<li class='".$appointment."'><a href='appointment.php'>Rendez-vous</a></li>
-			<li><a href='#'>Contact</a></li>
+			<li class=".$contact."><a href='contact.php'>Contact</a></li>
 		  </ul>
 		  <ul class='nav navbar-nav navbar-right hide_logged_in'>
 			<li><a href='signup.php'><span class='glyphicon glyphicon-user'></span> Sign Up</a></li>
 			<li><a href='login.php'><span class='glyphicon glyphicon-log-in'></span> Login</a></li>
 		  </ul>
 		  <ul class='nav navbar-nav navbar-right show_logged_in'>
-			<li><a href='signup.php'><span class='glyphicon glyphicon-user'></span> My account</a></li>
-			<li><a href='#'><span class='glyphicon glyphicon-log-in'></span> Sign out</a></li>
+			<li><a href='#'><span class='glyphicon glyphicon-user'></span> ".$fullname."</a></li>
+			<li><a href='../Controllers/logoutController.php'><span class='glyphicon glyphicon-log-in'></span> Sign out</a></li>
 		  </ul>
 		</div>
 	  </div>
