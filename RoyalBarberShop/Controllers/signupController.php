@@ -38,7 +38,7 @@
 	}
 	else {
 		$flag = 0;
-		$insertError = "Une erreur est survenu, le compte n'as pu être créé.";
+		//$insertError = "Une erreur est survenu, le compte n'as pu être créé.";
 	}
 	
 	//Put error messages in array
@@ -60,7 +60,17 @@
 	
 	//Redirect
 	if ($flag == 0){
-		header("Location:../Pages/signup.php");
+		?>
+			<form id="signupForm" action="../Pages/signup.php" method="post">
+				<input type="hidden" value="<?php if(!empty($_POST["fname"]))echo $_POST["fname"]?>" name="fname">
+				<input type="hidden" value="<?php if(!empty($_POST["lname"]))echo $_POST["lname"]?>" name="lname">
+				<input type="hidden" value="<?php if(!empty($_POST["email"]))echo $_POST["email"]?>" name="email">
+			</form>
+			<script type="text/javascript">
+				document.getElementById('signupForm').submit(); //SUBMIT FORM
+			</script>
+		<?php
+		//header("Location:../Pages/signup.php");
 	}
 	else if ($flag == 1){
 		$_SESSION["loggedin"] = "loggedin";

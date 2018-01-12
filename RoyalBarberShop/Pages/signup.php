@@ -24,7 +24,10 @@
 <body class="mainBackground">
 <div class="wrapper">
 	<!-- Nav bar start-->
-		<?php include("../Content/Display/navbar.php") ?>
+	<?php
+		$_SESSION["current"] = "signup";
+		include("../Content/Display/navbar.php"); 
+	?>
 	<!-- Nav bar end -->
 	<!-- Body start -->
 		<h1 class="myTitle text-center margin_bottom_5">Royal Barber Shop</h1>
@@ -35,15 +38,15 @@
 				<table>
 					<tr>
 						<td><label for="fname">Prénom:</label></td>
-						<td><input type="text" name="fname" required /></td>
+						<td><input type="text" name="fname" value="<?php if(!empty($_POST["email"]))echo $_POST["fname"]?>" required /></td>
 					</tr>
 					<tr>
 						<td><label for="lname">Nom de famille:</label></td>
-						<td><input type="text" name="lname" required /></td>
+						<td><input type="text" name="lname" value="<?php if(!empty($_POST["email"]))echo $_POST["lname"]?>" required /></td>
 					</tr>
 					<tr>
 						<td><label for="email">Adresse courriel:</label></td>
-						<td><input type="email" name="email" required /></td>
+						<td><input type="email" name="email" value="<?php if(!empty($_POST["email"]))echo $_POST["email"]?>" required /></td>
 					</tr>
 					<tr>
 						<td><label for="password">Mot de passe:</label></td>
