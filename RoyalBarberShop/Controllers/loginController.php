@@ -3,11 +3,10 @@
 	include("../Pages/connection.inc");
 
 	$email=$_POST["email"];
-	$password=md5($_POST["password"]);
 	$pass2 = $_POST["password"];
+	$hashcode = md5('thisguyisgood').md5($email).md5($pass2).md5('yesyesdovisio').md5('isthatsecureamin?');
 
-	$loginSql="SELECT email, password FROM customer WHERE email='".$email."'";
-	 
+	$loginSql="SELECT email, password, customer_fname, customer_lname FROM customer WHERE email='".$email."'";
 	$loginres=$conn->query($loginSql) or die("cant connect");
 	$user=mysqli_fetch_array($loginres);
 	$emailFlag = 0;
@@ -35,7 +34,7 @@
 		$emptyPasswordError = "Veuillez entrer un mot de passe.";
 		$passwordFlag = 0;
 	}
-	else if($password!=$user['password']){
+	else if($hashcode!=$user['password']){
 		$invalidPasswordError = "Le mot de pass entré est incorrecte.";
 		$passwordFlag = 0;
 	}
@@ -68,7 +67,8 @@
 		header("Location:../Pages/login.php");
 	}
 	else {
-		$_SESSION["loggedin"] = true;
+		$_SESSION["fullname"] = $user["customer_fname"]." ".$user["customer_lname"];
+		$_SESSION["loggedin"] = "loggedin";
 		header("Location:../Pages/appointment.php");
 	}
 ?>

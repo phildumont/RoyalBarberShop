@@ -1,4 +1,4 @@
-html {height: 100%;}
+html, body {height: 100%;}
 .mainBackground {
 	background-color: #5b5a5e;
 	background: -webkit-linear-gradient(#5b5a5e, lightgrey) fixed;
@@ -24,13 +24,13 @@ html {height: 100%;}
 .subTitle {
 	margin-top: 15px;
 }
-a {color: #333538;}
-a:hover {
+.home_text {color: #333538;}
+.home_text:hover {
 	color: white;
 	background-color:white;
 }
-a:visited {color: white;}
-a:active {color:white;}
+.home_text:visited {color: white;}
+.home_text:active {color:white;}
 .inverted {filter: invert(87%);}
 
 .nav_logo {
@@ -76,16 +76,44 @@ li {padding-bottom:15px;}
 	background-color: black;
 	color: white;
 }
+
 td {
 	padding-bottom: 10px;
 	padding-right: 5px;
 }
+.contact_link {
+	color:black;
+	font-size: 20pt;
+}
+.contact_link:hover {
+	color: black;
+}
+.contact_link:visited {color: black;}
+.contact_link:active {color: black;}
+.error_message {
+	color: #a51c0d;
+	font-weight: bold;
+	list-style:  none;
+}
+.footer_link {
+	color: black;
+	font-size:20pt;
+}
+.footer_link:hover { color: black;}
+.footer_link:visited { color: black;}
+.footer_link:active { color: black;}
+.footer {
+	font-size: 13pt;
+	padding-bottom: 15px;
+	padding-top: 15px;
+	font-weight: bold;
+	font-style: italic;
+	color: grey;
 
-
-
-
-
-
+    
+    height: 50px;
+}
+.wrapper {min-height: 100%; margin-bottom: -50px;}
 
 
 

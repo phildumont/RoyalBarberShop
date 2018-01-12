@@ -20,6 +20,6 @@
 			</div>
 		</div>
 	</div>
-	<a href="Index.php"><h2 class="text-center subTitle">Découvrir Royal Barber Shop</h2></a>
+	<a href="Index.php" class="home_text"><h2 class="text-center subTitle">Découvrir Royal Barber Shop</h2></a>
 </body>
 </html>

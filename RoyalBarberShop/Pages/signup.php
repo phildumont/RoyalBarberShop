@@ -17,10 +17,12 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="Stylesheet" type="text/css" href="../Content/Stylesheets/bootstrap.min.css">
 	<link rel="Stylesheet" type="text/css" href="../Content/Stylesheets/mainStylesheet.css">
 </head>
 <body class="mainBackground">
+<div class="wrapper">
 	<!-- Nav bar start-->
 		<?php include("../Content/Display/navbar.php") ?>
 	<!-- Nav bar end -->
@@ -41,7 +43,7 @@
 					</tr>
 					<tr>
 						<td><label for="email">Adresse courriel:</label></td>
-						<td><input type="text" name="email" required /></td>
+						<td><input type="email" name="email" required /></td>
 					</tr>
 					<tr>
 						<td><label for="password">Mot de passe:</label></td>
@@ -51,15 +53,19 @@
 						<td><label for="confirm">Confirmer le mot de passe:</label></td>
 						<td><input type="password" name="confirm" required /></td>
 					</tr>
+					</table>
+					<ul class="error_message">
 					<?php 
 						foreach($signup_errors as $item){
-							echo "<tr><td>".$item."</td></tr>";
+							echo "<li>".$item."</li>";
 						}
 					?>
-				</table>
+					</ul>
 				<center><input type="submit" value="Sign up" class="custom_button"></center>
 			</form>
 		</div>
 	<!--Body end -->
+</div>
+	<?php include("../Content/Display/footer.php"); ?>
 </body>
 </html>
