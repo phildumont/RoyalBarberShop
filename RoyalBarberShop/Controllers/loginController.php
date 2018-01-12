@@ -64,10 +64,18 @@
 	
 	//Redirect
 	if ($emailFlag == 0 || $passwordFlag == 0){
-		header("Location:../Pages/login.php");
+		?>
+			<form id="loginForm" action="../Pages/login.php" method="post">
+				<input type="hidden" value="<?php if(!empty($_POST["email"]))echo $_POST["email"]?>" name="email">
+			</form>
+			<script type="text/javascript">
+				document.getElementById('loginForm').submit(); //SUBMIT FORM
+			</script>
+		<?php
 	}
 	else {
 		$_SESSION["fullname"] = $user["customer_fname"]." ".$user["customer_lname"];
+		$_SESSION["email"] = $user["email"];
 		$_SESSION["loggedin"] = "loggedin";
 		header("Location:../Pages/appointment.php");
 	}

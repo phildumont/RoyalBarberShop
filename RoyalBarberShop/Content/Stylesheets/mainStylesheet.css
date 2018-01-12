@@ -102,19 +102,23 @@ td {
 .footer_link:hover { color: black;}
 .footer_link:visited { color: black;}
 .footer_link:active { color: black;}
-.footer {
+footer {
 	font-size: 13pt;
 	padding-bottom: 15px;
 	padding-top: 15px;
 	font-weight: bold;
 	font-style: italic;
 	color: grey;
-
-    
     height: 50px;
 }
+.footer_item {color: #2d62b7;}
 .wrapper {min-height: 100%; margin-bottom: -50px;}
-
+.user_info {
+	margin-top: 20px;
+	font-size: 15pt;
+	list-style-type: none;
+	color: black;
+}
 
 
 

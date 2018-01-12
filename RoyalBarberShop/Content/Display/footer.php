@@ -10,15 +10,12 @@
 			</div>
 			<div class="col-sm-2">
 				<a href="https://www.facebook.com/royalbarbershop450/" class="footer_link" target="_blank">
-					<i class="fa  fa-facebook-square"></i>
+					<i class="fa  fa-facebook-square footer_item"></i>
 				</a>
 				<a href="https://www.instagram.com/royal_barber_shop_/" class="footer_link" target="_blank">
-					<i class="fa fa-instagram"></i>
+					<i class="fa fa-instagram footer_item"></i>
 				</a>
 			</div>
 		</div>
-	</div>
-	
-	
-	
+	</div>	
 </footer>
