@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <?php
 	session_start();
-	include("../Content/Display/hideElements.php"); 
+	include("../Content/Display/hideElements.php");
+	include("connection.inc");
 ?>
 <html lang="en">
 <head>
@@ -13,13 +14,61 @@
 	<link rel="Stylesheet" type="text/css" href="../Content/Stylesheets/mainStylesheet.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	<script>
+		function dateVisible(){
+			var radio = document.getElementsByClassName("barber_radio");
+			if (radio.checked == true){
+				$("#appDate").hide();
+			}
+			else {
+				$("#appDate").show();
+			}
+		}
+	</script>
 </head>
 <body class="mainBackground">
 <div class="wrapper">
 	<!-- Nav bar start-->
 		<?php
 			$_SESSION["current"] = "appointment";
-			include("../Content/Display/navbar.php") 
+			
+			include("../Content/Display/navbar.php");
+			
+			//Get the services information
+			$serviceSql = "SELECT name, price FROM service";
+			$serviceRes = $conn->query($serviceSql) or die ("cant connect");
+			$services = array(array());
+			$i = 0;
+			
+			while ($row = mysqli_fetch_array($serviceRes)){
+				$name = $row[0];
+				$price = $row[1];
+				$services[$i][0] = $name;
+				$services[$i][1] = $price;
+				$i++;
+			}
+			
+			//Get the barbers information
+			$barberSql = "SELECT first_name, last_name, picture FROM barber";
+			$barberRes = $conn->query($barberSql) or die ("cant connect");
+			$barbers = array(array());
+			$j = 0;
+			
+			while ($row = mysqli_fetch_array($barberRes)){
+				$barber_fname = $row[0];
+				$barber_lname = $row[1];
+				$barber_picture = imagecreatefromstring($row[2]);
+				ob_start();
+				imagejpeg($barber_picture, null, 80);
+				$picture_data = ob_get_contents();
+				ob_end_clean();
+				
+				$barbers[$j][0] = $barber_fname;
+				$barbers[$j][1] = $barber_lname;
+				$barbers[$j][2] = $picture_data;
+				$j++;
+			}
 		?>
 	<!-- Nav bar end -->
 	<h1 class="myTitle text-center">Royal Barber Shop</h1>
@@ -27,31 +76,38 @@
 	<div class="container">
 		<form action="" method="post">
 		<div class="row">
-			<div class="col-sm-2"></div>
 			<div class="col-sm-4 selection">
 				<h3 class="no_margin_top">Service</h3>
 				<ul class="app_ul">
-					<li>Service 1&nbsp;&nbsp;&nbsp;&nbsp;Price 1&nbsp;&nbsp;<input type="radio" name="service" class="custom_radio"/></li>
-					<li class="description">Description du type de service 1. <br> Description for service 1.</li>
-					<li>Service 2&nbsp;&nbsp;&nbsp;&nbsp;Price 2&nbsp;&nbsp;<input type="radio" name="service" class="custom_radio"/></li>
-					<li class="description">Description du type de service 2. <br> Description for service 2.</li>
-					<li>Service 3&nbsp;&nbsp;&nbsp;&nbsp;Price 3&nbsp;&nbsp;<input type="radio" name="service" class="custom_radio"/></li>
-					<li class="description">Description du type de service 3. <br> Description for service 3.</li>
+					<?php
+						foreach ($services as $service){
+							echo '<li>'.$service[0].': '.$service[1].'&nbsp;&nbsp;<input type="radio" name="service" class="custom_radio"/></li>';
+						}
+					?>
 				</ul>
 			</div>
+			<div class="col-sm-1"></div>
 			<div class="col-sm-4 selection">
 				<h3 class="no_margin_top">Barbier</h3>
 				<ul class="app_ul">
-					<li><img src="../Content/Images/Appointment/_MG_3111.jpg" alt="image1" class="select_barber_img">
-						Barber1&nbsp;&nbsp;<input type="radio" name="barber" class="custom_radio"/></li>
-					<li><img src="../Content/Images/Appointment/_MG_3111.jpg" alt="image2" class="select_barber_img">
-						Barber2&nbsp;&nbsp;<input type="radio" name="barber" class="custom_radio"/></li>
-					<li><img src="../Content/Images/Appointment/_MG_3111.jpg" alt="image3" class="select_barber_img">
-						Barber3&nbsp;&nbsp;<input type="radio" name="barber" class="custom_radio"/></li>
+					<?php 
+						foreach ($barbers as $barber){
+							echo 
+							'<li class="barber_list">
+								<img src="data:image/jpg;base64,'.base64_encode($barber[2]).'"  class="select_barber_img"/>&nbsp;&nbsp;'.
+								$barber[0].' '.$barber[1].'&nbsp;&nbsp;<input type="radio" name="barber" class="custom_radio" class="barber_radio" onClick="dateVisible();"/>
+							</li>';
+						}
+					?>
 				</ul>
 			</div>
 		</div>
-		<div class="text-center"><input type="button" value="Continue" class="custom_button"/></div>
+		<div class="row">
+			<div class="col-sm-8">
+				<input type="date" id="appDate" style="display: none;">
+			</div>
+		</div>
+		<div class="text-center"><a href="appointmentDate.php"><input type="button" value="Continue" class="custom_button"/></a></div>
 		</form>
 	</div>
 </div>
