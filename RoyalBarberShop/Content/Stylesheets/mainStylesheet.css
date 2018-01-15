@@ -52,8 +52,8 @@ html, body {height: 100%;}
 	font-size: 15pt;
 }
 .select_barber_img {
-	width: 103.68px;
-	height: 103.68px;
+	width: 50px;
+	height: 50px;
 	border-radius: 50%;
 }
 li {padding-bottom:15px;}
@@ -71,12 +71,12 @@ li {padding-bottom:15px;}
 	width: 90px;
 	border-radius: 30%;
 	background-color: #e6e9ef;
+	color: black;
 }
 .custom_button:hover {
 	background-color: black;
 	color: white;
 }
-
 td {
 	padding-bottom: 10px;
 	padding-right: 5px;
@@ -119,8 +119,10 @@ footer {
 	list-style-type: none;
 	color: black;
 }
-
-
+.barber_list {
+	font-size: 10pt;
+	padding-right: 20px;
+}
 
 
 
