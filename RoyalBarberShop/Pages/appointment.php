@@ -14,18 +14,6 @@
 	<link rel="Stylesheet" type="text/css" href="../Content/Stylesheets/mainStylesheet.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	
-	<script>
-		function dateVisible(){
-			var radio = document.getElementsByClassName("barber_radio");
-			if (radio.checked == true){
-				$("#appDate").hide();
-			}
-			else {
-				$("#appDate").show();
-			}
-		}
-	</script>
 </head>
 <body class="mainBackground">
 <div class="wrapper">
@@ -50,7 +38,7 @@
 			}
 			
 			//Get the barbers information
-			$barberSql = "SELECT first_name, last_name, picture FROM barber";
+			$barberSql = "SELECT first_name, last_name, picture, barber_id FROM barber";
 			$barberRes = $conn->query($barberSql) or die ("cant connect");
 			$barbers = array(array());
 			$j = 0;
@@ -58,6 +46,7 @@
 			while ($row = mysqli_fetch_array($barberRes)){
 				$barber_fname = $row[0];
 				$barber_lname = $row[1];
+				$barber_id = $row[3];
 				$barber_picture = imagecreatefromstring($row[2]);
 				ob_start();
 				imagejpeg($barber_picture, null, 80);
@@ -67,47 +56,56 @@
 				$barbers[$j][0] = $barber_fname;
 				$barbers[$j][1] = $barber_lname;
 				$barbers[$j][2] = $picture_data;
+				$barbers[$j][3] = $barber_id;
 				$j++;
 			}
+			
+			$minDate = '20'.date("y").'-'.date("m")."-".date("d");
+			$maxMonth = date("m", strtotime('+2 months'));
+			$maxDate = '20'.date("y").'-'.$maxMonth."-".date("d");
 		?>
 	<!-- Nav bar end -->
-	<h1 class="myTitle text-center">Royal Barber Shop</h1>
+	<h1 class="myTitle text-center">Rendez-vous</h1>
 	
-	<div class="container">
-		<form action="" method="post">
+	<div class="container-full">
+		<form action="appointmentDate.php" method="post">
 		<div class="row">
-			<div class="col-sm-4 selection">
-				<h3 class="no_margin_top">Service</h3>
+			<div class="col-sm-1"></div>
+			<div class="col-sm-3 selection">
+				<h3>Service</h3>
+				<h4>Veuillez choisir un service</h4>
 				<ul class="app_ul">
 					<?php
 						foreach ($services as $service){
-							echo '<li>'.$service[0].': '.$service[1].'&nbsp;&nbsp;<input type="radio" name="service" class="custom_radio"/></li>';
+							echo '<li class="service_list"><input type="radio" name="service"/>&nbsp;'.$service[0].': '.$service[1].'$</li>';
 						}
 					?>
 				</ul>
 			</div>
-			<div class="col-sm-1"></div>
+			
 			<div class="col-sm-4 selection">
-				<h3 class="no_margin_top">Barbier</h3>
+				<h3>Barbier</h3>
+				<h4>Veuillez choisir un barbier</h4>
 				<ul class="app_ul">
 					<?php 
 						foreach ($barbers as $barber){
 							echo 
-							'<li class="barber_list">
+							'<li class="barber_list"><input type="radio" name="barber" class="barber_radio" value="'.$barber[3].'"/>
 								<img src="data:image/jpg;base64,'.base64_encode($barber[2]).'"  class="select_barber_img"/>&nbsp;&nbsp;'.
-								$barber[0].' '.$barber[1].'&nbsp;&nbsp;<input type="radio" name="barber" class="custom_radio" class="barber_radio" onClick="dateVisible();"/>
+								$barber[0].' '.$barber[1].'
 							</li>';
 						}
 					?>
 				</ul>
 			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-8">
-				<input type="date" id="appDate" style="display: none;">
+			<div class="col-sm-3 selection">
+				<h3>Date</h3>
+				<h4>Veuillez choisir la date</h4>
+					<input type="date" name="appDate" id='appDate' min="<?php echo $minDate ?>" max="<?php echo $maxDate ?>"  onClick="disableDays()"/>
+					<p id="available"></p>
 			</div>
 		</div>
-		<div class="text-center"><a href="appointmentDate.php"><input type="button" value="Continue" class="custom_button"/></a></div>
+		<div class="text-center"><input type="submit" value="Continue" class="custom_button"/></div>
 		</form>
 	</div>
 </div>
