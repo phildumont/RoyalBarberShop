@@ -69,7 +69,7 @@
 				<input type="hidden" value="<?php if(!empty($_POST["email"]))echo $_POST["email"]?>" name="email">
 			</form>
 			<script type="text/javascript">
-				document.getElementById('loginForm').submit(); //SUBMIT FORM
+				document.getElementById('loginForm').submit();
 			</script>
 		<?php
 	}

@@ -2,9 +2,26 @@
 <?php 
 	session_start();
 	
-	$user_info = [];
-	if (isset($_SESSION["user_info"])){
-		$user_info = $_SESSION["user_info"];
+	include("../Pages/connection.inc");
+	$flag = false;
+	if ($_SESSION["loggedin"] == "loggedin"){
+		if (isset($_SESSION["email"])){
+			$email = $_SESSION["email"];
+			$infoSql = "SELECT customer_fname, customer_lname, email FROM customer WHERE email='".$email."'";
+			$infoRes = $conn->query($infoSql) or die("cant connect");
+			$user = mysqli_fetch_array($infoRes);
+			
+			$firstName = $user["customer_fname"];
+			$lastName = $user["customer_lname"];
+			$email = $user["email"];
+			
+			$user_info = array($firstName, $lastName, $email);
+			$flag = true;
+		}
+	}
+	else {
+		$userNotloggedIn = "Vous n'êtes pas connecté. Veuillez vous connecter avant d'accéder à cette page.";
+		$flag = false;
 	}
 	
 	include("../Content/Display/hideElements.php");
@@ -37,13 +54,22 @@
 		<div class="col-sm-3"></div>
 		<div class="col-sm-6">
 			<ul class="user_info">
-				<li>Prénom: <?php echo $user_info[0] ?></li>
-				<li>Nom de famille: <?php echo $user_info[1] ?></li>
-				<li>Adresse courriel: <?php echo $user_info[2] ?></li>
-				<li><a href="#">Changer le mot de passe</a></li>
+				<?php
+					if ($flag == true){
+					?>
+						<li>Prénom: <?php echo $user_info[0] ?></li>
+						<li>Nom de famille: <?php echo $user_info[1] ?></li>
+						<li>Adresse courriel: <?php echo $user_info[2] ?></li>
+						<li><a href="#">Changer le mot de passe</a></li>
+					<?php
+					}
+					else {
+						echo '<li>'.$userNotloggedIn.'</li>
+							<li><a href="login.php">Connexion</a></li>
+							<li><a href="signup.php">Créer un compte</a></li>';
+					}
+				?>
 			</ul>
-			
-			
 		</div>
 	</div>
 	</div>
