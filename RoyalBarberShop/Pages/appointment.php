@@ -24,7 +24,7 @@
 			include("../Content/Display/navbar.php");
 			
 			//Get the services information
-			$serviceSql = "SELECT name, price FROM service";
+			$serviceSql = "SELECT name, price, service_id FROM service";
 			$serviceRes = $conn->query($serviceSql) or die ("cant connect");
 			$services = array(array());
 			$i = 0;
@@ -32,8 +32,10 @@
 			while ($row = mysqli_fetch_array($serviceRes)){
 				$name = $row[0];
 				$price = $row[1];
+				$service_id = $row[2];
 				$services[$i][0] = $name;
 				$services[$i][1] = $price;
+				$services[$i][2] = $service_id;
 				$i++;
 			}
 			
@@ -68,7 +70,7 @@
 	<h1 class="myTitle text-center">Rendez-vous</h1>
 	
 	<div class="container-full">
-		<form action="appointmentDate.php" method="post">
+		<form action="../Controllers/appointmentController.php" method="post">
 		<div class="row">
 			<div class="col-sm-1"></div>
 			<div class="col-sm-3 selection">
@@ -77,7 +79,12 @@
 				<ul class="app_ul">
 					<?php
 						foreach ($services as $service){
-							echo '<li class="service_list"><input type="radio" name="service"/>&nbsp;'.$service[0].': '.$service[1].'$</li>';
+							if (isset($_POST["barber"]) && $_POST["service"] == $service[2])
+								$service_selection = 'checked="checked"';
+							else
+								$service_selection = "";
+							echo '<li class="service_list"><input type="radio" name="service" value="'.$service[2].'"'.$service_selection.' required/>
+								&nbsp;'.$service[0].': '.$service[1].'$</li>';
 						}
 					?>
 				</ul>
@@ -87,10 +94,14 @@
 				<h3>Barbier</h3>
 				<h4>Veuillez choisir un barbier</h4>
 				<ul class="app_ul">
-					<?php 
+					<?php
 						foreach ($barbers as $barber){
+							if (isset($_POST["barber"]) && $_POST["barber"] == $barber[3])
+								$barber_selection = 'checked="checked"';
+							else
+								$barber_selection = "";
 							echo 
-							'<li class="barber_list"><input type="radio" name="barber" class="barber_radio" value="'.$barber[3].'"/>
+							'<li class="barber_list"><input type="radio" name="barber" class="barber_radio" value="'.$barber[3].'"'.$barber_selection.' required/>
 								<img src="data:image/jpg;base64,'.base64_encode($barber[2]).'"  class="select_barber_img"/>&nbsp;&nbsp;'.
 								$barber[0].' '.$barber[1].'
 							</li>';
@@ -101,8 +112,21 @@
 			<div class="col-sm-3 selection">
 				<h3>Date</h3>
 				<h4>Veuillez choisir la date</h4>
-					<input type="date" name="appDate" id='appDate' min="<?php echo $minDate ?>" max="<?php echo $maxDate ?>"  onClick="disableDays()"/>
-					<p id="available"></p>
+				<?php
+					if (isset($_POST["appDate"])){
+						$appDateValue = 'value="'.$_POST["appDate"].'"';
+					}
+					else {
+						$appDateValue = "";
+					}
+				?>
+					<input type="date" name="appDate" id='appDate' min="<?php echo $minDate ?>" max="<?php echo $maxDate ?>" <?php echo $appDateValue ?>required/><br>
+					<?php
+						if (isset($_SESSION["barberNotAvailable"])){
+							echo $_SESSION["barberNotAvailable"];
+							unset($_SESSION["barberNotAvailable"]);
+						}
+					?>
 			</div>
 		</div>
 		<div class="text-center"><input type="submit" value="Continue" class="custom_button"/></div>
