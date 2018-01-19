@@ -42,7 +42,7 @@
 	<!-- Slideshow end -->
 	
 	<!--About section start -->
-	<div class="container-fluid">
+	<div class="container-fluid" style="padding-left:0px;padding-right:0px;">
 		<div class="jumbotron">
 			<div class="row">
 				<div class="col-sm-8">

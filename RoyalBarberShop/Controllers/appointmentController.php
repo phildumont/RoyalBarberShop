@@ -72,7 +72,6 @@
 		while ($row = mysqli_fetch_array($appTimeRes)){
 			$appTime[$appTimeIndex][0] = $row[0];
 			$appTimeIndex++;
-			echo $row[0].'<br>';
 		}
 		$_SESSION["appointments"] = $appTime;
 		
