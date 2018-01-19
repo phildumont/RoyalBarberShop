@@ -73,24 +73,26 @@
 		<form action="../Controllers/appointmentController.php" method="post">
 		<div class="row">
 			<div class="col-sm-1"></div>
-			<div class="col-sm-3 selection">
+			<div class="col-sm-3 ">
 				<h3>Service</h3>
 				<h4>Veuillez choisir un service</h4>
 				<ul class="app_ul">
 					<?php
+						$i = 0;
 						foreach ($services as $service){
 							if (isset($_POST["barber"]) && $_POST["service"] == $service[2])
 								$service_selection = 'checked="checked"';
 							else
 								$service_selection = "";
-							echo '<li class="service_list"><input type="radio" name="service" value="'.$service[2].'"'.$service_selection.' required/>
-								&nbsp;'.$service[0].': '.$service[1].'$</li>';
+							echo '<li class="service_list"><input type="radio" name="service" id="'.$i.'" value="'.$service[2].'"'.$service_selection.' required/>
+								<label for="'.$i.'">'.$service[0].': '.$service[1].'$</li></label>';
+							$i++;
 						}
 					?>
 				</ul>
 			</div>
 			
-			<div class="col-sm-4 selection">
+			<div class="col-sm-4 ">
 				<h3>Barbier</h3>
 				<h4>Veuillez choisir un barbier</h4>
 				<ul class="app_ul">
@@ -101,15 +103,16 @@
 							else
 								$barber_selection = "";
 							echo 
-							'<li class="barber_list"><input type="radio" name="barber" class="barber_radio" value="'.$barber[3].'"'.$barber_selection.' required/>
-								<img src="data:image/jpg;base64,'.base64_encode($barber[2]).'"  class="select_barber_img"/>&nbsp;&nbsp;'.
-								$barber[0].' '.$barber[1].'
+							'<li class="barber_list"><input type="radio" name="barber" id="'.$i.'" class="barber_radio" value="'.$barber[3].'"'.$barber_selection.' required/>
+								<label for="'.$i.'"><img src="data:image/jpg;base64,'.base64_encode($barber[2]).'"  class="select_barber_img"/>'.
+								$barber[0].' '.$barber[1].'</label>
 							</li>';
+							$i++;
 						}
 					?>
 				</ul>
 			</div>
-			<div class="col-sm-3 selection">
+			<div class="col-sm-3 ">
 				<h3>Date</h3>
 				<h4>Veuillez choisir la date</h4>
 				<?php
