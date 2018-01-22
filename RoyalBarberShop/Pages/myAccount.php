@@ -25,6 +25,9 @@
 			$appRes = $conn->query($appSql) or die ("cant connect");
 			$apps = array(array());
 			$i = 0;
+			$apps_flag = "false";
+			$f_flag = "false";
+			$p_flag = "false";
 			
 			//Put appointments in array
 			while ($row = mysqli_fetch_array($appRes)){
@@ -38,44 +41,51 @@
 				$apps[$i]["barber"] = $row[3];
 				$apps[$i]["id"] = $row[4];
 				$i++;
-			}
-			//Find barber and service
-			$i=0;
-			foreach ($apps as $app){
-				$barberSql = "SELECT first_name, last_name FROM barber WHERE barber_id = ".$app["barber"];
-				$barberRes = $conn->query($barberSql) or die ("cant connect");
-				$barberInfo = mysqli_fetch_array($barberRes);
-				$apps[$i]["barber"] = $barberInfo[0].' '.$barberInfo[1];
-				
-				$serviceSql = "SELECT name, price FROM service WHERE service_id = ".$app["service"];
-				$serviceRes = $conn->query($serviceSql) or die ("cant connect");
-				$serviceInfo = mysqli_fetch_array($serviceRes);
-				$apps[$i]["service"] = $serviceInfo[0].', '.$serviceInfo[1].'$';
-				$i++;
+				$apps_flag = "true";
 			}
 			
-			$today = '20'.date("y").'-'.date("m")."-".date("d");
-			//Future and past appointments
-			$futureApp = array(array());
-			$pastApp = array(array());
-			$fi = 0;
-			$pi = 0;
-			foreach ($apps as $app){
-				if ($app["date"] >= $today){
-					$futureApp[$fi]["date"] = $app["date"];
-					$futureApp[$fi]["time"] = $app["time"];
-					$futureApp[$fi]["service"] = $app["service"];
-					$futureApp[$fi]["barber"] = $app["barber"];
-					$fi++;
+			if ($apps_flag == "true"){
+				//Find barber and service
+				$i=0;
+				foreach ($apps as $app){
+					$barberSql = "SELECT first_name, last_name FROM barber WHERE barber_id = ".$app["barber"];
+					$barberRes = $conn->query($barberSql) or die ("cant connect");
+					$barberInfo = mysqli_fetch_array($barberRes);
+					$apps[$i]["barber"] = $barberInfo[0].' '.$barberInfo[1];
+					
+					$serviceSql = "SELECT name, price FROM service WHERE service_id = ".$app["service"];
+					$serviceRes = $conn->query($serviceSql) or die ("cant connect");
+					$serviceInfo = mysqli_fetch_array($serviceRes);
+					$apps[$i]["service"] = $serviceInfo[0].', '.$serviceInfo[1].'$';
+					$i++;
 				}
-				else {
-					$pastApp[$pi]["date"] = $app["date"];
-					$pastApp[$pi]["time"] = $app["time"];
-					$pastApp[$pi]["service"] = $app["service"];
-					$pastApp[$pi]["barber"] = $app["barber"];
-					$pi++;
+			
+				$today = '20'.date("y").'-'.date("m")."-".date("d");
+				//Future and past appointments
+				$futureApp = array(array());
+				$pastApp = array(array());
+				$fi = 0;
+				$pi = 0;
+				foreach ($apps as $app){
+					if ($app["date"] >= $today){
+						$futureApp[$fi]["date"] = $app["date"];
+						$futureApp[$fi]["time"] = $app["time"];
+						$futureApp[$fi]["service"] = $app["service"];
+						$futureApp[$fi]["barber"] = $app["barber"];
+						$fi++;
+						$f_flag = "true";
+					}
+					else {
+						$pastApp[$pi]["date"] = $app["date"];
+						$pastApp[$pi]["time"] = $app["time"];
+						$pastApp[$pi]["service"] = $app["service"];
+						$pastApp[$pi]["barber"] = $app["barber"];
+						$pi++;
+						$p_flag = "true";
+					}
 				}
 			}
+			
 			
 			//Confirm
 			$flag = true;
@@ -126,7 +136,7 @@
 						<h3>Futures rendez-vous</h3>
 						<?php
 							echo "<ul class='user_info'>";
-							if (!empty($futureApp)){
+							if ($f_flag == "true"){
 								foreach ($futureApp as $app){
 									echo "<li>".$app["date"]." - ".$app["time"]."</li>
 											<li>&nbsp;&nbsp;Barbier: ".$app["barber"]."</li>
@@ -140,7 +150,7 @@
 							echo "</ul>
 								<h3>Rendez-vous passés</h3>
 								<ul class='user_info'>";
-							if (!empty($pastApp)){
+							if ($p_flag == "true"){
 								foreach ($pastApp as $app){
 									echo "<li>".$app["date"]." - ".$app["time"]."</li>
 											<li>&nbsp;&nbsp;Barbier: ".$app["barber"]."</li>
