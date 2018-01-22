@@ -1,4 +1,5 @@
 <?php
+	//loggedin
 	if (isset($_SESSION["loggedin"])){
 		if ($_SESSION["loggedin"] == "loggedin"){
 			?>
@@ -34,6 +35,36 @@
 			.hide_logged_in {
 					display:inline;
 				}
+		</style>
+		<?php
+	}
+	//admin
+	if (isset($_SESSION["admin"])){
+		if ($_SESSION["admin"] == "admin"){
+			?>
+			<style>
+				.show_admin {
+					display: inline;
+				}
+			</style>
+			<?php
+		}
+		else if ($_SESSION["admin"] == "no"){
+			?>
+			<style>
+				.show_admin {
+					display: none;
+				}
+			</style>
+			<?php
+		}
+	}
+	else {
+		?>
+		<style>
+			.show_admin {
+				display: none;
+			}
 		</style>
 		<?php
 	}

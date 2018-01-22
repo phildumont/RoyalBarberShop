@@ -13,9 +13,10 @@
 	if (isset($_SESSION["appointments"])){
 		//Array containing all the current appointments booked for the chosen day
 		$appointments = $_SESSION["appointments"];
-	}
-	if (isset($appointments)){
 		$flag = 1;
+	}
+	if ($appointments[0] == null){
+		$flag = 0;
 	}
 	
 	//Get timeframes
@@ -72,7 +73,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body class="mainBackground">
-<div class="wrapper">
+
 	<!-- Nav bar start-->
 		<?php
 			$_SESSION["current"] = "appointment";
@@ -161,7 +162,6 @@
 		<div class="text-center margin_top_30"><input type="submit" value="Continue" class="custom_button"/></div>
 		</form>
 	</div>
-</div>
 	<?php include("../Content/Display/footer.php"); ?>
 </body>
 </html>

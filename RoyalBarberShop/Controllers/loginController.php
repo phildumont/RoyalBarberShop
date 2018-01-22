@@ -4,9 +4,16 @@
 
 	$email=$_POST["email"];
 	$pass2 = $_POST["password"];
-	$hashcode = md5('thisguyisgood').md5($email).md5($pass2).md5('yesyesdovisio').md5('isthatsecureamin?');
+	$hashcode = md5($email).md5('thisguyisgood').md5($pass2).md5('yesyesdovisio').md5('isthatsecureamin?');
 
-	$loginSql="SELECT email, password, customer_fname, customer_lname FROM customer WHERE email='".$email."'";
+	if (isset($_POST["emp"])){
+		if ($_POST["emp"] == "yes"){
+			$loginSql="SELECT email, password, first_name, last_name FROM barber WHERE email='".$email."'";
+		}
+	}
+	else {
+		$loginSql="SELECT email, password, customer_fname, customer_lname FROM customer WHERE email='".$email."'";
+	}
 	$loginres=$conn->query($loginSql) or die("cant connect");
 	$user=mysqli_fetch_array($loginres);
 	$emailFlag = 0;
@@ -74,9 +81,25 @@
 		<?php
 	}
 	else {
-		$_SESSION["fullname"] = $user["customer_fname"]." ".$user["customer_lname"];
+		if (isset($_POST["emp"])){
+			if ($_POST["emp"] == "yes"){
+				$_SESSION["fullname"] = $user["first_name"]." ".$user["last_name"];
+				$_SESSION["barber"] = "yes";
+			}
+		}
+		else {
+			$_SESSION["fullname"] = $user["customer_fname"]." ".$user["customer_lname"];
+			$_SESSION["barber"] = "no";
+		}
 		$_SESSION["email"] = $user["email"];
 		$_SESSION["loggedin"] = "loggedin";
+		if ($user["email"] == "admin@admin.com"){
+			$_SESSION["admin"] = "admin";
+			$_SESSION["barber"] = "yes";
+		}
+		else {
+			$_SESSION["admin"] = "no";
+		}
 		header("Location:../Pages/appointment.php");
 	}
 ?>

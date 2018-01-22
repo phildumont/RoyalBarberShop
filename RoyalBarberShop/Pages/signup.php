@@ -22,7 +22,7 @@
 	<link rel="Stylesheet" type="text/css" href="../Content/Stylesheets/mainStylesheet.css">
 </head>
 <body class="mainBackground">
-<div class="wrapper">
+
 	<!-- Nav bar start-->
 	<?php
 		$_SESSION["current"] = "signup";
@@ -68,7 +68,6 @@
 			</form>
 		</div>
 	<!--Body end -->
-</div>
 	<?php include("../Content/Display/footer.php"); ?>
 </body>
 </html>

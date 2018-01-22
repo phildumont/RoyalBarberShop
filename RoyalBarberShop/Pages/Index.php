@@ -18,7 +18,7 @@
 	<script type="text/javascript" src="../Content/Scripts/jquery.js"></script>
 </head>
 <body class="mainBackground">
-<div class="wrapper">
+
 	<!-- Nav bar start-->
 		<?php
 			$_SESSION["current"] = "index";
@@ -57,7 +57,6 @@
 		</div>
 	</div>
 	<!-- About section end -->
-</div>
 	<?php include("../Content/Display/footer.php"); ?>
 </body>
 </html>
