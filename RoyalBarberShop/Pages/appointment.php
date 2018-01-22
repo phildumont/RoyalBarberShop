@@ -7,13 +7,15 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Royal Baber Shop</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="Stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="Stylesheet" type="text/css" href="../Content/Stylesheets/bootstrap.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="Stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="Stylesheet" type="text/css" href="../Content/Stylesheets/mainStylesheet.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../Content/Scripts/jquery.js"></script>
 </head>
 <body class="mainBackground">
 	<!-- Nav bar start-->
@@ -68,11 +70,11 @@
 	<!-- Nav bar end -->
 	<h1 class="myTitle text-center">Rendez-vous</h1>
 	
-	<div class="container-full">
+	<div class="container-full container-fluid">
 		<form action="../Controllers/appointmentController.php" method="post">
 		<div class="row">
-			<div class="col-sm-1"></div>
-			<div class="col-sm-3 ">
+			<div class="col-lg-1 col-sm-4 col-xs-4"></div>
+			<div class="col-lg-3 col-sm-8 col-xs-8 selection">
 				<h3>Service</h3>
 				<h4>Veuillez choisir un service</h4>
 				<ul class="app_ul">
@@ -90,8 +92,8 @@
 					?>
 				</ul>
 			</div>
-			
-			<div class="col-sm-4 ">
+			<div class="hidden-lg col-sm-4 col-xs-4"></div>
+			<div class="col-lg-4 col-sm-8 col-xs-8 selection">
 				<h3>Barbier</h3>
 				<h4>Veuillez choisir un barbier</h4>
 				<ul class="app_ul">
@@ -111,7 +113,8 @@
 					?>
 				</ul>
 			</div>
-			<div class="col-sm-3 ">
+			<div class="hidden-lg col-sm-4 col-xs-4"></div>
+			<div class="col-lg-3 col-sm-8 col-xs-8 selection">
 				<h3>Date</h3>
 				<h4>Veuillez choisir la date</h4>
 				<?php
@@ -129,9 +132,10 @@
 							unset($_SESSION["barberNotAvailable"]);
 						}
 					?>
+					<input type="submit" value="Continue" class="custom_button"/>
 			</div>
 		</div>
-		<div class="text-center"><input type="submit" value="Continue" class="custom_button"/></div>
+		
 		</form>
 	</div>
 	<?php include("../Content/Display/footer.php"); ?>
