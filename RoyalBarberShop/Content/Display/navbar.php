@@ -5,6 +5,7 @@
 	$myaccount = "";
 	$login = "";
 	$signup = "";
+	$adminTools = "";
 	if (!isset($_SESSION["current"])){
 		$_SESSION["current"] = "";
 		$current = $_SESSION["current"];
@@ -30,6 +31,9 @@
 	else if ($current == "signup"){
 		$signup = "active";
 	}
+	else if ($current == "adminTools"){
+		$adminTools = "active";
+	}
 	if (isset($_SESSION["fullname"])){
 		$fullname = $_SESSION["fullname"];
 	}
@@ -51,14 +55,18 @@
 		  <ul class='nav navbar-nav'>
 			<li class='".$index."'><a href='index.php'>Home</a></li>
 			<li class='".$appointment."'><a href='appointment.php'>Rendez-vous</a></li>
-			<li class=".$contact."><a href='contact.php'>Contact</a></li>
+			<li class='".$contact."'><a href='contact.php'>Contact</a></li>
+			
+		  </ul>
+		  <ul class='nav navbar-nav show_admin'>
+			<li class='".$adminTools."'><a href='adminTools.php'>Outils administratifs</a></li>
 		  </ul>
 		  <ul class='nav navbar-nav navbar-right hide_logged_in'>
-			<li class=".$signup."><a href='signup.php'><span class='glyphicon glyphicon-user'></span> Sign Up</a></li>
-			<li class=".$login."><a href='login.php'><span class='glyphicon glyphicon-log-in'></span> Login</a></li>
+			<li class='".$signup."'><a href='signup.php'><span class='glyphicon glyphicon-user'></span> Sign Up</a></li>
+			<li class='".$login."'><a href='login.php'><span class='glyphicon glyphicon-log-in'></span> Login</a></li>
 		  </ul>
 		  <ul class='nav navbar-nav navbar-right show_logged_in'>
-			<li class=".$myaccount."><a href='myAccount.php'><span class='glyphicon glyphicon-user'></span> ".$fullname."</a></li>
+			<li class='".$myaccount."'><a href='myAccount.php'><span class='glyphicon glyphicon-user'></span> ".$fullname."</a></li>
 			<li><a href='../Controllers/logoutController.php'><span class='glyphicon glyphicon-log-in'></span> Sign out</a></li>
 		  </ul>
 		</div>

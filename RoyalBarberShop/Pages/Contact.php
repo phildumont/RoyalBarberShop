@@ -18,7 +18,7 @@
 	<script type="text/javascript" src="../Content/Scripts/jquery.js"></script>
 </head>
 <body class="mainBackground wrapper">
-<div class="wrapper">
+
 	<!-- Nav bar start-->
 		<?php
 			$_SESSION["current"] = "contact";
@@ -55,7 +55,6 @@
 	</div>
 	<script src="../Content/Scripts/mapScript.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNaW_GXb74cTam2QQO6uJQGK0MSZ71PJo&callback=myMap"></script>
-</div>
 	<?php include("../Content/Display/footer.php"); ?>
 </body>
 </html>

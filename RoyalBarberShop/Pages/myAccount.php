@@ -1,21 +1,83 @@
 <!DOCTYPE html>
 <?php 
 	session_start();
-	
 	include("../Pages/connection.inc");
 	$flag = false;
+	setlocale(LC_ALL, 'FR');
 	if ($_SESSION["loggedin"] == "loggedin"){
 		if (isset($_SESSION["email"])){
+			//Retrieve user info
 			$email = $_SESSION["email"];
-			$infoSql = "SELECT customer_fname, customer_lname, email FROM customer WHERE email='".$email."'";
+			$infoSql = "SELECT customer_fname, customer_lname, email, customer_id FROM customer WHERE email='".$email."'";
 			$infoRes = $conn->query($infoSql) or die("cant connect");
 			$user = mysqli_fetch_array($infoRes);
 			
+			//Put user info in variables
 			$firstName = $user["customer_fname"];
 			$lastName = $user["customer_lname"];
 			$email = $user["email"];
-			
+			$id = $user["customer_id"];
 			$user_info = array($firstName, $lastName, $email);
+			
+			//Retrieve user appointments
+			$appSql = "SELECT appointment_date, appointment_time, service_id, barber_id,appointment_id FROM appointment
+						WHERE customer_id = ".$id;
+			$appRes = $conn->query($appSql) or die ("cant connect");
+			$apps = array(array());
+			$i = 0;
+			
+			//Put appointments in array
+			while ($row = mysqli_fetch_array($appRes)){
+				//Convert date
+				$month = strftime("%B", strtotime($row[0]));
+				$day = strftime("%e", strtotime($row[0]));
+				$year = '20'.date("y", strtotime($row[0]));
+				$apps[$i]["date"] = $day.' '.$month.', '.$year;
+				$apps[$i]["time"] = date("H:i", strtotime($row[1]));
+				$apps[$i]["service"] = $row[2];
+				$apps[$i]["barber"] = $row[3];
+				$apps[$i]["id"] = $row[4];
+				$i++;
+			}
+			//Find barber and service
+			$i=0;
+			foreach ($apps as $app){
+				$barberSql = "SELECT first_name, last_name FROM barber WHERE barber_id = ".$app["barber"];
+				$barberRes = $conn->query($barberSql) or die ("cant connect");
+				$barberInfo = mysqli_fetch_array($barberRes);
+				$apps[$i]["barber"] = $barberInfo[0].' '.$barberInfo[1];
+				
+				$serviceSql = "SELECT name, price FROM service WHERE service_id = ".$app["service"];
+				$serviceRes = $conn->query($serviceSql) or die ("cant connect");
+				$serviceInfo = mysqli_fetch_array($serviceRes);
+				$apps[$i]["service"] = $serviceInfo[0].', '.$serviceInfo[1].'$';
+				$i++;
+			}
+			
+			$today = '20'.date("y").'-'.date("m")."-".date("d");
+			//Future and past appointments
+			$futureApp = array(array());
+			$pastApp = array(array());
+			$fi = 0;
+			$pi = 0;
+			foreach ($apps as $app){
+				if ($app["date"] >= $today){
+					$futureApp[$fi]["date"] = $app["date"];
+					$futureApp[$fi]["time"] = $app["time"];
+					$futureApp[$fi]["service"] = $app["service"];
+					$futureApp[$fi]["barber"] = $app["barber"];
+					$fi++;
+				}
+				else {
+					$pastApp[$pi]["date"] = $app["date"];
+					$pastApp[$pi]["time"] = $app["time"];
+					$pastApp[$pi]["service"] = $app["service"];
+					$pastApp[$pi]["barber"] = $app["barber"];
+					$pi++;
+				}
+			}
+			
+			//Confirm
 			$flag = true;
 		}
 	}
@@ -39,7 +101,7 @@
 	<link rel="Stylesheet" type="text/css" href="../Content/Stylesheets/mainStylesheet.css">
 </head>
 <body class="mainBackground">
-<div class="wrapper">
+
 	<!-- Nav bar start-->
 	<?php
 		$_SESSION["current"] = "myaccount";
@@ -61,19 +123,48 @@
 						<li>Nom de famille: <?php echo $user_info[1] ?></li>
 						<li>Adresse courriel: <?php echo $user_info[2] ?></li>
 						<li><a href="#">Changer le mot de passe</a></li>
+						<h3>Futures rendez-vous</h3>
+						<?php
+							echo "<ul class='user_info'>";
+							if (!empty($futureApp)){
+								foreach ($futureApp as $app){
+									echo "<li>".$app["date"]." - ".$app["time"]."</li>
+											<li>&nbsp;&nbsp;Barbier: ".$app["barber"]."</li>
+											<li>&nbsp;&nbsp;Service: ".$app["service"]."</li>
+											<li><hr></li>";
+								}
+							}
+							else {
+								echo "<li>Vous n'avez pas de futures rendez-vous.</li>";
+							}
+							echo "</ul>
+								<h3>Rendez-vous passés</h3>
+								<ul class='user_info'>";
+							if (!empty($pastApp)){
+								foreach ($pastApp as $app){
+									echo "<li>".$app["date"]." - ".$app["time"]."</li>
+											<li>&nbsp;&nbsp;Barbier: ".$app["barber"]."</li>
+											<li>&nbsp;&nbsp;Service: ".$app["service"]."</li>
+											<li><hr></li>";
+								}
+							}
+							else {
+								echo "<li>Vous n'avez pas de rendez-vous passés.</li>";
+							}
+							echo "</ul>";
+						?>
+					</ul>
 					<?php
 					}
 					else {
 						echo '<li>'.$userNotloggedIn.'</li>
 							<li><a href="login.php">Connexion</a></li>
-							<li><a href="signup.php">Créer un compte</a></li>';
+							<li><a href="signup.php">Créer un compte</a></li></ul>';
 					}
 				?>
-			</ul>
 		</div>
 	</div>
 	</div>
-</div>
 	<?php include("../Content/Display/footer.php"); ?>
 </body>
 </html>

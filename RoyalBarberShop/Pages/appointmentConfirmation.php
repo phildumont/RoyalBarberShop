@@ -31,7 +31,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body class="mainBackground">
-<div class="wrapper">
+
 	<!-- Nav bar start-->
 		<?php
 			$_SESSION["current"] = "appointment";
@@ -65,7 +65,6 @@
 			</div>
 		</div>
 	</div>
-</div>
 	<?php include("../Content/Display/footer.php"); ?>
 </body>
 </html>

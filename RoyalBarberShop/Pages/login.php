@@ -23,7 +23,6 @@
 	<link rel="Stylesheet" type="text/css" href="../Content/Stylesheets/mainStylesheet.css">
 </head>
 <body class="mainBackground">
-<div class="wrapper">
 	<!-- Nav bar start-->
 	<?php
 		$_SESSION["current"] = "login";
@@ -39,7 +38,7 @@
 				<table>
 					<tr>
 						<td><label for="emp">Êtes-vous un employé?</label></td>
-						<td><input type="checkbox" name="emp"/></td>
+						<td><input type="checkbox" name="emp" value="yes"/></td>
 					</tr>
 					<tr>
 						<td><label for="email">Adresse courriel:</label></td>
@@ -65,7 +64,6 @@
 		</div>
 		<center><h2 class="show_logged_in"><?php echo "Bonjour, ".$_SESSION["fullname"].", vous êtes déjà connecté(e)"?></h2></center>
 	<!--Body end -->
-</div>
 	<?php include("../Content/Display/footer.php"); ?>
 </body>
 </html>

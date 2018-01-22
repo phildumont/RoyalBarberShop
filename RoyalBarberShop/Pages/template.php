@@ -16,7 +16,6 @@
 	<link rel="Stylesheet" type="text/css" href="../Content/Stylesheets/mainStylesheet.css">
 </head>
 <body class="mainBackground">
-<div class="wrapper">
 	<!-- Nav bar start-->
 	<?php
 		$_SESSION["current"] = "myaccount";
@@ -25,7 +24,6 @@
 	<!-- Nav bar end -->
 	<h1 class="myTitle text-center margin_bottom_5">Royal Barber Shop</h1>
 	<h2 class="text-center">Contact</h2>
-</div>
 	<?php include("../Content/Display/footer.php"); ?>
 </body>
 </html>

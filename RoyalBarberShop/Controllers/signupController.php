@@ -8,7 +8,7 @@
 	$email = $_POST["email"];
 	$password = $_POST["password"];
 	$confirm = $_POST["confirm"];
-	$hashcode = md5('thisguyisgood').md5($email).md5($password).md5('yesyesdovisio').md5('isthatsecureamin?');
+	$hashcode = md5($email).md5('thisguyisgood').md5($password).md5('yesyesdovisio').md5('isthatsecureamin?');
 
 	//Sql statement to insert
 	$addUserSql = "INSERT INTO customer VALUES (0, '".$fname."', '".$lname."', "."'".$email."', '".$hashcode."')";
@@ -62,19 +62,19 @@
 	if ($flag == 0){
 		?>
 			<form id="signupForm" action="../Pages/signup.php" method="post">
-				<input type="hidden" value="<?php if(!empty($_POST["fname"]))echo $_POST["fname"]?>" name="fname">
-				<input type="hidden" value="<?php if(!empty($_POST["lname"]))echo $_POST["lname"]?>" name="lname">
-				<input type="hidden" value="<?php if(!empty($_POST["email"]))echo $_POST["email"]?>" name="email">
+				<input type="hidden" value="<?php if(!empty($_POST["fname"]))echo $fname?>" name="fname">
+				<input type="hidden" value="<?php if(!empty($_POST["lname"]))echo $lname?>" name="lname">
+				<input type="hidden" value="<?php if(!empty($_POST["email"]))echo $email?>" name="email">
 			</form>
 			<script type="text/javascript">
-				document.getElementById('signupForm').submit(); //SUBMIT FORM
+				document.getElementById('signupForm').submit();
 			</script>
 		<?php
-		//header("Location:../Pages/signup.php");
 	}
 	else if ($flag == 1){
 		$_SESSION["loggedin"] = "loggedin";
 		$_SESSION["fullname"] = $fname." ".$lname;
+		$_SESSION["email"] = $email;
 		header("Location:../Pages/appointment.php");
 	}
 

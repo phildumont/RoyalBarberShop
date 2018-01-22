@@ -16,7 +16,10 @@
 	
 	$insertApp = "INSERT INTO appointment VALUES (0, '".$date."', '".$time."', '".$service_id."', '".$barber_id."', '".$customer_id."')";
 	if (mysqli_query($conn, $insertApp) === true){
-		echo 'added';
+		$msg = "testEmail";
+		$subject = "Test Email";
+		//mail("phildumont8@gmail.com", $subject, $msg);
+		//echo "email sent";
 	}
 	
 ?>
@@ -32,15 +35,14 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body class="mainBackground">
-<div class="wrapper">
 	<!-- Nav bar start-->
 		<?php
 			$_SESSION["current"] = "appointment";
 			include("../Content/Display/navbar.php");
 		?>
 	<!-- Nav bar end-->
-	<h1 class="myTitle text-center">Confirmation</h1>
-	<h2 class="subtitle text-center margin_bottom_30">Veuillez confirmer ces informations</h2>
+	<h1 class="myTitle text-center">Votre rendez-vous à été enregistré!</h1>
+	<h2 class="subtitle text-center margin_bottom_30"></h2>
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-1"></div>
@@ -48,7 +50,6 @@
 			</div>
 		</div>
 	</div>
-</div>
 	<?php include("../Content/Display/footer.php"); ?>
 </body>
 </html>
