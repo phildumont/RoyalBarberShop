@@ -32,14 +32,16 @@
 			//Put appointments in array
 			while ($row = mysqli_fetch_array($appRes)){
 				//Convert date
-				$month = strftime("%B", strtotime($row[0]));
-				$day = strftime("%e", strtotime($row[0]));
+				$month = utf8_encode(strftime("%B", strtotime($row[0])));
+				$day = strftime("%#d", strtotime($row[0]));
 				$year = '20'.date("y", strtotime($row[0]));
 				$apps[$i]["date"] = $day.' '.$month.', '.$year;
 				$apps[$i]["time"] = date("H:i", strtotime($row[1]));
 				$apps[$i]["service"] = $row[2];
 				$apps[$i]["barber"] = $row[3];
 				$apps[$i]["id"] = $row[4];
+				$apps[$i]["year"] = $year;
+				$apps[$i]["normalDate"] = $row[0];
 				$i++;
 				$apps_flag = "true";
 			}
@@ -61,13 +63,14 @@
 				}
 			
 				$today = '20'.date("y").'-'.date("m")."-".date("d");
+				$currentYear = '20'.date("y");
 				//Future and past appointments
 				$futureApp = array(array());
 				$pastApp = array(array());
 				$fi = 0;
 				$pi = 0;
 				foreach ($apps as $app){
-					if ($app["date"] >= $today){
+					if ($app["normalDate"] >= $today){
 						$futureApp[$fi]["date"] = $app["date"];
 						$futureApp[$fi]["time"] = $app["time"];
 						$futureApp[$fi]["service"] = $app["service"];
@@ -75,7 +78,7 @@
 						$fi++;
 						$f_flag = "true";
 					}
-					else {
+					else if ($app["year"] == $currentYear){
 						$pastApp[$pi]["date"] = $app["date"];
 						$pastApp[$pi]["time"] = $app["time"];
 						$pastApp[$pi]["service"] = $app["service"];
@@ -85,8 +88,6 @@
 					}
 				}
 			}
-			
-			
 			//Confirm
 			$flag = true;
 		}
@@ -102,6 +103,8 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-type" value="text/html; charset=utf-8" />
 	<title>Royal Baber Shop</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -133,8 +136,12 @@
 						<li>Nom de famille: <?php echo $user_info[1] ?></li>
 						<li>Adresse courriel: <?php echo $user_info[2] ?></li>
 						<li><a href="#">Changer le mot de passe</a></li>
-						<h3>Futures rendez-vous</h3>
+						</ul>
+		</div></div>
+						<div class="row">
 						<?php
+							echo "<div class=col-lg-1></div>";
+							echo "<div class='col-lg-5'><h3>Futures rendez-vous</h3>";
 							echo "<ul class='user_info'>";
 							if ($f_flag == "true"){
 								foreach ($futureApp as $app){
@@ -147,7 +154,8 @@
 							else {
 								echo "<li>Vous n'avez pas de futures rendez-vous.</li>";
 							}
-							echo "</ul>
+							echo "</ul></div>
+								<div class='col-lg-5'>
 								<h3>Rendez-vous passés</h3>
 								<ul class='user_info'>";
 							if ($p_flag == "true"){
@@ -161,13 +169,13 @@
 							else {
 								echo "<li>Vous n'avez pas de rendez-vous passés.</li>";
 							}
-							echo "</ul>";
+							echo "</ul></div>";
 						?>
-					</ul>
+					</div>
 					<?php
 					}
 					else {
-						echo '<li>'.$userNotloggedIn.'</li>
+						echo '<ul class="user_info"><li>'.$userNotloggedIn.'</li>
 							<li><a href="login.php">Connexion</a></li>
 							<li><a href="signup.php">Créer un compte</a></li></ul>';
 					}

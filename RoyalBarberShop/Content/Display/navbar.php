@@ -6,6 +6,7 @@
 	$login = "";
 	$signup = "";
 	$adminTools = "";
+	$barberProfile = "";
 	if (!isset($_SESSION["current"])){
 		$_SESSION["current"] = "";
 		$current = $_SESSION["current"];
@@ -13,7 +14,10 @@
 	else {
 		$current = $_SESSION["current"];
 	}
-	if ($current == "index"){
+	if ($current == "barberProfile"){
+		$barberProfile = "active";
+	}
+	else if ($current == "index"){
 		$index = "active";
 	}
 	else if ($current == "appointment"){
@@ -56,6 +60,7 @@
 			<li class='".$index."'><a href='index.php'>Home</a></li>
 			<li class='".$appointment."'><a href='appointment.php'>Rendez-vous</a></li>
 			<li class='".$contact."'><a href='contact.php'>Contact</a></li>
+			<li class='".$barberProfile."'><a href='barberProfile.php'>Notre équipe</a></li>
 			
 		  </ul>
 		  <ul class='nav navbar-nav show_admin'>
