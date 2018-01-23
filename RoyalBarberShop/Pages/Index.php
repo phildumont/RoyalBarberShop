@@ -48,7 +48,7 @@
 				<div class="col-sm-8">
 					<h2 class="no_margin_top bold">À propos</h2>
 					<!-- TODO change text -->
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque varius sapien at tincidunt cursus. In porttitor ante pretium nulla molestie, non auctor enim molestie. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque arcu eros, laoreet et magna ultrices, pharetra ultricies tellus. Morbi non consectetur sapien. Etiam id tempus tellus. Pellentesque id tempus odio. Proin ornare elit non ligula rhoncus, eu suscipit lorem eleifend. Aenean fermentum elit dignissim, cursus massa id, lobortis felis. Sed ullamcorper vulputate neque, ac posuere ex porttitor vitae. Aenean est elit, varius non tempus eget, egestas ac purus.</p>
+					<p>Chez Royal Barber Shop, la coiffure est notre passion. Transformer une corvée en une expérience sensationnelle. Se faire couper les cheveux n’aura jamais été aussi amusant et agréable. Toute personne désirant une coupe classique, un Mohawk, un dégradé, un désigne, etc. sont les biens venus. Nous attachons le plus grand soin à la qualité du service offert à tous nos clients, nous prenons le temps de vous écouter afin de vous proposer ce qui vous conviendra le mieux tout en respectant votre personnalité. Faites confiance à nos barbiers talentueux, qui mettront la main à la patte pour vous rendre ravissant et flamboyant.</p>
 				</div>
 				<div class="col-sm-4">
 					<img src="../Content/Images/Index/IMG_3071.jpg" alt="aboutImage" class="homePicture hidden-sm img-responsive">

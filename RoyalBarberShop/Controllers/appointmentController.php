@@ -76,7 +76,7 @@
 		}
 		$_SESSION["appointments"] = $appTime;
 		$_SESSION["displayTime"] = "true";
-		header("Location: ../Pages/appointmentDate.php");
+		header("Location: ../Pages/appointment.php");
 	}
 	else if ($available == false){
 		$_SESSION["barberNotAvailable"] = "Le barbier que vous avez sélectionné n'est pas disponible pour cette journée. Veuillez choisir une autre journée.";
