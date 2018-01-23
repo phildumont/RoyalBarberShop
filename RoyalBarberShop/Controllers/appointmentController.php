@@ -6,6 +6,7 @@
 	$appDate = $_POST["appDate"];
 	$appDay = date('D', strtotime($appDate));
 	$available = false;
+	$_SESSION["formInfo"] = array("barber"=>$_POST["barber"], "service"=>$_POST["service"], "appDate"=>$_POST["appDate"]);
 	
 	$barberSql = "SELECT barber_day FROM barber WHERE barber_id = ".$barber_id;
 	$barberRes = $conn->query($barberSql) or die("cant connect");
@@ -74,18 +75,12 @@
 			$appTimeIndex++;
 		}
 		$_SESSION["appointments"] = $appTime;
-		
-		?><form action="../Pages/appointmentDate.php" id="appForm" method="post"><?php
+		$_SESSION["displayTime"] = "true";
+		header("Location: ../Pages/appointmentDate.php");
 	}
 	else if ($available == false){
 		$_SESSION["barberNotAvailable"] = "Le barbier que vous avez sélectionné n'est pas disponible pour cette journée. Veuillez choisir une autre journée.";
-		?><form action="../Pages/appointment.php" id="appForm" method="post"><?php
+		$_SESSION["displayTime"] = "false";
+		header("Location: ../Pages/appointment.php");
 	}
 ?>
-	<input type="hidden" name="barber" value="<?php if(!empty($_POST["barber"]))echo $_POST['barber']?>"/>
-	<input type="hidden" name="service" value="<?php if(!empty($_POST["service"]))echo $_POST['service']?>" />
-	<input type="hidden" name="appDate" value="<?php if(!empty($_POST["appDate"]))echo $_POST['appDate']?>" />
-</form>
-<script type="text/javascript">
-	document.getElementById('appForm').submit();
-</script>

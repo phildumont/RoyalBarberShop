@@ -66,6 +66,16 @@
 			$minDate = '20'.date("y").'-'.date("m")."-".date("d");
 			$maxMonth = date("m", strtotime('+2 months'));
 			$maxDate = '20'.date("y").'-'.$maxMonth."-".date("d");
+			
+			if (isset($_SESSION["formInfo"])){
+				$formInfo = $_SESSION["formInfo"];
+				unset($_SESSION["formInfo"]);
+			}
+			else {
+				$formInfo["service"] = "";
+				$formInfo["barber"] = "";
+				$formInfo["appDate"] = "";
+			}
 		?>
 	<!-- Nav bar end -->
 	<h1 class="myTitle text-center">Rendez-vous</h1>
@@ -81,7 +91,7 @@
 					<?php
 						$i = 0;
 						foreach ($services as $service){
-							if (isset($_POST["barber"]) && $_POST["service"] == $service[2])
+							if ($formInfo["service"] == $service[2])
 								$service_selection = 'checked="checked"';
 							else
 								$service_selection = "";
@@ -92,14 +102,14 @@
 					?>
 				</ul>
 			</div>
-			<div class="hidden-lg col-sm-4 col-xs-4"></div>
-			<div class="col-lg-4 col-sm-8 col-xs-8 selection">
+			<div class="hidden-lg col-sm-4 col-xs-2"></div>
+			<div class="col-lg-4 col-sm-8 col-xs-10 selection">
 				<h3>Barbier</h3>
 				<h4>Veuillez choisir un barbier</h4>
 				<ul class="app_ul">
 					<?php
 						foreach ($barbers as $barber){
-							if (isset($_POST["barber"]) && $_POST["barber"] == $barber[3])
+							if ($formInfo["barber"] == $barber[3])
 								$barber_selection = 'checked="checked"';
 							else
 								$barber_selection = "";
@@ -113,25 +123,22 @@
 					?>
 				</ul>
 			</div>
-			<div class="hidden-lg col-sm-4 col-xs-4"></div>
-			<div class="col-lg-3 col-sm-8 col-xs-8 selection">
+			<div class="hidden-lg col-sm-4 col-xs-2"></div>
+			<div class="col-lg-3 col-sm-8 col-xs-10 selection">
 				<h3>Date</h3>
 				<h4>Veuillez choisir la date</h4>
 				<?php
-					if (isset($_POST["appDate"])){
-						$appDateValue = 'value="'.$_POST["appDate"].'"';
-					}
-					else {
-						$appDateValue = "";
-					}
+					echo $formInfo["appDate"];
+					$appDateValue = $formInfo["appDate"];
 				?>
-					<input type="date" name="appDate" id='appDate' min="<?php echo $minDate ?>" max="<?php echo $maxDate ?>" <?php echo $appDateValue ?>required/><br>
+					<input type="date" name="appDate" id='appDate' min="<?php echo $minDate ?>" max="<?php echo $maxDate ?>" value="<?php echo $appDateValue ?>" required/><br>
 					<?php
 						if (isset($_SESSION["barberNotAvailable"])){
 							echo $_SESSION["barberNotAvailable"];
 							unset($_SESSION["barberNotAvailable"]);
 						}
 					?>
+					<br>
 					<input type="submit" value="Continue" class="custom_button"/>
 			</div>
 		</div>
