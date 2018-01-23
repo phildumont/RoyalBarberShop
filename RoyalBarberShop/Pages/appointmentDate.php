@@ -4,10 +4,14 @@
 	include("../Content/Display/hideElements.php");
 	include("connection.inc");
 	
-	$barber = $_POST["barber"];
-	$service = $_POST["service"];
-	$appDate = $_POST["appDate"];
-	$appDay = date('D', strtotime($appDate));
+	if (isset($_SESSION["formInfo"])){
+		$formInfo = $_SESSION["formInfo"];
+		unset($_SESSION["formInfo"]);
+		$barber = $formInfo["barber"];
+		$service = $formInfo["service"];
+		$appDate = $formInfo["appDate"];
+		$appDay = date('D', strtotime($appDate));
+	}
 	
 	$flag = 0;
 	if (isset($_SESSION["appointments"])){
