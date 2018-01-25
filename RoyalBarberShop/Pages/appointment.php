@@ -54,15 +54,11 @@
 				$barber_fname = $row[0];
 				$barber_lname = $row[1];
 				$barber_id = $row[3];
-				$barber_picture = imagecreatefromstring($row[2]);
-				ob_start();
-				imagejpeg($barber_picture, null, 80);
-				$picture_data = ob_get_contents();
-				ob_end_clean();
-				
+				$barber_picture = $row[2];
+
 				$barbers[$j][0] = $barber_fname;
 				$barbers[$j][1] = $barber_lname;
-				$barbers[$j][2] = $picture_data;
+				$barbers[$j][2] = $barber_picture;
 				$barbers[$j][3] = $barber_id;
 				$j++;
 			}
@@ -136,7 +132,7 @@
 								$barber_selection = "";
 							echo 
 							'<li class="barber_list"><input type="radio" name="barber" id="'.$i.'" class="barber_radio" value="'.$barb[3].'"'.$barber_selection.' required/>
-								<label for="'.$i.'"><img src="data:image/jpg;base64,'.base64_encode($barb[2]).'"  class="select_barber_img"/>'.
+								<label for="'.$i.'"><img src="'.$barb[2].'" class="select_barber_img"/>'.
 								$barb[0].' '.$barb[1].'</label>
 							</li>';
 							$i++;

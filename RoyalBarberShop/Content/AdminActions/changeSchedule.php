@@ -11,7 +11,6 @@
 				$newSchedule[$j]["open"] = $_POST[$nameO];
 				$newSchedule[$j]["close"] = $_POST[$nameF];
 			}
-
 			$msI = 0;
 			for ($j=0;$j<7;$j++){
 				if ($newSchedule[$j]["open"] != $schedule[$j]["open"] || $newSchedule[$j]["close"] != $schedule[$j]["close"]){
