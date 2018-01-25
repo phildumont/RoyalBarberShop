@@ -104,8 +104,7 @@
 				echo "<script>document.getElementById('openAddedModal').click();</script>";
 				$msg = "testEmail";
 				$subject = "Test Email";
-				//mail("phildumont8@gmail.com", $subject, $msg);
-				//echo "email sent";
+				mail("phildumont8@gmail.com", $subject, $msg);
 			}
 		}
 	?>
