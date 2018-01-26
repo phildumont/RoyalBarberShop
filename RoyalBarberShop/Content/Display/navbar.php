@@ -7,6 +7,7 @@
 	$signup = "";
 	$adminTools = "";
 	$barberProfile = "";
+	$assignedApp = "";
 	if (!isset($_SESSION["current"])){
 		$_SESSION["current"] = "";
 		$current = $_SESSION["current"];
@@ -14,10 +15,7 @@
 	else {
 		$current = $_SESSION["current"];
 	}
-	if ($current == "barberProfile"){
-		$barberProfile = "active";
-	}
-	else if ($current == "index"){
+	if ($current == "index"){
 		$index = "active";
 	}
 	else if ($current == "appointment"){
@@ -37,6 +35,12 @@
 	}
 	else if ($current == "adminTools"){
 		$adminTools = "active";
+	}
+	else if ($current == "barberProfile"){
+		$barberProfile = "active";
+	}
+	else if ($current == "assignedApp"){
+		$assignedApp = "active";
 	}
 	if (isset($_SESSION["fullname"])){
 		$fullname = $_SESSION["fullname"];
@@ -72,7 +76,9 @@
 			<li class='".$appointment."'><a href='appointment.php'>Rendez-vous</a></li>
 			<li class='".$contact."'><a href='contact.php'>Contact</a></li>
 			<li class='".$barberProfile."'><a href='barberProfile.php'>Notre équipe</a></li>
-			
+		  </ul>
+		  <ul class='nav navbar-nav show_barber'>
+			<li class='".$assignedApp."'><a href='assignedAppointments.php'>Mes rendez-vous</a></li>
 		  </ul>
 		  <ul class='nav navbar-nav show_admin'>
 			<li class='".$adminTools."'><a href='adminTools.php'>Outils administratifs</a></li>
