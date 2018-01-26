@@ -68,4 +68,34 @@
 		</style>
 		<?php
 	}
+	//barber
+	if (isset($_SESSION["barber"])){
+		if ($_SESSION["barber"] == "yes"){
+			?>
+			<style>
+				.show_barber {
+					display: inline;
+				}
+			</style>
+			<?php
+		}
+		else if ($_SESSION["barber"] == "no"){
+			?>
+			<style>
+				.show_barber {
+					display: none;
+				}
+			</style>
+			<?php
+		}
+	}
+	else {
+		?>
+		<style>
+			.show_barber {
+				display: none;
+			}
+		</style>
+		<?php
+	}
 ?>
