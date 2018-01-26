@@ -9,7 +9,7 @@
 			//Retrieve user info
 			$email = $_SESSION["email"];
 			$infoSql = "SELECT customer_fname, customer_lname, email, customer_id FROM customer WHERE email='".$email."'";
-			$infoRes = $conn->query($infoSql) or die("cant connect");
+			$infoRes = $conn->query($infoSql) or die("cant connect 1");
 			$user = mysqli_fetch_array($infoRes);
 			
 			//Put user info in variables
@@ -22,7 +22,7 @@
 			//Retrieve user appointments
 			$appSql = "SELECT appointment_date, appointment_time, service_id, barber_id,appointment_id FROM appointment
 						WHERE customer_id = ".$id;
-			$appRes = $conn->query($appSql) or die ("cant connect");
+			$appRes = $conn->query($appSql) or die ("cant connect 2");
 			$apps = array(array());
 			$i = 0;
 			$apps_flag = "false";
@@ -51,7 +51,7 @@
 				$i=0;
 				foreach ($apps as $app){
 					$barberSql = "SELECT first_name, last_name FROM barber WHERE barber_id = ".$app["barber"];
-					$barberRes = $conn->query($barberSql) or die ("cant connect");
+					$barberRes = $conn->query($barberSql) or die ("cant connect 3");
 					$barberInfo = mysqli_fetch_array($barberRes);
 					$apps[$i]["barber"] = $barberInfo[0].' '.$barberInfo[1];
 					

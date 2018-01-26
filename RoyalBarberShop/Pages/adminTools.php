@@ -18,7 +18,6 @@
 	<link rel="Stylesheet" type="text/css" href="../Content/Stylesheets/mainStylesheet.css">
 </head>
 <body class="mainBackground">
-
 	<!-- Nav bar start-->
 	<?php
 		$_SESSION["current"] = "adminTools";

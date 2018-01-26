@@ -24,7 +24,6 @@
 			//TODO error
 		}
 		
-		
 		//Checking for availability
 		if (isset($_POST["monday"])){
 			if ($_POST["monday"] == "yes")
