@@ -44,6 +44,17 @@
 	else {
 		$fullname = "";
 	}
+	if (isset($_SESSION["barber"])){
+		if ($_SESSION["barber"] == "yes"){
+			$accountLink = "barberAccount.php";
+		}
+		else {
+			$accountLink = "myAccount.php";
+		}
+	}
+	else {
+		$accountLink = "myAccount.php";
+	}
 	$navbar = "
 	<nav class='navbar navbar-inverse'>
 	  <div class='container-fluid'>
@@ -53,7 +64,7 @@
 			<span class='icon-bar'></span>
 			<span class='icon-bar'></span>                        
 		  </button>
-		  <a href='#'><img src='../Content/Images/logo.png' alt='logo' class='inverted  nav_logo'></a>
+		  <a href='#'><img src='../Content/Images/logo.png' alt='logo' class='inverted nav_logo'></a>
 		</div>
 		<div class='collapse navbar-collapse' id='myNavbar'>
 		  <ul class='nav navbar-nav'>
@@ -71,7 +82,7 @@
 			<li class='".$login."'><a href='login.php'><span class='glyphicon glyphicon-log-in'></span> Login</a></li>
 		  </ul>
 		  <ul class='nav navbar-nav navbar-right show_logged_in'>
-			<li class='".$myaccount."'><a href='myAccount.php'><span class='glyphicon glyphicon-user'></span> ".$fullname."</a></li>
+			<li class='".$myaccount."'><a href='".$accountLink."'><span class='glyphicon glyphicon-user'></span> ".$fullname."</a></li>
 			<li><a href='../Controllers/logoutController.php'><span class='glyphicon glyphicon-log-in'></span> Sign out</a></li>
 		  </ul>
 		</div>

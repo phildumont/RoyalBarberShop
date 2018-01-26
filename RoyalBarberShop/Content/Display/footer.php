@@ -1,8 +1,8 @@
 <footer class="footer navbar-inverse">
 	<div class="container-full">
 		<div class="row">
-			<div class="col-lg-4 col-sm-1 hidden-xs"></div>
-			<div class="col-lg-2 col-sm-5 col-xs-9">
+			<div class="col-lg-3 col-sm-1 hidden-xs"></div>
+			<div class="col-lg-4 col-sm-5 col-xs-9">
 				Royal Barber Shop - Estd. 2017
 			</div>
 			<div  class="col-lg-2 col-sm-3 hidden-xs">

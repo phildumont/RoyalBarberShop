@@ -1,5 +1,5 @@
 <?php 
-	include("timeframes.php")
+	include("../timeframes.php")
 ?>
 <div id="timeModal" class="modal fade" role="dialog">
 	<div class="modal-dialog">
