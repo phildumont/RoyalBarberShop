@@ -85,6 +85,7 @@
 				$todayApps[$ti]["customer_email"] = $app["customer_email"];
 				$todayApps[$ti]["id"] = $app["id"];
 				$todayApps[$ti]["attended"] = $app["attended"];
+				$todayApps[$ti]["customer_id"] = $app["customer_id"];
 				$ti++;
 				$todayApps_flag = "true";
 			}
@@ -125,11 +126,12 @@
 		<div class="col-sm-3"></div>
 		<div class="col-sm-6">
 			<h3 class="text-center">Rendez-vous d'aujourd'hui</h3>
-			<form action="assignedAppointments" method="post">
+			
 			<ul class="user_info">
 			<?php
 				if ($todayApps_flag == "true"){
 					foreach ($todayApps as $app){
+						echo "<form action='assignedAppointments' method='post'>";
 						$appList = 
 						"<li>Client: ".$app["customer_name"]."</li>
 						<li>Adresse courriel: ".$app["customer_email"]."</li>
@@ -143,13 +145,14 @@
 							$appList.="<li>Le client ne s'est pas présenté au rendez-vous</li>";
 						}
 						$appList.="<input type='hidden' value='".$app["id"]."' name='app_id' />
-						<li><hr></li>";
+							<input type='hidden' name='customer_id' value='".$app["customer_id"]."' />
+							<li><hr></li>";
 						echo $appList;
+						echo "</form>";
 					}
 				}
 			?>	
 			</ul>
-			</form>
 		</div>
 	</div>
 	<div class="row">
@@ -178,10 +181,16 @@
 	<?php 
 		//Check attendance
 		if (isset($_POST["app_id"])){
-			echo 'hhhh';
-			$app_id = $_POST["app_id"];
-			$attendSql = "UPDATE appointment SET attended='no' WHERE appointment_id=".$app_id;
+			//Set apointments as missed
+			$attendSql = "UPDATE appointment SET attended='no' WHERE appointment_id=".$_POST["app_id"];
 			if (mysqli_query($conn, $attendSql) === true){}
+			else {
+				echo '<br>failed<br>';
+				printf("Errormessage: %s\n", $conn->error);
+			}
+			//Give strike to customer
+			$strikeSql = "UPDATE customer SET strikes=strikes+1 WHERE customer_id=".$_POST["customer_id"];
+			if (mysqli_query($conn, $strikeSql) === true){}
 			else {
 				echo '<br>failed<br>';
 				printf("Errormessage: %s\n", $conn->error);

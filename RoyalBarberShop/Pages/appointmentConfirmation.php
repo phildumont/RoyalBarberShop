@@ -73,7 +73,7 @@
 		</div>
 	</div>
 
-	<!-- Modal -->
+	<!-- Added Modal -->
 	<div id="addedModal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 			<!-- Modal content-->
@@ -88,23 +88,48 @@
 					<a href="index.php"><input type="button" class="btn btn-default" value="Fermer"></a>
 				</div>
 			</div>
-
 		</div>
 	</div>
+	<!-- Denied Modal -->
+	<div id="deniedModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Impossible de prendre le rendez-vous</h4>
+				</div>
+				<div class="modal-body text-center">
+					<h2>Vous avez manqué trop de rendez-vous, vous ne pouvez plus en réserver.</h2>
+					<h2>Merci de contacter Royal Barber Shop</h2>
+				</div>
+				<div class="modal-footer">
+					<a href="index.php"><input type="button" class="btn btn-default" value="Fermer"></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	<?php 
 		if (isset($_POST["confirmed"])){
-			$customerSql = "SELECT customer_id FROM customer WHERE  email='".$_SESSION["email"]."'";
+			$customerSql = "SELECT customer_id, strikes FROM customer WHERE  email='".$_SESSION["email"]."'";
 			$customerRes = $conn->query($customerSql) or die ("cant connect");
 			$customerArr = mysqli_fetch_array($customerRes);
 			$customer_id = $customerArr[0];
 			echo "<button type='button' data-toggle='modal' data-target='#addedModal' style='display:none' id='openAddedModal' data-backdrop='static' data-keyboard='false'>Open Modal</button>";
+			echo "<button type='button' data-toggle='modal' data-target='#deniedModal' style='display:none' id='openDeniedModal' data-backdrop='static' data-keyboard='false'>Open Modal</button>";
 			
-			$insertApp = "INSERT INTO appointment VALUES (0, '".$date."', '".$time."', '".$service_id."', '".$barber_id."', '".$customer_id."')";
-			if (mysqli_query($conn, $insertApp) === true){
-				echo "<script>document.getElementById('openAddedModal').click();</script>";
-				$msg = "testEmail";
-				$subject = "Test Email";
-				mail("phildumont8@gmail.com", $subject, $msg);
+			echo $customerArr[1];
+			if (intval($customerArr[1]) >= 3){
+				echo "<script>document.getElementById('openDeniedModal').click();</script>";
+			}
+			else {
+				$insertApp = "INSERT INTO appointment VALUES (0, '".$date."', '".$time."', '".$service_id."', '".$barber_id."', '".$customer_id."')";
+				if (mysqli_query($conn, $insertApp) === true){
+					echo "<script>document.getElementById('openAddedModal').click();</script>";
+					$msg = "testEmail";
+					$subject = "Test Email";
+					mail("phildumont8@gmail.com", $subject, $msg);
+				}
 			}
 		}
 	?>

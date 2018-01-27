@@ -34,5 +34,6 @@
 			}
 			$_POST["setChangeSchedule"] = "no";
 		}
+		echo "<script>window.location.replace('adminTools.php');</script>";
 	}
 ?>
