@@ -31,6 +31,7 @@
 	<ul class="app_ul text-center">
 		<a class="contact_link" href="" data-toggle="modal" data-target="#addEmp"><li>Ajouter un employé</li></a>
 		<a class="contact_link" href=""><li>Supprimer un employé</li></a>
+		<a class="contact_link" href="" data-toggle="modal" data-target="#unbanCustomer"><li>Autoriser un client</li></a>
 		<a class="contact_link" href=""><li>Liste des rendez-vous</li></a>
 		<a class="contact_link" href="" data-toggle="modal" data-target="#seeCustomers"><li>Liste des clients</li></a>
 		<a class="contact_link" href="" data-toggle="modal" data-target="#changeSchedule"><li>Changer les heures d'ouverture</li></a>
@@ -46,6 +47,8 @@
 			include("../Content/Display/Modals/displayCustomersModal.php");
 			//Change schedule modal
 			include("../Content/Display/Modals/changeScheduleModal.php");
+			//Unban customer modal
+			include("../Content/Display/Modals/unbanCustomerModal.php");
 		?>
 	<!-- Modals definition end -->
 	
@@ -54,7 +57,9 @@
 			//Add barber to db
 			include("../Content/AdminActions/addBarber.php");
 			//Change schedule in db
-			include("../Content/AdminActions/changeSchedule.php")
+			include("../Content/AdminActions/changeSchedule.php");
+			//Change strikes
+			include("../Content/AdminActions/unbanCustomer.php");
 		?>
 	<!-- Database action end --> 
 	

@@ -8,7 +8,7 @@
 		if (isset($_SESSION["email"])){
 			//Retrieve user info
 			$email = $_SESSION["email"];
-			$infoSql = "SELECT customer_fname, customer_lname, email, customer_id FROM customer WHERE email='".$email."'";
+			$infoSql = "SELECT customer_fname, customer_lname, email, customer_id, strikes FROM customer WHERE email='".$email."'";
 			$infoRes = $conn->query($infoSql) or die("cant connect 1");
 			$user = mysqli_fetch_array($infoRes);
 			
@@ -17,7 +17,8 @@
 			$lastName = $user["customer_lname"];
 			$email = $user["email"];
 			$id = $user["customer_id"];
-			$user_info = array($firstName, $lastName, $email);
+			$strikes = $user["strikes"];
+			$user_info = array($firstName, $lastName, $email, $strikes);
 			
 			//Retrieve user appointments
 			$appSql = "SELECT appointment_date, appointment_time, service_id, barber_id,appointment_id FROM appointment
@@ -135,6 +136,7 @@
 						<li>Prénom: <?php echo $user_info[0] ?></li>
 						<li>Nom de famille: <?php echo $user_info[1] ?></li>
 						<li>Adresse courriel: <?php echo $user_info[2] ?></li>
+						<li>Rendez-vous manqués: <?php echo $user_info[3] ?></li>
 						<li><a href="#">Changer le mot de passe</a></li>
 						</ul>
 		</div></div>
