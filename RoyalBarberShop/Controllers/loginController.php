@@ -5,15 +5,6 @@
 	$email=$_POST["email"];
 	$pass2 = $_POST["password"];
 	$hashcode = md5($email).md5('thisguyisgood').md5($pass2).md5('yesyesdovisio').md5('isthatsecureamin?');
-
-	/*if (isset($_POST["emp"])){
-		if ($_POST["emp"] == "yes"){
-			$loginSql="SELECT email, password, first_name, last_name FROM barber WHERE email='".$email."'";
-		}
-	}
-	else {
-		$loginSql="SELECT email, password, customer_fname, customer_lname FROM customer WHERE email='".$email."'";
-	}*/
 	
 	//Search for barber
 	$loginSql = "SELECT email, password, first_name, last_name FROM barber WHERE email='".$email."'";
@@ -117,18 +108,17 @@
 			$admins[$i][0] = $row[0];
 			$i++;
 		}
+		$_SESSION["admin"] = "no";
 		foreach ($admins as $admin){
 			if ($user["email"] == $admin[0]){
-				$_SESSION["userFlag"] = "in admin";
 				$_SESSION["admin"] = "admin";
 				$_SESSION["barber"] = "yes";
-				header("Location:../Pages/adminTools.php");
-			}
-			else {
-				$_SESSION["admin"] = "no";
 			}
 		}
-		if ($_SESSION["barber"] == "yes"){
+		if ($_SESSION["admin"] == "admin"){
+			header("Location:../Pages/adminTools.php");
+		}
+		else if ($_SESSION["barber"] == "yes"){
 			header("Location:../Pages/assignedAppointments.php");
 		}
 		else {
