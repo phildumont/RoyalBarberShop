@@ -24,6 +24,9 @@ html {width:100%}
 .subTitle {
 	margin-top: 15px;
 }
+.carousel_img {
+	height: 500px;
+}
 .home_text {color: #333538;}
 .home_text:hover {
 	color: white;
