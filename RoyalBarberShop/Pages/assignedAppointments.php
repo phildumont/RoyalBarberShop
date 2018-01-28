@@ -45,19 +45,21 @@
 	$ti = 0;
 	$fi = 0;
 	
-	while ($row = mysqli_fetch_array($appRes)){
-		$month = utf8_encode(strftime("%B", strtotime($row[0])));
-		$day = strftime("%#d", strtotime($row[0]));
-		$year = '20'.date("y", strtotime($row[0]));
-		$apps[$i]["date"] = $day.' '.$month.', '.$year;
-		$apps[$i]["time"] = date("H:i", strtotime($row[1]));
-		$apps[$i]["service_id"] = $row[2];
-		$apps[$i]["customer_id"] = $row[3];
-		$apps[$i]["normalDate"] = $row[0];
-		$apps[$i]["id"] = $row[4];
-		$apps[$i]["attended"] = $row[5];
-		$i++;
-		$apps_flag = "true";
+	if (!empty($appRes)){
+		while ($row = mysqli_fetch_array($appRes)){
+			$month = utf8_encode(strftime("%B", strtotime($row[0])));
+			$day = strftime("%#d", strtotime($row[0]));
+			$year = '20'.date("y", strtotime($row[0]));
+			$apps[$i]["date"] = $day.' '.$month.', '.$year;
+			$apps[$i]["time"] = date("H:i", strtotime($row[1]));
+			$apps[$i]["service_id"] = $row[2];
+			$apps[$i]["customer_id"] = $row[3];
+			$apps[$i]["normalDate"] = $row[0];
+			$apps[$i]["id"] = $row[4];
+			$apps[$i]["attended"] = $row[5];
+			$i++;
+			$apps_flag = "true";
+		}
 	}
 	
 	//Find service and customer for the appointments
@@ -118,7 +120,7 @@
 <body class="mainBackground">
 	<!-- Nav bar start-->
 	<?php
-		$_SESSION["current"] = "assignedApp";
+		$_SESSION["current"] = "appointment";
 		include("../Content/Display/navbar.php");
 	?>
 	<div class="container">
@@ -151,6 +153,9 @@
 						echo "</form>";
 					}
 				}
+				else {
+					echo "Vous n'avez pas de rendez-vous aujourd'hui";
+				}
 			?>	
 			</ul>
 		</div>
@@ -172,6 +177,9 @@
 						<li><hr></li>";
 						echo $appList;
 					}
+				}
+				else {
+					echo "Vous n'avez pas de futures rendez-vous";
 				}
 			?>
 			</ul>

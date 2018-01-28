@@ -123,12 +123,15 @@
 				echo "<script>document.getElementById('openDeniedModal').click();</script>";
 			}
 			else {
-				$insertApp = "INSERT INTO appointment VALUES (0, '".$date."', '".$time."', '".$service_id."', '".$barber_id."', '".$customer_id."')";
+				$insertApp = "INSERT INTO appointment VALUES (0, '".$date."', '".$time."', '".$service_id."', '".$barber_id."', '".$customer_id."', null)";
 				if (mysqli_query($conn, $insertApp) === true){
 					echo "<script>document.getElementById('openAddedModal').click();</script>";
 					$msg = "testEmail";
 					$subject = "Test Email";
 					mail("phildumont8@gmail.com", $subject, $msg);
+				}
+				else {
+					echo mysqli_error($conn);
 				}
 			}
 		}

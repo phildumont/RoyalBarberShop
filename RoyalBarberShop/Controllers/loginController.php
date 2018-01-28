@@ -6,16 +6,28 @@
 	$pass2 = $_POST["password"];
 	$hashcode = md5($email).md5('thisguyisgood').md5($pass2).md5('yesyesdovisio').md5('isthatsecureamin?');
 
-	if (isset($_POST["emp"])){
+	/*if (isset($_POST["emp"])){
 		if ($_POST["emp"] == "yes"){
 			$loginSql="SELECT email, password, first_name, last_name FROM barber WHERE email='".$email."'";
 		}
 	}
 	else {
 		$loginSql="SELECT email, password, customer_fname, customer_lname FROM customer WHERE email='".$email."'";
+	}*/
+	
+	//Search for barber
+	$loginSql = "SELECT email, password, first_name, last_name FROM barber WHERE email='".$email."'";
+	$barberRes = $conn->query($loginSql) or die ("cant connect");
+	$user = mysqli_fetch_array($barberRes);
+	$userFlag = "false";
+	if (empty($user)){
+		$loginSql="SELECT email, password, customer_fname, customer_lname FROM customer WHERE email='".$email."'";
+		$userFlag = "true";
 	}
+	$_SESSION["userFlag"] = $userFlag;
 	$loginres=$conn->query($loginSql) or die("cant connect");
 	$user=mysqli_fetch_array($loginres);
+
 	$emailFlag = 0;
 	$passwordFlag = 0;
 
@@ -66,6 +78,9 @@
 	if (isset($invalidPasswordError)){
 		$login_errors[] = $invalidPasswordError;
 	}
+	if (isset($isBarberError)){
+		$login_errors[] = $isBarberError;
+	}
 	
 	$_SESSION["login_errors"] = $login_errors;
 	
@@ -81,11 +96,11 @@
 		<?php
 	}
 	else {
-		if (isset($_POST["emp"])){
-			if ($_POST["emp"] == "yes"){
+		if ($userFlag == "false"){
+			#if ($_POST["emp"] == "yes"){
 				$_SESSION["fullname"] = $user["first_name"]." ".$user["last_name"];
 				$_SESSION["barber"] = "yes";
-			}
+			#}
 		}
 		else {
 			$_SESSION["fullname"] = $user["customer_fname"]." ".$user["customer_lname"];
@@ -93,14 +108,32 @@
 		}
 		$_SESSION["email"] = $user["email"];
 		$_SESSION["loggedin"] = "loggedin";
-		if ($user["email"] == "admin@admin.com"){
-			$_SESSION["admin"] = "admin";
-			$_SESSION["barber"] = "yes";
+		//Check admin
+		$adminSql = "SELECT email FROM admin";
+		$adminRes = $conn->query($adminSql);
+		$admins = array(array());
+		$i = 0;
+		while ($row = mysqli_fetch_array($adminRes)){
+			$admins[$i][0] = $row[0];
+			$i++;
+		}
+		foreach ($admins as $admin){
+			if ($user["email"] == $admin[0]){
+				$_SESSION["userFlag"] = "in admin";
+				$_SESSION["admin"] = "admin";
+				$_SESSION["barber"] = "yes";
+				header("Location:../Pages/adminTools.php");
+			}
+			else {
+				$_SESSION["admin"] = "no";
+			}
+		}
+		if ($_SESSION["barber"] == "yes"){
+			header("Location:../Pages/assignedAppointments.php");
 		}
 		else {
-			$_SESSION["admin"] = "no";
+			header("Location:../Pages/appointment.php");
 		}
-		header("Location:../Pages/appointment.php");
 	}
 ?>
 
