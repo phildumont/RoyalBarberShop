@@ -21,6 +21,7 @@
 	else {
 		header("Location: index.php");
 	}
+	$pageName = "barberAccount.php";
 ?>
 <html lang="en">
 <head>
@@ -67,6 +68,44 @@
 			if ($char == 'U')
 				$u=$c;
 		}
+		
+		include("../Content/Display/Modals/changePasswordModal.php");
+		include("../Content/Display/Modals/passWordConfirm.php");
+		
+		//Change password actions start
+		#Retrieve session variables from controller
+		if (isset($_SESSION["fromController"])){
+			if ($_SESSION["fromController"] == "true"){
+				$fromControllerFlag = "true";
+				$error_message = $_SESSION["errors"];
+				$openPassModal = $_SESSION["openPassModal"];
+				$openConfirmModal = $_SESSION["setConfirmModal"];
+				#unset session variables
+				unset($_SESSION["errors"]);
+				unset($_SESSION["openPassModal"]);
+				unset($_SESSION["setConfirmModal"]);
+				unset($_SESSION["fromController"]);
+			}
+			#Check which modal to open when coming back
+			if ($openPassModal == "true"){
+				echo '<button type="button" data-toggle="modal" data-target="#changePass" style="display:none" id="openPassModal">Open Modal</button>';
+				?>
+					<script>
+						document.getElementById("openPassModal").click();
+					</script>
+				<?php
+			}
+			else if ($openConfirmModal == "true"){
+				echo '<button type="button" data-toggle="modal" data-target="#passConfirm" style="display:none" id="openPassConfirmModal">Open Modal</button>';
+				?>
+					<script>
+						document.getElementById("openPassConfirmModal").click();
+					</script>
+				<?php
+			}
+			
+		}
+		//Change password actions end
 	?>
 	<!-- Nav bar end -->
 	<h1 class="myTitle text-center margin_bottom_5">Royal Barber Shop</h1>
@@ -147,6 +186,7 @@
 		</div>
 	</div>
 	</div>
+	<ul class="user_info text-center"><li><a href="#" data-toggle="modal" data-target="#changePass">Changer le mot de passe</a></li></ul>
 	<?php 
 		//Change barber info
 		if (isset($_POST["setBarberAccount"])){
