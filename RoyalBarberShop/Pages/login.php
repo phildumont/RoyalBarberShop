@@ -38,16 +38,12 @@
 			<form class="col-sm-4" action="../Controllers/loginController.php" method="post">
 				<table>
 					<tr>
-						<td><label for="emp">Êtes-vous un employé?</label></td>
-						<td><input type="checkbox" name="emp" value="yes"/></td>
-					</tr>
-					<tr>
 						<td><label for="email">Adresse courriel:</label></td>
-						<td><input type="email" name="email" value="<?php if(!empty($_POST["email"]))echo $_POST["email"]?>" required/></td>
+						<td><input type="email" name="email" value="<?php if(!empty($_POST["email"]))echo $_POST["email"]?>" required /></td>
 					</tr>
 					<tr>
 						<td><label for="password">Mot de passe:</label></td>
-						<td><input type="password" name="password" required/></td>
+						<td><input type="password" name="password" required /></td>
 					</tr>
 				</table>
 				<ul class="error_message">

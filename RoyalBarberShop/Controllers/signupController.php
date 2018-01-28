@@ -11,7 +11,7 @@
 	$hashcode = md5($email).md5('thisguyisgood').md5($password).md5('yesyesdovisio').md5('isthatsecureamin?');
 
 	//Sql statement to insert
-	$addUserSql = "INSERT INTO customer VALUES (0, '".$fname."', '".$lname."', "."'".$email."', '".$hashcode."')";
+	$addUserSql = "INSERT INTO customer VALUES (0, '".$fname."', '".$lname."', "."'".$email."', '".$hashcode."', 0)";
 
 	$flag = 0;
 	
@@ -38,7 +38,8 @@
 	}
 	else {
 		$flag = 0;
-		//$insertError = "Une erreur est survenu, le compte n'as pu être créé.";
+		$insertError = "Une erreur est survenu, le compte n'as pu être créé.";
+		$insertError = $conn->error;
 	}
 	
 	//Put error messages in array

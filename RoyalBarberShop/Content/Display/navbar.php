@@ -51,13 +51,16 @@
 	if (isset($_SESSION["barber"])){
 		if ($_SESSION["barber"] == "yes"){
 			$accountLink = "barberAccount.php";
+			$appointmentLink = "assignedAppointments.php";
 		}
 		else {
 			$accountLink = "myAccount.php";
+			$appointmentLink = "appointment.php";
 		}
 	}
 	else {
 		$accountLink = "myAccount.php";
+		$appointmentLink = "appointment.php";
 	}
 	$navbar = "
 	<nav class='navbar navbar-inverse'>
@@ -73,12 +76,9 @@
 		<div class='collapse navbar-collapse' id='myNavbar'>
 		  <ul class='nav navbar-nav'>
 			<li class='".$index."'><a href='index.php'>Home</a></li>
-			<li class='".$appointment."'><a href='appointment.php'>Rendez-vous</a></li>
+			<li class='".$appointment."'><a href='".$appointmentLink."'>Rendez-vous</a></li>
 			<li class='".$contact."'><a href='contact.php'>Contact</a></li>
 			<li class='".$barberProfile."'><a href='barberProfile.php'>Notre équipe</a></li>
-		  </ul>
-		  <ul class='nav navbar-nav show_barber'>
-			<li class='".$assignedApp."'><a href='assignedAppointments.php'>Mes rendez-vous</a></li>
 		  </ul>
 		  <ul class='nav navbar-nav show_admin'>
 			<li class='".$adminTools."'><a href='adminTools.php'>Outils administratifs</a></li>

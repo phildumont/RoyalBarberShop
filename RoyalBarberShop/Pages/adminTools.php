@@ -36,6 +36,7 @@
 		<a class="contact_link" href="" data-toggle="modal" data-target="#seeCustomers"><li>Liste des clients</li></a>
 		<a class="contact_link" href="" data-toggle="modal" data-target="#changeSchedule"><li>Changer les heures d'ouverture</li></a>
 		<a class="contact_link" href=""><li>Rapports</li></a>
+		<a class="contact_link" href="" data-toggle="modal" data-target="#addAdmin"><li>Modifier les administrateurs</li></a>
 	</ul>
 	<!-- Options menu end -->
 	
@@ -49,6 +50,8 @@
 			include("../Content/Display/Modals/changeScheduleModal.php");
 			//Unban customer modal
 			include("../Content/Display/Modals/unbanCustomerModal.php");
+			//Add admin modal
+			include("../Content/Display/Modals/addAdminModal.php");
 		?>
 	<!-- Modals definition end -->
 	
@@ -60,6 +63,8 @@
 			include("../Content/AdminActions/changeSchedule.php");
 			//Change strikes
 			include("../Content/AdminActions/unbanCustomer.php");
+			//Add admin
+			include("../Content/AdminActions/addAdmin.php");
 		?>
 	<!-- Database action end --> 
 	

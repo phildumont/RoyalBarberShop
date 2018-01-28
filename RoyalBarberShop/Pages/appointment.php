@@ -3,8 +3,17 @@
 	session_start();
 	include("../Content/Display/hideElements.php");
 	include("connection.inc");
-	if ($_SESSION["loggedin"] == "loggedout"){
-		header("Location:login.php");
+	$loggedFlag = "false";
+	if (isset($_SESSION["loggedin"])){
+		if ($_SESSION["loggedin"] == "loggedin"){
+			$loggedFlag = "true";
+		}
+		else {
+			$loggedFlag = "false";
+		}
+	}
+	else {
+		$loggedFlag = "false";
 	}
 ?>
 <html lang="en">
@@ -93,7 +102,17 @@
 			else {
 				$displayTime = "false";
 			}
+			if ($loggedFlag == "false"){
+				include("../Content/Display/Modals/logInModal.php");
+				echo '<button type="button" data-toggle="modal" data-target="#loginModal" style="display:none" id="openLogInModal" data-backdrop="static" data-keyboard="false">Open Modal</button>';
+				?>
+					<script>
+						document.getElementById("openLogInModal").click();
+					</script>
+				<?php
+			}
 		?>
+	
 	<!-- Nav bar end -->
 	<h1 class="myTitle text-center">Rendez-vous</h1>
 	
