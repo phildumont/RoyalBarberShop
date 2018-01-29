@@ -16,6 +16,7 @@
 	//m monday, t tuesday, w wednesday, r thursday, f friday, s saturday, u sunday
 	$monday=false;$tuesday=false;$wednesday=false;$thursday=false;$friday=false;$saturday=false;$sunday=false;$available=false;
 
+
 	for ($i=0;$i<strlen($days);$i++){
 		$char = substr($days, $i, 1);
 		if ($char == 'M'){
@@ -61,6 +62,16 @@
 	}
 	else if ($appDay == 'Sun' && $sunday == true){
 		$available = true;
+	}
+	
+	//Check closed days
+	$daysSql = "SELECT open, close, day FROM schedule";
+	$daysRes = $conn->query($daysSql) or die ("cant connect");
+	$daysS = array(array());
+	while ($row = mysqli_fetch_array($daysRes)){
+		if ($row[0] == '00:00:00' && $row[1] == '00:00:00' && $appDay == $row[2]){
+			$available = false;
+		}
 	}
 	
 	if ($available == true){

@@ -6,7 +6,7 @@
 	$customers = array(array());
 	$ci = 0;
 	$customerFlag = "false";
-	if (!empty(mysqli_fetch_array($customerRes))){
+	if ($customerRes != "false"){
 		while ($row = mysqli_fetch_array($customerRes)){
 			$customers[$ci][0] = $row[0];
 			$customers[$ci][1] = $row[1];

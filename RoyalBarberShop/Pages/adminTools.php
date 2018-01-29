@@ -27,23 +27,40 @@
 	<h1 class="myTitle text-center margin_bottom_5">Royal Barber Shop</h1>
 	<h2 class="text-center">Outils administratifs</h2>
 	
+	<!-- Options menu beta start -->
+	<div class="container-full">
+		<div class="row">
+			<div class="col-sm-2"></div>
+			<div class="col-sm-3">
+				<h4>Employés</h4><hr>
+					<button class="btn btn-primary" data-toggle="modal" data-target="#addEmp">Ajouter un employé</button><br><br>
+					<button class="btn btn-primary" data-toggle="modal" data-target="#deleteEmp">Supprimer un employé</button><br><br>
+					<button class="btn btn-primary" data-toggle="modal" data-target="#addAdmin">Modifier les administrateurs</button>
+			</div>
+			<div class="col-sm-3">
+				<h4>Clients</h4><hr>
+				<button class="btn btn-primary" data-toggle="modal" data-target="#seeCustomers">Liste des clients</button><br><br>
+				<button class="btn btn-primary" data-toggle="modal" data-target="#unbanCustomer">Autoriser un client</button><br><br>
+				<button class="btn btn-primary" data-toggle="modal" data-target="#">Liste des rendez-vous</button><br><br>
+			</div>
+			<div class="col-sm-3">
+				<h4>Services</h4><hr>
+				<button class="btn btn-primary" data-toggle="modal" data-target="#">Changer les services offerts</button><br><br>
+				<button class="btn btn-primary" data-toggle="modal" data-target="#changeSchedule">Changer les heures d'ouverture</button><br><br>
+				<button class="btn btn-primary" data-toggle="modal" data-target="#">Rapports</button>
+			</div>
+		</div>
+	</div>
+	<br>
+	<!-- Options menu beta end -->
 	<!-- Options menu start -->
-	<ul class="app_ul text-center">
-		<a class="contact_link" href="" data-toggle="modal" data-target="#addEmp"><li>Ajouter un employé</li></a>
-		<a class="contact_link" href=""><li>Supprimer un employé</li></a>
-		<a class="contact_link" href="" data-toggle="modal" data-target="#unbanCustomer"><li>Autoriser un client</li></a>
-		<a class="contact_link" href=""><li>Liste des rendez-vous</li></a>
-		<a class="contact_link" href="" data-toggle="modal" data-target="#seeCustomers"><li>Liste des clients</li></a>
-		<a class="contact_link" href="" data-toggle="modal" data-target="#changeSchedule"><li>Changer les heures d'ouverture</li></a>
-		<a class="contact_link" href=""><li>Rapports</li></a>
-		<a class="contact_link" href="" data-toggle="modal" data-target="#addAdmin"><li>Modifier les administrateurs</li></a>
-	</ul>
-	<!-- Options menu end -->
 	
 	<!-- Modals definition start -->
 		<?php 
 			//Add barber modal
 			include("../Content/Display/Modals/addBarberModal.php");
+			//Delete barber modal
+			include("../Content/Display/Modals/deleteEmployeeModal.php");
 			//Display customers modal
 			include("../Content/Display/Modals/displayCustomersModal.php");
 			//Change schedule modal
@@ -59,6 +76,8 @@
 		<?php
 			//Add barber to db
 			include("../Content/AdminActions/addBarber.php");
+			//Delete barber
+			include("../Content/AdminActions/deleteEmployee.php");
 			//Change schedule in db
 			include("../Content/AdminActions/changeSchedule.php");
 			//Change strikes
