@@ -26,7 +26,7 @@
 				<h4 class="modal-title">Changer les heures d'ouverture</h4>
 			</div>
 			<div class="modal-body">
-				<p>Mettre 00:00 à 00:00 si le salon est fermé pour cette journée</p>
+				<p>Mettre 00:00 à 00:00 si le salon est fermé pour cette journée.</p>
 				<!-- Form -->
 				<?php
 					$idIndex = 500;
@@ -34,10 +34,10 @@
 					foreach ($schedule as $day){
 						echo "<label>".$days[$dayIndex]."</label><br>
 							<label for='".$idIndex."' style='margin-right:8px'>Ouverture:</label>
-							<input type='time' id='".$idIndex."' style='width:70px;margin-right:8px' value='".$schedule[$dayIndex]["open"]."' name='".$days[$dayIndex]."O' />";
+							<input type='time' id='".$idIndex."' style='width:75px;margin-right:8px' value='".$schedule[$dayIndex]["open"]."' name='".$days[$dayIndex]."O' />";
 							$idIndex++;
 						echo "<label for='".$idIndex."' style='margin-right: 8px'>Fermeture:</label>
-							<input type='time' id='".$idIndex."' style='width:70px' value='".$schedule[$dayIndex]["close"]."' name='".$days[$dayIndex]."F' /><hr>";
+							<input type='time' id='".$idIndex."' style='width:75px' value='".$schedule[$dayIndex]["close"]."' name='".$days[$dayIndex]."F' /><hr>";
 						$idIndex++;
 						$dayIndex++;
 					}
