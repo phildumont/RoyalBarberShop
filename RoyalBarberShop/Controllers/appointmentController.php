@@ -13,6 +13,16 @@
 	$daysRes = mysqli_fetch_array($barberRes);
 	$days = $daysRes["barber_day"];
 	
+	//Get all blocked days
+	$daysSql = "SELECT day FROM blockedDays";
+	$daysRes = $conn->query($daysSql);
+	$blockedDays = array(array());
+	$bdi = 0;
+	while ($row = mysqli_fetch_array($daysRes)){
+		$blockedDays[$bdi][0] = $row[0];
+		$bdi++;
+	}
+	
 	//m monday, t tuesday, w wednesday, r thursday, f friday, s saturday, u sunday
 	$monday=false;$tuesday=false;$wednesday=false;$thursday=false;$friday=false;$saturday=false;$sunday=false;$available=false;
 
@@ -70,6 +80,13 @@
 	$daysS = array(array());
 	while ($row = mysqli_fetch_array($daysRes)){
 		if ($row[0] == '00:00:00' && $row[1] == '00:00:00' && $appDay == $row[2]){
+			$available = false;
+		}
+	}
+	
+	//Check blocked days
+	foreach ($blockedDays as $bday){
+		if ($bday[0] == $appDate){
 			$available = false;
 		}
 	}
