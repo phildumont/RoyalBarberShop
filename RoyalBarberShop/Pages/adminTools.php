@@ -33,21 +33,21 @@
 			<div class="col-sm-2"></div>
 			<div class="col-sm-3">
 				<h4>Employés</h4><hr>
-					<button class="btn btn-primary" data-toggle="modal" data-target="#addEmp">Ajouter un employé</button><br><br>
-					<button class="btn btn-primary" data-toggle="modal" data-target="#deleteEmp">Supprimer un employé</button><br><br>
-					<button class="btn btn-primary" data-toggle="modal" data-target="#addAdmin">Modifier les administrateurs</button>
+					<button class="btn btn-default" data-toggle="modal" data-target="#addEmp">Ajouter un employé</button><br><br>
+					<button class="btn btn-default" data-toggle="modal" data-target="#deleteEmp">Supprimer un employé</button><br><br>
+					<button class="btn btn-default" data-toggle="modal" data-target="#addAdmin">Modifier les administrateurs</button>
 			</div>
 			<div class="col-sm-3">
 				<h4>Clients</h4><hr>
-				<button class="btn btn-primary" data-toggle="modal" data-target="#seeCustomers">Liste des clients</button><br><br>
-				<button class="btn btn-primary" data-toggle="modal" data-target="#unbanCustomer">Autoriser un client</button><br><br>
-				<button class="btn btn-primary" data-toggle="modal" data-target="#">Liste des rendez-vous</button><br><br>
+				<button class="btn btn-default" data-toggle="modal" data-target="#seeCustomers">Liste des clients</button><br><br>
+				<button class="btn btn-default" data-toggle="modal" data-target="#unbanCustomer">Autoriser un client</button><br><br>
+				<button class="btn btn-default" data-toggle="modal" data-target="#">Liste des rendez-vous</button><br><br>
 			</div>
 			<div class="col-sm-3">
 				<h4>Services</h4><hr>
-				<button class="btn btn-primary" data-toggle="modal" data-target="#">Changer les services offerts</button><br><br>
-				<button class="btn btn-primary" data-toggle="modal" data-target="#changeSchedule">Changer les heures d'ouverture</button><br><br>
-				<button class="btn btn-primary" data-toggle="modal" data-target="#">Rapports</button>
+				<button class="btn btn-default" data-toggle="modal" data-target="#changeServices">Changer les services offerts</button><br><br>
+				<button class="btn btn-default" data-toggle="modal" data-target="#changeSchedule">Changer les heures d'ouverture</button><br><br>
+				<button class="btn btn-default" data-toggle="modal" data-target="#">Rapports</button>
 			</div>
 		</div>
 	</div>
@@ -57,33 +57,24 @@
 	
 	<!-- Modals definition start -->
 		<?php 
-			//Add barber modal
 			include("../Content/Display/Modals/addBarberModal.php");
-			//Delete barber modal
 			include("../Content/Display/Modals/deleteEmployeeModal.php");
-			//Display customers modal
 			include("../Content/Display/Modals/displayCustomersModal.php");
-			//Change schedule modal
 			include("../Content/Display/Modals/changeScheduleModal.php");
-			//Unban customer modal
 			include("../Content/Display/Modals/unbanCustomerModal.php");
-			//Add admin modal
 			include("../Content/Display/Modals/addAdminModal.php");
+			include("../Content/Display/Modals/changeServicesModal.php")
 		?>
 	<!-- Modals definition end -->
 	
 	<!-- Database actions start -->
 		<?php
-			//Add barber to db
 			include("../Content/AdminActions/addBarber.php");
-			//Delete barber
 			include("../Content/AdminActions/deleteEmployee.php");
-			//Change schedule in db
 			include("../Content/AdminActions/changeSchedule.php");
-			//Change strikes
 			include("../Content/AdminActions/unbanCustomer.php");
-			//Add admin
 			include("../Content/AdminActions/addAdmin.php");
+			include("../Content/AdminActions/changeServices.php");
 		?>
 	<!-- Database action end --> 
 	
