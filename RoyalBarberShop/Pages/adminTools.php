@@ -9,6 +9,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-type" value="text/html; charset=utf-8" />
 	<title>Royal Baber Shop</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -48,6 +49,7 @@
 				<button class="btn btn-default" data-toggle="modal" data-target="#changeServices">Changer les services offerts</button><br><br>
 				<button class="btn btn-default" data-toggle="modal" data-target="#changeSchedule">Changer les heures d'ouverture</button><br><br>
 				<button class="btn btn-default" data-toggle="modal" data-target="#">Rapports</button>
+				<button class="btn btn-default" data-toggle="modal" data-target="#blockDays">Bloquer une journée</button>
 			</div>
 		</div>
 	</div>
@@ -63,7 +65,8 @@
 			include("../Content/Display/Modals/changeScheduleModal.php");
 			include("../Content/Display/Modals/unbanCustomerModal.php");
 			include("../Content/Display/Modals/addAdminModal.php");
-			include("../Content/Display/Modals/changeServicesModal.php")
+			include("../Content/Display/Modals/changeServicesModal.php");
+			include("../Content/Display/Modals/blockDaysModal.php");
 		?>
 	<!-- Modals definition end -->
 	
@@ -75,6 +78,7 @@
 			include("../Content/AdminActions/unbanCustomer.php");
 			include("../Content/AdminActions/addAdmin.php");
 			include("../Content/AdminActions/changeServices.php");
+			include("../Content/AdminActions/blockDays.php");
 		?>
 	<!-- Database action end --> 
 	

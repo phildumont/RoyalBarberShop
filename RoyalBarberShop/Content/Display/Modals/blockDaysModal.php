@@ -1,65 +1,59 @@
-<?php
-	//Get all the barbers
-	$serviceSql = "SELECT service_id, name, price FROM service";
-	$serviceRes = $conn->query($serviceSql) or die ("cant connect");
-	$services = array(array());
+<?php 
+	//Get blocked days from next 2 months
+	$sql = "SELECT day FROM blockeddays";
+	$res = $conn->query($sql);
+	$days = array(array());
 	$i = 0;
-	while ($row = mysqli_fetch_array($serviceRes)){
-		$services[$i]["id"] = $row[0];
-		$services[$i]["name"] = $row[1];
-		$services[$i]["price"] = $row[2];
+	setlocale(LC_ALL, 'FR');
+	while ($row = mysqli_fetch_array($res)){
+		$day = strftime("%#d", strtotime($row[0]));
+		$month = utf8_encode(strftime("%B", strtotime($row[0])));
+		$year1 = '20'.date("y", strtotime($row[0]));
+		$year = '20'.date("y");
+		
+		if ($year == $year1){
+			$days[$i][0] = $day.' '.$month.', '.$year;
+		}
 		$i++;
 	}
 ?>
 <!-- Change service modal start -->
-<div id="changeServices" class="modal fade" role="dialog">
+<div id="blockDays" class="modal fade" role="dialog">
 	<div class="modal-dialog">
 		<div class="modal-content">
+		<form action="adminTools.php" method="post">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Changer les services</h4>
+				<h4 class="modal-title">Bloquer une journée</h4>
 			</div>
 			<div class="modal-body">
-				<?php 
-					//Display all employees
-					echo "<table>";
-					foreach ($services as $service){
-						echo "
-							<form action='adminTools.php' method='post'>
-							<tr>
-								<td>".$service["name"].", ".$service["price"]."$</td>
-								<td><input type='submit' value='Supprimer' class='btn btn-default' /></td>
-								<input type='hidden' name='service_id' value='".$service["id"]."' />
-								<input type='hidden' name='setDeleteService' value='yes' />
-							</tr>
-							</form>";
-					}
-					echo "</table>";
-					echo "<h3>Ajouter un service</h3>
-						<table>
-						<form action='adminTools.php' method='post'>
-						<tr>
-							<td>Nom: </td>
-							<td><input type='text' name='serviceName' /></td>
-						</tr>
-						<tr>
-							<td>Prix: </td>
-							<td><input type='text' name='servicePrice' /></td>
-							<input type='hidden' name='service_id' value='".$service["id"]."' />
-							<input type='hidden' name='setAddService' value='yes' />
-						</tr>
-						<tr>
-							<td></td>
-							<td><input type='submit' value='Ajouter' class='btn btn-default' /></td>
-						</tr>
-						</form>
-					</table>";
-				?>
+				<!-- Content -->
+				<table>
+					<tr>
+						<td><label for="daysBlocked">Jours bloqués</label></td>
+						<td>
+							<select style="width:100%" name='daysBlocked'>
+								<?php
+									foreach ($days as $day){
+										echo "<option>".$day[0]."</option>";
+									}
+								?>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td><label for="day">Journée: </label></td>
+						<td><input type="date" name="day" /></td>
+						<input type="hidden" name="setBlockedDay" value="yes"/>
+					</tr>
+				</table>
 				
 			</div>
 			<div class="modal-footer">
+				<input type="submit" class="btn btn-default" value="Confirmer"/>
 				<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
 			</div>
+		</form>
 		</div>
 	</div>
 </div>
