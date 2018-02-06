@@ -34,7 +34,7 @@
 			<div class="col-sm-2"></div>
 			<div class="col-sm-3">
 				<h4>Employés</h4><hr>
-					<button class="btn btn-default" data-toggle="modal" data-target="#addEmp">Ajouter un employé</button><br><br>
+					<button class="btn btn-default" data-toggle="modal" data-target="#addEmp" id="addEmpB">Ajouter un employé</button><br><br>
 					<button class="btn btn-default" data-toggle="modal" data-target="#deleteEmp">Supprimer un employé</button><br><br>
 					<button class="btn btn-default" data-toggle="modal" data-target="#addAdmin">Modifier les administrateurs</button>
 			</div>
@@ -59,6 +59,17 @@
 	
 	<!-- Modals definition start -->
 		<?php 
+			if (isset($_SESSION["errorPic"])){
+				if ($_SESSION["errorPic"] == ""){
+					$heyy = "true";
+				}
+				else {
+					$heyy = "false";
+				}
+			}
+			else {
+				$heyy = "false";
+			}
 			include("../Content/Display/Modals/addBarberModal.php");
 			include("../Content/Display/Modals/deleteEmployeeModal.php");
 			include("../Content/Display/Modals/displayCustomersModal.php");
@@ -85,6 +96,14 @@
 </div>
 	<!-- Footer start -->
 	<?php include("../Content/Display/footer.php"); ?>
+	<?php
+		if (isset($_SESSION["openModalAgain"]) == "true" && $heyy == "true"){
+			echo "<script>
+					document.getElementById('addEmpB').click();
+				</script>";
+		}
+		
+	?>
 	<!-- Footer end -->
 </body>
 </html>
