@@ -42,7 +42,7 @@
 				<h4>Clients</h4><hr>
 				<button class="btn btn-default" data-toggle="modal" data-target="#seeCustomers">Liste des clients</button><br><br>
 				<button class="btn btn-default" data-toggle="modal" data-target="#unbanCustomer">Autoriser un client</button><br><br>
-				<button class="btn btn-default" data-toggle="modal" data-target="#">Liste des rendez-vous</button><br><br>
+				<button class="btn btn-default" data-toggle="modal" data-target="#seeApp">Liste des futures rendez-vous</button><br><br>
 			</div>
 			<div class="col-sm-3">
 				<h4>Services</h4><hr>
@@ -78,6 +78,7 @@
 			include("../Content/Display/Modals/addAdminModal.php");
 			include("../Content/Display/Modals/changeServicesModal.php");
 			include("../Content/Display/Modals/blockDaysModal.php");
+			include("../Content/Display/Modals/seeAppointmentsModal.php");
 		?>
 	<!-- Modals definition end -->
 	
