@@ -18,7 +18,7 @@
 		$serviceToMod = array("", "");
 	}
 ?>
-<!-- Add admin modal start -->
+<!-- Modify services modal start -->
 <div id="modifyService2" class="modal fade" role="dialog">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -44,5 +44,5 @@
 		</div>
 	</div>
 </div>
-<!-- Add admin modal end -->
+<!-- Modify services modal end -->
 <button data-toggle="modal" data-target="#modifyService2" style="display:none" id="openModifySModal"></button>
