@@ -1,20 +1,29 @@
+<?php 
+	if (isset($_SESSION["addBarberInfo"])){
+		$addBarberInfo = $_SESSION["addBarberInfo"];
+		unset($_SESSION["addBarberInfo"]);
+	}
+	else {
+		$addBarberInfo = array("", "", "", "");
+	}
+?>	
 	<input type="hidden" name="setAddEmp" value="yes"/>
 	<table>
 	<tr>
 		<td><label for="b_fname">Prénom:</label></td>
-		<td><input type="text" name="b_fname" id="b_fname" required /></td>
+		<td><input type="text" name="b_fname" id="b_fname" required value="<?php echo $addBarberInfo[0]; ?>"/></td>
 	</tr>
 	<tr>
 		<td><label for="b_lname">Nom de famille:</label></td>
-		<td><input type="text" name="b_lname" id="b_lname" required /></td>
+		<td><input type="text" name="b_lname" id="b_lname" required value="<?php echo $addBarberInfo[1]; ?>"/></td>
 	</tr>
 	<tr>
 		<td><label for="b_phone">Numéro de téléphone:</label></td>
-		<td><input type="tel" name="b_phone" id="b_phone" required /></td>
+		<td><input type="tel" name="b_phone" id="b_phone" required value="<?php echo $addBarberInfo[2]; ?>"/></td>
 	</tr>
 	<tr>
 		<td><label for="b_mail">Adresse courriel:</label></td>
-		<td><input type="email" name="b_mail" id="b_mail" required /></td>
+		<td><input type="email" name="b_mail" id="b_mail" required value="<?php echo $addBarberInfo[3]; ?>"/></td>
 	</tr>
 	<tr>
 		<td><label for="b_pass">Mot de passe:</label></td>
@@ -22,7 +31,11 @@
 	</tr>
 	<tr>
 		<td><label for="photo">Photo:</label></td>
-		<td><input type="file" name="photo" id="photo" /></td>
+		<td><input type="file" name="photo" id="photo" required /></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td class="error_message"><?php if (isset($_SESSION["errorPic"])) echo $_SESSION["errorPic"];unset($_SESSION["errorPic"]);?></td>
 	</tr>
 	<tr>
 		<td><label>Jours disponibles:</label></td>

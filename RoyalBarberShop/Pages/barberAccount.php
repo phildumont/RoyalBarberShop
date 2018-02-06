@@ -131,6 +131,10 @@
 					<td><input type="file" name="picture" value="picture" /></td>
 				</tr>
 				<tr>
+					<td></td>
+					<td class="error_message"><?php if (isset($_SESSION["errorPic"])) echo $_SESSION["errorPic"];unset($_SESSION["errorPic"]);?></td>
+				</tr>
+				<tr>
 					<td><label>Jours disponibles:</label></td>
 					<td>
 						<input type="checkbox" name="monday" id="mon" value="yes" <?php echo $m; ?>/>
@@ -211,20 +215,30 @@
 				}
 				echo $passFlag;
 				if ($passFlag == "true"){
-					$_SESSION["email"] = $email;
+					//$_SESSION["email"] = $email;
 					//Put picture in db
 					$picture_tmp = $_FILES["picture"]["tmp_name"];
 					$picture_type = $_FILES["picture"]["type"];
 					$picture_name = $_FILES["picture"]["name"];
 					$allowed_type = array('image/png', 'image/gif', 'image.jpg', 'image/jpeg');
 					$path = $barber["picture"];
-					if (in_array($picture_type, $allowed_type)){
-						$path = '../Content/dbImages/'.$picture_name;
-						move_uploaded_file($picture_tmp, $path);
+					$error_message = "";
+					$picFlag = "false";
+					
+					if ($_FILES["picture"]["name"] == ""){
+						$picFlag = "true";
 					}
 					else {
-						//TODO error
+						if (in_array($picture_type, $allowed_type)){
+							$path = '../Content/dbImages/'.$picture_name;
+							move_uploaded_file($picture_tmp, $path);
+							$picFlag = "true";
+						}
+						else {
+							$error_message = "Veuillez importer une photo de type jpeg, gif ou png seulement.".$FILES["picture"]["name"];
+						}
 					}
+					$_SESSION["errorPic"] = $error_message;
 					//Checking for availability
 					$b_avail = "";
 					if (isset($_POST["monday"])){
@@ -256,17 +270,19 @@
 							$b_avail.="U";
 					}
 					
-					//Update record in db
-					$hashedPassword = md5($email).md5('thisguyisgood').md5($pass2).md5('yesyesdovisio').md5('isthatsecureamin?');
-					$updateSql = "UPDATE barber
-									SET email='".$email."', picture='".$path."', barber_day='".$b_avail."', password='".$hashedPassword."'
-									WHERE barber_id='".$barber["barber_id"]."'";
-					if (mysqli_query($conn, $updateSql) === true){
-						$_SESSION["email"] = $email;
-					}
-					else {
-						echo '<br>failed<br>';
-						printf("Errormessage: %s\n", $conn->error);
+					if ($picFlag == "true"){
+						//Update record in db
+						$hashedPassword = md5($email).md5('thisguyisgood').md5($pass2).md5('yesyesdovisio').md5('isthatsecureamin?');
+						$updateSql = "UPDATE barber
+										SET email='".$email."', picture='".$path."', barber_day='".$b_avail."', password='".$hashedPassword."'
+										WHERE barber_id='".$barber["barber_id"]."'";
+						if (mysqli_query($conn, $updateSql) === true){
+							$_SESSION["email"] = $email;
+						}
+						else {
+							echo '<br>failed<br>';
+							printf("Errormessage: %s\n", $conn->error);
+						}	
 					}
 					$_SESSION["wrongPass"] = "";
 				}
