@@ -64,7 +64,9 @@
 			$insertBarber = "INSERT INTO barber 
 					VALUES (0, '".$b_fname."', '".$b_lname."', '".$b_phone."', '".$b_mail."', '".$hashed_pass."', '".$b_avail."', '".$path."', 'hhhhh')";
 			//echo $insertBarber;
-			if (mysqli_query($conn, $insertBarber) === true){}
+			if (mysqli_query($conn, $insertBarber) === true){
+				$_SESSION["displayMessage"] = "Le barbier à été ajouté.";
+			}
 			else {
 				echo '<br>failed<br>';
 				printf("Errormessage: %s\n", $conn->error);
@@ -74,7 +76,7 @@
 		else {
 			$_SESSION["openModalAgain"] = "true";
 		}
-		echo "<script>window.location.replace('adminTools.php');</script>";
+		echo "<script>window.location.replace('adminTools.php?confirm=yes');</script>";
 	}
 ?>
 <!-- Add employee to db end -->

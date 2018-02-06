@@ -49,7 +49,7 @@
 						</tr>
 						<tr>
 							<td>Prix: </td>
-							<td><input type='text' name='servicePrice' /></td>
+							<td><input type='number' name='servicePrice' /></td>
 							<input type='hidden' name='service_id' value='".$service["id"]."' />
 							<input type='hidden' name='setAddService' value='yes' />
 						</tr>

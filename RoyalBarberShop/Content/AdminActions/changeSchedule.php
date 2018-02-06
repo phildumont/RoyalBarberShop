@@ -5,9 +5,10 @@
 			$days3L = array("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun");
 			$newSchedule = array(array());
 			$modifiedSchedule = array(array());
+			$myDays = array("Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche");
 			for($j=0;$j<7;$j++){
-				$nameO = $days[$j].'O';
-				$nameF = $days[$j].'F';
+				$nameO = $myDays[$j].'O';
+				$nameF = $myDays[$j].'F';
 				$newSchedule[$j]["open"] = $_POST[$nameO];
 				$newSchedule[$j]["close"] = $_POST[$nameF];
 			}
@@ -26,7 +27,9 @@
 				foreach ($modifiedSchedule as $item){
 					$itemSql = "UPDATE schedule 
 								SET open='".$item["open"]."', close='".$item["close"]."' WHERE day='".$item["day"]."'";
-					if (mysqli_query($conn, $itemSql) === true){}
+					if (mysqli_query($conn, $itemSql) === true){
+						$_SESSION["displayMessage"] = "Les heures d'ouvertures ont été changées.";
+					}
 					else {
 						echo "failed";
 					}
@@ -34,6 +37,6 @@
 			}
 			$_POST["setChangeSchedule"] = "no";
 		}
-		echo "<script>window.location.replace('adminTools.php');</script>";
+		echo "<script>window.location.replace('adminTools.php?confirm=yes');</script>";
 	}
 ?>

@@ -104,7 +104,14 @@
 					document.getElementById('addEmpB').click();
 				</script>";
 		}
-		
+		if (isset($_GET["confirm"])){
+			if ($_GET["confirm"] == "yes"){
+				include("../Content/Display/Modals/adminConfirmationModal.php");
+				echo "<script>
+						document.getElementById('openAdminConfirmModal').click();
+					</script>";
+			}
+		}
 	?>
 	<!-- Footer end -->
 </body>
