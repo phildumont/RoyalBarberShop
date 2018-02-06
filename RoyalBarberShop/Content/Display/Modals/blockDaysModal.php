@@ -30,12 +30,14 @@
 				<!-- Content -->
 				<table>
 					<tr>
-						<td><label for="daysBlocked">Jours bloqués</label></td>
+						<td><label for="daysBlocked">Jours bloqués en <?php echo $year; ?></label></td>
 						<td>
 							<select style="width:100%" name='daysBlocked'>
 								<?php
 									foreach ($days as $day){
-										echo "<option>".$day[0]."</option>";
+										if (isset($day[0])){
+											echo "<option>".$day[0]."</option>";
+										}
 									}
 								?>
 							</select>

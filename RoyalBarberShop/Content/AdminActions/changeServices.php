@@ -14,12 +14,14 @@
 		
 		$deleteSql = "DELETE FROM service WHERE service_id=".$id;
 		
-		if (mysqli_query($conn, $deleteSql) === true){}
+		if (mysqli_query($conn, $deleteSql) === true){
+			$_SESSION["displayMessage"] = "Le service à été supprimé.";
+		}
 		else {
 			echo "failed";
 			printf("Errormessage: %s\n", $conn->error);
 		}
-		echo "<script>window.location.replace('adminTools.php');</script>";
+		echo "<script>window.location.replace('adminTools.php?confirm=yes');</script>";
 	}
 	
 	//Add
@@ -28,12 +30,14 @@
 		$price = $_POST["servicePrice"];
 		
 		$insertSql = "INSERT INTO service VALUES(0, '".$name."', '".$price."')";
-		if (mysqli_query($conn, $insertSql) === true){}
+		if (mysqli_query($conn, $insertSql) === true){
+			$_SESSION["displayMessage"] =  "Le service à été ajouté.";
+		}
 		else {
 			echo "failed";
 			printf("Errormessage: %s\n", $conn->error);
 		}
-		echo "<script>window.location.replace('adminTools.php');</script>";
+		echo "<script>window.location.replace('adminTools.php?confirm=yes');</script>";
 	}
 	//Modify
 	if (isset($_POST["setModifyService"])){
@@ -54,11 +58,13 @@
 		$sId = $_POST["sId"];
 		$alterSql = "UPDATE service SET name='".$sName."', price='".$sPrice."' WHERE service_id=".$sId;
 		
-		if (mysqli_query($conn, $alterSql) === true){}
+		if (mysqli_query($conn, $alterSql) === true){
+			$_SESSION["displayMessage"] = "Le service à été modifié.";
+		}
 		else {
 			echo "failed";
 			printf("Errormessage: %s\n", $conn->error);
 		}
-		echo "<script>window.location.replace('adminTools.php');</script>";
+		echo "<script>window.location.replace('adminTools.php?confirm=yes');</script>";
 	}
 ?>
