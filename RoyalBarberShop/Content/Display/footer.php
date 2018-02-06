@@ -1,4 +1,4 @@
-<footer class="footer navbar-inverse">
+<footer class="footer navbar-inverse navbar-fixed-bottom">
 	<div class="container-full">
 		<div class="row">
 			<div class="col-lg-3 col-sm-1 hidden-xs"></div>

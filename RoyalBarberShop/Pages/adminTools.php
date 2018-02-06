@@ -90,6 +90,7 @@
 			include("../Content/AdminActions/addAdmin.php");
 			include("../Content/AdminActions/changeServices.php");
 			include("../Content/AdminActions/blockDays.php");
+			include("../Content/AdminActions/deleteAdmin.php");
 		?>
 	<!-- Database action end --> 
 	
