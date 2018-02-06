@@ -25,14 +25,19 @@
 					echo "<table>";
 					foreach ($services as $service){
 						echo "
-							<form action='adminTools.php' method='post'>
 							<tr>
 								<td>".$service["name"].", ".$service["price"]."$</td>
-								<td><input type='submit' value='Supprimer' class='btn btn-default' /></td>
-								<input type='hidden' name='service_id' value='".$service["id"]."' />
-								<input type='hidden' name='setDeleteService' value='yes' />
-							</tr>
-							</form>";
+								<form action='adminTools.php' method='post'>
+									<input type='hidden' name='service_id' value='".$service["id"]."' />
+									<input type='hidden' name='setModifyService' value='yes' />
+									<td><input type='submit' value='Modifier' class='btn btn-default' /></td>
+								</form>
+								<form action='adminTools.php' method='post'>
+									<input type='hidden' name='service_id' value='".$service["id"]."' />
+									<input type='hidden' name='setDeleteService' value='yes' />
+									<td><input type='submit' value='Supprimer' class='btn btn-default' /></td>
+								</form>
+							</tr>";
 					}
 					echo "</table>";
 					echo "<h3>Ajouter un service</h3>

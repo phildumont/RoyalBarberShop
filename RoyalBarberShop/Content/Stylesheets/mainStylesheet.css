@@ -111,6 +111,9 @@ footer {
 	font-style: italic;
 	color: grey;
     height: 50px;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
 }
 .footer_item {color: #2d62b7;}
 .user_info {
