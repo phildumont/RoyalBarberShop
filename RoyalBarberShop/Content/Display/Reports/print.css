@@ -1,0 +1,6 @@
+@media print /*--This is for Print--*/
+{
+	.printB {
+        display: none;
+	} 
+}
