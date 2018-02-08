@@ -5,7 +5,7 @@
 	include("connection.inc");
 	if (isset($_SESSION["loggedin"])){
 		if (isset($_SESSION["admin"])){
-			if ($_SESSION["admin"] != "yes"){
+			if ($_SESSION["admin"] != "admin"){
 				header("Location:index.php");
 			}
 		}

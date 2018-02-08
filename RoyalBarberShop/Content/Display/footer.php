@@ -1,3 +1,4 @@
+<div style="height:100px;"></div>
 <footer class="footer navbar-inverse navbar-fixed-bottom">
 	<div class="container-full">
 		<div class="row">

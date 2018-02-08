@@ -1,6 +1,6 @@
 <?php 
 	//Get today
-	setLocale(LC_ALL, "fr");
+	setLocale(LC_ALL, 'FR');
 	$today = '20'.date("y").'-'.date('m').'-'.date('d');
 	
 	//Get future appointments
@@ -20,36 +20,37 @@
 
 	//Convert information
 	$kki = 0;
-	foreach ($appp as $app){
-		//Barber
-		$barberSql = "SELECT first_name, last_name FROM barber WHERE barber_id=".$app["barber_id"];
-		$barberRes = $conn->query($barberSql);
-		$barber = mysqli_fetch_array($barberRes);
-		$appp[$kki]["barber"] = $barber[0].' '.$barber[1];
-		
-		//Customer
-		$customerSql = "SELECT customer_fname, customer_lname FROM customer WHERE customer_id=".$app["customer_id"];
-		$customerRes = $conn->query($customerSql);
-		$customer = mysqli_fetch_array($customerRes);
-		$appp[$kki]["customer"] = $customer[0].' '.$customer[1];
-		
-		//Service
-		$serviceSql = "SELECT name, price FROM service WHERE service_id=".$app["service_id"];
-		$serviceRes = $conn->query($serviceSql);
-		$service = mysqli_fetch_array($serviceRes);
-		$appp[$kki]["service"] = $service[0].', '.$service[1].'$';
-		
-		//Date
-		$day = strftime("%#d", date('d', strtotime($app["date"])));
-		$month = strftime("%B", date('m', strtotime($app["date"])));
-		$year = date('y', strtotime($app["date"]));
-		$time = date("H:i", strtotime($app["time"]));
-		
-		$appp[$kki]["newDate"] = $day.' '.$month.', '.$year;
-		$appp[$kki]["newTime"] = $time;
-		$kki++;
+	if (count($appp) > 1){
+		foreach ($appp as $app){
+			//Barber
+			$barberSql = "SELECT first_name, last_name FROM barber WHERE barber_id=".$app["barber_id"];
+			$barberRes = $conn->query($barberSql);
+			$barber = mysqli_fetch_array($barberRes);
+			$appp[$kki]["barber"] = $barber[0].' '.$barber[1];
+			
+			//Customer
+			$customerSql = "SELECT customer_fname, customer_lname FROM customer WHERE customer_id=".$app["customer_id"];
+			$customerRes = $conn->query($customerSql);
+			$customer = mysqli_fetch_array($customerRes);
+			$appp[$kki]["customer"] = $customer[0].' '.$customer[1];
+			
+			//Service
+			$serviceSql = "SELECT name, price FROM service WHERE service_id=".$app["service_id"];
+			$serviceRes = $conn->query($serviceSql);
+			$service = mysqli_fetch_array($serviceRes);
+			$appp[$kki]["service"] = $service[0].', '.$service[1].'$';
+			
+			//Date
+			$day = strftime("%#d", strtotime($app["date"]));
+			$month = utf8_encode(strftime("%B", strtotime($app["date"])));
+			$year = '20'.date('y', strtotime($app["date"]));
+			$time = date("H:i", strtotime($app["time"]));
+
+			$appp[$kki]["newDate"] = $day.' '.$month.', '.$year;
+			$appp[$kki]["newTime"] = $time;
+			$kki++;
+		}
 	}
-	
 ?>
 <!-- See appointments modal start -->
 <div id="seeApp" class="modal fade" role="dialog">
@@ -60,15 +61,20 @@
 			</div>
 			<div class="modal-body">
 				<ul class="user_info">
-					<?php 
-						foreach ($appp as $app){
-							echo "<li>".$app["newDate"]." - ".$app["newTime"]."
-								<ul style='font-size:12pt'>
-									<li>".$app["customer"]."</li>
-									<li>".$app["barber"]."</li>
-									<li>".$app["service"]."</li>
-								</ul>
-							</li>";
+					<?php
+						if (count($appp) > 1){
+							foreach ($appp as $app){
+								echo "<li>".$app["newDate"]." - ".$app["newTime"]."
+									<ul style='font-size:12pt'>
+										<li>".$app["customer"]."</li>
+										<li>".$app["barber"]."</li>
+										<li>".$app["service"]."</li>
+									</ul>
+								</li>";
+							}
+						}
+						else {
+							echo "Il n'y a pas de futures rendez-vous.";
 						}
 					?>
 				</ul>

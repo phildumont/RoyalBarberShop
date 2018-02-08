@@ -22,7 +22,7 @@
 	$_SESSION["current"] = "barberProfile";
 	include("../Content/Display/navbar.php");
 	
-		$barberInfo = "SELECT first_name, last_name, description FROM barber";
+		$barberInfo = "SELECT first_name, last_name, description, picture FROM barber";
 		
 		$barberRes=$conn->query($barberInfo) or die("can't connect");
 		
@@ -31,40 +31,26 @@
 		while($row=mysqli_fetch_array($barberRes)){
 			$barber_fname=$row[0];
 			$barber_lname=$row[1];
-			
 			$barber_description=$row[2];
 			
 			$barbers[$i][0]=$barber_fname;
 			$barbers[$i][1]=$barber_lname;
 			$barbers[$i][2]=$barber_description;
-			
+			$barbers[$i][3]=$row[3];
 			$i++;
 		}
-			
-
 ?>
 
 <h1 class="myTitle text-center"> Notre équipe </h1>
 	
-	
-	<?php
-	echo '<strong>'.$barbers[0][0].','.$barbers[0][1].'<br>'.'</strong>'.' --';
-echo '<img src="..//Content/Images/barbers/omar.jpg" style="height:40%; width:30%"><br><br>'.$barbers[0][2].'<br>';
-		/*foreach($barbers as $barber){
-		echo $barber[0].'---'.$barber[1].'---'.$barber[2].'<br>';
-		
-		}*/
-			echo '<strong>'.$barbers[1][0].','.$barbers[1][1].'<br>'.'</strong>'.' --';
-
-echo '<img src="..//Content/Images/barbers/omar.jpg" style="height:40%; width:30%"><br><br>'.$barbers[1][2].'<br>';
-	echo '<strong>'.$barbers[2][0].','.$barbers[2][1].'<br>'.'</strong>'.' --';
-echo '<img src="..//Content/Images/barbers/ritchy.jpg" class="img-responsive"><br><br>'.$barbers[2][2].'<br>';
-	echo '<strong>'.$barbers[3][0].','.$barbers[3][1].'<br>'.'</strong>'.' --';
-echo '<img src="..//Content/Images/barbers/omar.jpg" style="height:40%; width:30%"><br><br>'.$barbers[3][2].'<br>';
-	echo '<strong>'.$barbers[4][0].','.$barbers[4][1].'<br>'.'</strong>'.' --';
-echo '<img src="..//Content/Images/barbers/omar.jpg" style="height:40%; width:30%"><br><br>'.$barbers[4][2].'<br>';
-	?>
-
+<?php 
+	foreach($barbers as $barber){
+		echo "<img src='".$barber[3]."' alt='".$barber[0]."' style='width:100px;'/><strong>".$barber[0]." ".$barber[1]."</strong><br>";
+		echo "<div class='row'><div class='col-sm-8' style='padding-left:50px;'>";
+		echo $barber[2]."<br>";
+		echo "</div></div>";
+	}
+?>
 	
 
 	<?php include("../Content/Display/footer.php"); ?>

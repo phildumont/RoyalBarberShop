@@ -38,6 +38,10 @@
 		<td class="error_message"><?php if (isset($_SESSION["errorPic"])) echo $_SESSION["errorPic"];unset($_SESSION["errorPic"]);?></td>
 	</tr>
 	<tr>
+		<td><label for="b_des">Description:</label></td>
+		<td><textarea rows='3' col='80' name="b_des" id="b_des" required></textarea></td>
+	</tr>
+	<tr>
 		<td><label>Jours disponibles:</label></td>
 		<td>
 			<input type="checkbox" name="monday" id="mon" value="yes"/>
