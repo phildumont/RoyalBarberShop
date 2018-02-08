@@ -7,6 +7,7 @@
 		$b_phone = $_POST["b_phone"];
 		$b_mail = $_POST["b_mail"];
 		$b_pass = $_POST["b_pass"];
+		$b_des = $_POST["b_des"];
 		$addBarberInfo = array($b_fname, $b_lname, $b_phone, $b_mail);
 		$_SESSION["addBarberInfo"] = $addBarberInfo;
 		$hashed_pass = md5($b_mail).md5('thisguyisgood').md5($b_pass).md5('yesyesdovisio').md5('isthatsecureamin?');
@@ -62,7 +63,7 @@
 		//Add barber to db
 		if ($picFlag == "true"){
 			$insertBarber = "INSERT INTO barber 
-					VALUES (0, '".$b_fname."', '".$b_lname."', '".$b_phone."', '".$b_mail."', '".$hashed_pass."', '".$b_avail."', '".$path."', 'hhhhh')";
+					VALUES (0, '".$b_fname."', '".$b_lname."', '".$b_phone."', '".$b_mail."', '".$hashed_pass."', '".$b_avail."', '".$path."', '".$b_des."')";
 			//echo $insertBarber;
 			if (mysqli_query($conn, $insertBarber) === true){
 				$_SESSION["displayMessage"] = "Le barbier à été ajouté.";

@@ -48,6 +48,7 @@
 		$barber = mysqli_fetch_array($barberRes);
 		$barber_day = $barber["barber_day"];
 		$password = $barber["password"];
+		$description = $barber["description"];
 		
 		//Checking the days
 		$m="";$t="";$w="";$r="";$f="";$s="";$u="";
@@ -125,6 +126,10 @@
 				<tr>
 					<td><label for="email">Adresse courriel:</label></td>
 					<td><input type="email" id="email" name="email" value="<?php echo $email; ?>" required /></td>
+				</tr>
+				<tr>
+					<td><label for="desc">Description: </label></td>
+					<td><textarea name="desc" id="desc" rows="5" col="50"><?php echo $description ?></textarea></td>
 				</tr>
 				<tr>
 					<td><label for="picture">Photo:</label></td>
@@ -207,6 +212,7 @@
 			if ($_POST["setBarberAccount"] == "yes"){
 				$email = $_POST["email"];
 				$pass2 = $_POST["password"];
+				$desc = $_POST["desc"];
 				$hashedPassword = md5($_SESSION["email"]).md5('thisguyisgood').md5($pass2).md5('yesyesdovisio').md5('isthatsecureamin?');
 				$passFlag = "false";
 				//Validate password
@@ -274,7 +280,7 @@
 						//Update record in db
 						$hashedPassword = md5($email).md5('thisguyisgood').md5($pass2).md5('yesyesdovisio').md5('isthatsecureamin?');
 						$updateSql = "UPDATE barber
-										SET email='".$email."', picture='".$path."', barber_day='".$b_avail."', password='".$hashedPassword."'
+										SET email='".$email."', picture='".$path."', barber_day='".$b_avail."', password='".$hashedPassword."', description='".$desc."'
 										WHERE barber_id='".$barber["barber_id"]."'";
 						if (mysqli_query($conn, $updateSql) === true){
 							$_SESSION["email"] = $email;
