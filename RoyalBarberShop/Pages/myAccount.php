@@ -76,6 +76,7 @@
 						$futureApp[$fi]["time"] = $app["time"];
 						$futureApp[$fi]["service"] = $app["service"];
 						$futureApp[$fi]["barber"] = $app["barber"];
+						$futureApp[$fi]["id"] = $app["id"];
 						$fi++;
 						$f_flag = "true";
 					}
@@ -123,6 +124,13 @@
 		include("../Content/Display/navbar.php");
 		include("../Content/Display/Modals/changePasswordModal.php");
 		include("../Content/Display/Modals/passWordConfirm.php");
+		include("../Content/Display/Modals/askCancelAppModal.php");
+		include("../Content/Display/Modals/appCancelledModal.php");
+		
+		//Delete appointment confirmation
+		if (isset($_SESSION["openModal1"])){
+			echo "YOOOOOOO";
+		}
 		
 		//Change password actions start
 		#Retrieve session variables from controller
@@ -185,10 +193,17 @@
 							echo "<ul class='user_info'>";
 							if ($f_flag == "true"){
 								foreach ($futureApp as $app){
+									echo "<form action='../Controllers/cancelAppointment.php' method='post'>";
+									echo "<input type='hidden' name='setCancelApp' value='yes'/>
+										<input type='hidden' name='appId' value='".$app["id"]."' />
+										<input type='hidden' name='appDate' value='".$app["date"]."' />
+										<input type='hidden' name='appTime' value='".$app["time"]."' />";
 									echo "<li>".$app["date"]." - ".$app["time"]."</li>
 											<li>&nbsp;&nbsp;Barbier: ".$app["barber"]."</li>
 											<li>&nbsp;&nbsp;Service: ".$app["service"]."</li>
+											<li>&nbsp;&nbsp;<input type='submit' value='Annuler le rendez-vous' class='btn btn-primary'/></li>
 											<li><hr></li>";
+									echo "</form>";
 								}
 							}
 							else {
