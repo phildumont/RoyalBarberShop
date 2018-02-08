@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <?php 
 	session_start();
 	include("../Content/Display/hideElements.php");
@@ -58,7 +58,7 @@
 				<h4>Services</h4><hr>
 				<button class="btn btn-default" data-toggle="modal" data-target="#changeServices">Changer les services offerts</button><br><br>
 				<button class="btn btn-default" data-toggle="modal" data-target="#changeSchedule">Changer les heures d'ouverture</button><br><br>
-				<button class="btn btn-default" data-toggle="modal" data-target="#">Rapports</button>
+				<button class="btn btn-default" data-toggle="modal" data-target="#reportsMenu">Rapports</button>
 				<button class="btn btn-default" data-toggle="modal" data-target="#blockDays">Bloquer une journée</button>
 			</div>
 		</div>
@@ -89,6 +89,9 @@
 			include("../Content/Display/Modals/changeServicesModal.php");
 			include("../Content/Display/Modals/blockDaysModal.php");
 			include("../Content/Display/Modals/seeAppointmentsModal.php");
+			
+			//Reports
+			include("../Content/Display/Reports/menu.php");
 		?>
 	<!-- Modals definition end -->
 	
