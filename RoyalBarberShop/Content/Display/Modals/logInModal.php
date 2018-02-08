@@ -18,7 +18,7 @@
 						</tr>
 						<tr>
 							<td></td>
-							<td><input type="submit" value="Connexion" class="custom_button"/></td>
+							<td><input type="submit" value="Connexion" class="btn btn-default"/></td>
 						</tr>
 					</table>
 				</form>

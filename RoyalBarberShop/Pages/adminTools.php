@@ -3,6 +3,16 @@
 	session_start();
 	include("../Content/Display/hideElements.php");
 	include("connection.inc");
+	if (isset($_SESSION["loggedin"])){
+		if (isset($_SESSION["admin"])){
+			if ($_SESSION["admin"] != "yes"){
+				header("Location:index.php");
+			}
+		}
+	}
+	else {
+		header("Location:index.php");
+	}
 ?>
 
 <html lang="en">
