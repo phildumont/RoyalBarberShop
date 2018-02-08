@@ -17,7 +17,7 @@
 		$i++;
 	}
 ?>
-<!-- Change service modal start -->
+<!-- Block days modal start -->
 <div id="blockDays" class="modal fade" role="dialog">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -59,4 +59,4 @@
 		</div>
 	</div>
 </div>
-<!-- Change service modal end -->
+<!-- Block days modal end -->
