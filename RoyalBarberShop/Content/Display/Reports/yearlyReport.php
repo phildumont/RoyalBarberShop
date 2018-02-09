@@ -57,7 +57,8 @@
 </head>
 <body id="printarea">
 	<h3>Rendez-vous en <?php echo $year; ?></h3>
-	<input type="button" value="Print" class="printB" onClick="PrintDoc()"/>
+	<input type="button" value="Imprimer" class="printB" onClick="PrintDoc()"/>
+	<br><br>
 	<table class="table table-bordered">
 		<tr>
 			<th>Id</th>
