@@ -50,10 +50,8 @@
 							<td>Rendez-vous de 
 								<select name='month'>
 								<?php 
-									$i = 0;
 									foreach ($monthArr as $month){
-										echo "<option value='".$i."'>".$month."</option>";
-										$i++;
+										echo "<option value='".$month."'>".$month."</option>";
 									}
 								?>
 								</select>

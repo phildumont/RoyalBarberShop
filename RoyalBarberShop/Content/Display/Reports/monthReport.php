@@ -114,7 +114,7 @@
 	<?php 
 		if (count($apps) > 1){
 	?>
-	<table class="table table-bordered">
+	<table class="table table-bordered table-striped table-responsive">
 		<tr>
 			<th>Id</th>
 			<th>Date</th>
@@ -137,7 +137,7 @@
 					else {
 						echo "<td></td>";
 					}
-					echo "<tr>";
+					echo "</tr>";
 				}
 			}
 		?>

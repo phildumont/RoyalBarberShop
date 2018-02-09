@@ -59,7 +59,7 @@
 	<h3>Rendez-vous en <?php echo $year; ?></h3>
 	<input type="button" value="Imprimer" class="printB" onClick="PrintDoc()"/>
 	<br><br>
-	<table class="table table-bordered">
+	<table class="table table-bordered table-striped table-responsive">
 		<tr>
 			<th>Id</th>
 			<th>Date</th>
@@ -81,7 +81,7 @@
 				else {
 					echo "<td></td>";
 				}
-				echo "<tr>";
+				echo "</tr>";
 			}
 		?>
 	</table>
