@@ -3,6 +3,7 @@
 	setlocale(LC_ALL, "FR");
 	$year = '20'.date('y');
 	$month = utf8_encode(strftime('%B', date('m')));
+	$monthArr = array("Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre");
 	
 	//Get services name
 	$serviceSql = "SELECT service_id, name FROM service";
@@ -46,7 +47,17 @@
 					</tr>
 					<tr>
 						<form action='../Content/Display/Reports/monthReport.php' method='get' target="_blank">
-							<td>Rendez-vous de <?php echo $month.' '.$year; ?></td>
+							<td>Rendez-vous de 
+								<select name='month'>
+								<?php 
+									$i = 0;
+									foreach ($monthArr as $month){
+										echo "<option value='".$i."'>".$month."</option>";
+										$i++;
+									}
+								?>
+								</select>
+							<?php echo $year; ?></td>
 							<td><button type="submit" class="btn btn-default">Générer</button></td>
 						</form>
 					</tr>
