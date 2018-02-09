@@ -74,7 +74,7 @@
 								<select name='service'>
 									<?php 
 										foreach ($services as $ser){
-											echo "<option id='".$ser[0]."'>".$ser[1]."</option>";
+											echo "<option value='".$ser[0]."'>".$ser[1]."</option>";
 										}
 									?>
 								</select>
@@ -91,7 +91,7 @@
 								<select name='barber'>
 									<?php 
 										foreach ($barbers as $bar){
-											echo "<option id='".$bar[0]."'>".$bar[1]." ".$bar[2]."</option>";
+											echo "<option value='".$bar[0]."'>".$bar[1]." ".$bar[2]."</option>";
 										}
 									?>
 								</select>
