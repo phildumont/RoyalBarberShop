@@ -1,4 +1,4 @@
-<?php 
+<?php
 	include("../../../Pages/connection.inc");
 	
 	//Date info

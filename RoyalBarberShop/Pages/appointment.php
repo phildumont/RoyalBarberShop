@@ -166,7 +166,7 @@
 				<?php
 					$appDateValue = $formInfo["appDate"];
 				?>
-					<input type="date" name="appDate" id='appDate' min="<?php echo $minDate ?>" max="<?php echo $maxDate ?>" value="<?php echo $appDateValue ?>" required/><br>
+					<input type="date" name="appDate" id='appDate' min="<?php echo $minDate ?>" max="<?php echo $maxDate ?>" value="<?php echo $appDateValue ?>" required /><br>
 					<?php
 						if (isset($_SESSION["barberNotAvailable"])){
 							echo $_SESSION["barberNotAvailable"];
@@ -174,7 +174,7 @@
 						}
 					?>
 					<br>
-					<input type="submit" value="Continue" class="custom_button"/>
+					<input type="submit" value="Continue" class="btn btn-default"/>
 			</div>
 		</div>
 		
