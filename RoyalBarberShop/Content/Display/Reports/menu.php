@@ -86,7 +86,7 @@
 						<td><strong>Veuillez choisir un barbier</strong></td>
 					</tr>
 					<tr>
-						<form action='../Content/Display/Reports/barberReport.php' method='get' target="_blank">
+						<form action='../Content/Display/Reports/testReport.php' method='get' target="_blank">
 							<td>
 								<select name='barber'>
 									<?php 
