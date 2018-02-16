@@ -45,10 +45,8 @@
 	
 <?php 
 	foreach($barbers as $barber){
-		echo "<img src='".$barber[3]."' alt='".$barber[0]."' style='width:100px;'/><strong>".$barber[0]." ".$barber[1]."</strong><br>";
-		echo "<div class='row'><div class='col-sm-8' style='padding-left:50px;'>";
-		echo $barber[2]."<br>";
-		echo "</div></div>";
+		echo "<img src='".$barber[3]."' alt='".$barber[0]."' style='width:100px;float:left;margin-right:10px;margin-left:30px;'/><strong>".$barber[0]." ".$barber[1]."</strong><br>";
+		echo "<p class='text-justify' style='width:1100px;'>".$barber[2]."</p><br>";
 	}
 ?>
 	

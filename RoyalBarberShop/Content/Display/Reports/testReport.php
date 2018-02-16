@@ -2,27 +2,28 @@
 	include("../../../Pages/connection.inc");
 	
 	//Find service, barber, customer from id
-	#barber
-	$barberSql = "SELECT first_name, last_name FROM barber WHERE barber_id=".$_GET["barber"];
-	$barberRes = $conn->query($barberSql);
-	$barber = mysqli_fetch_array($barberRes) or die('Pas de barbier.');
-	$bar = $barber["first_name"].' '.$barber["last_name"];
-	
-	//Get all services name for labels
-	$serviceSql = "SELECT service_id, name FROM service";
+	#service
+	$serviceSql = "SELECT name FROM service WHERE service_id=".$_GET["service"];
 	$serviceRes = $conn->query($serviceSql);
-	$services = array(array());
+	$service = mysqli_fetch_array($serviceRes) or die('Pas de service.');
+	$ser = $service["name"];
+	
+	//Get all barbers name for labels
+	$barberSql = "SELECT first_name, last_name, barber_id FROM barber";
+	$barberRes = $conn->query($barberSql);
+	$barbers = array(array());
 	$i = 0;
-	while ($row = mysqli_fetch_array($serviceRes)){
-		$services[$i][0] = $row[0];
-		$services[$i][1] = $row[1];
+	while ($row = mysqli_fetch_array($barberRes)){
+		$barbers[$i][0] = $row[0];
+		$barbers[$i][1] = $row[1];
+		$barbers[$i][2] = $row[2];
 		$i++;
 	}
 	$labelArr = "[";
 	$i = 0;
-	$max = count($services)-1;
-	foreach ($services as $label){
-		$labelArr.='"'.$label[1].'"';
+	$max = count($barbers)-1;
+	foreach ($barbers as $label){
+		$labelArr.='"'.$label[0].' '.$label[1].'"';
 		if ($i < $max){
 			$labelArr.= ',';
 		}
@@ -30,9 +31,9 @@
 	}
 	$labelArr.=']';
 	
-	//Get all appointments with selected barber
-	$barber_id = $_GET["barber"];
-	$appSql = "SELECT service_id FROM appointment WHERE barber_id=".$barber_id;
+	//Get all appointments with selected service
+	$service_id = $_GET["service"];
+	$appSql = "SELECT barber_id FROM appointment WHERE service_id=".$service_id;
 	$appRes = $conn->query($appSql);
 	$apps = array();
 	if (count($appRes) > 0){
@@ -43,11 +44,11 @@
 		}
 	}
 	
-	//Count types of service
-	#Array of size of all services
+	//Count barbers
+	#Array of size of all barbers
 	$dataArr = array();
 	$i = 0;
-	foreach ($services as $ser){
+	foreach ($barbers as $bar){
 		$dataArr[$i] = 0;
 		$i++;
 	}
@@ -55,8 +56,8 @@
 	#Count
 	foreach ($apps as $app){
 		$i = 0;
-		foreach ($services as $ser){
-			if ($app == $ser[0]){
+		foreach ($barbers as $bar){
+			if ($app == $bar[2]){
 				$dataArr[$i]++;
 			}
 			$i++;
@@ -87,8 +88,8 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body id="printarea">
-	<h3 style='margin-left: 15px;'>Nombre de rendez-vous par service avec <?php echo $bar.' en 20'.date('y'); ?></h3>
-	<input type="button" value="Imprimer" class="printB" onClick="PrintDoc()" style='margin-left: 15px;'/>
+	<h3 style='margin-left: 15px;'>Rendez-vous par barbier avec <?php echo $ser.' en 20'.date('y'); ?></h3>
+	<!--<input type="button" value="Imprimer" class="printB" onClick="PrintDoc()" style='margin-left: 15px;'/>-->
 	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
 	<canvas id="myChart" width="400" height="100"></canvas>

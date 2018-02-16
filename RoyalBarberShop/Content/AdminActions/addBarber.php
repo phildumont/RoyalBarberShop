@@ -20,7 +20,6 @@
 		$allowed_type = array('image/png', 'image/gif', 'image.jpg', 'image/jpeg');
 		$error_message = "";
 		$picFlag = "false";
-		
 		if (in_array($picture_type, $allowed_type)){
 			$path = '../Content/dbImages/'.$picture_name;
 			move_uploaded_file($picture_tmp, $path);
@@ -64,9 +63,9 @@
 		if ($picFlag == "true"){
 			$insertBarber = "INSERT INTO barber 
 					VALUES (0, '".$b_fname."', '".$b_lname."', '".$b_phone."', '".$b_mail."', '".$hashed_pass."', '".$b_avail."', '".$path."', '".$b_des."')";
-			//echo $insertBarber;
 			if (mysqli_query($conn, $insertBarber) === true){
 				$_SESSION["displayMessage"] = "Le barbier à été ajouté.";
+				echo "<script>window.location.replace('adminTools.php?confirm=yes');</script>";
 			}
 			else {
 				echo '<br>failed<br>';
@@ -75,9 +74,8 @@
 			$_SESSION["openModalAgain"] = "false";
 		}
 		else {
-			$_SESSION["openModalAgain"] = "true";
+			echo "<script>window.location.replace('adminTools.php?error=yes');</script>";
 		}
-		echo "<script>window.location.replace('adminTools.php?confirm=yes');</script>";
 	}
 ?>
 <!-- Add employee to db end -->

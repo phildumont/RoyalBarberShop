@@ -15,15 +15,15 @@
 	</tr>
 	<tr>
 		<td><label for="b_lname">Nom de famille:</label></td>
-		<td><input type="text" name="b_lname" id="b_lname" required value="<?php echo $addBarberInfo[1]; ?>"/></td>
+		<td><input type="text" name="b_lname" id="b_lname" value="<?php echo $addBarberInfo[1]; ?>"/></td>
 	</tr>
 	<tr>
 		<td><label for="b_phone">Numéro de téléphone:</label></td>
-		<td><input type="tel" name="b_phone" id="b_phone" required value="<?php echo $addBarberInfo[2]; ?>"/></td>
+		<td><input type="tel" name="b_phone" id="b_phone" value="<?php echo $addBarberInfo[2]; ?>"/></td>
 	</tr>
 	<tr>
 		<td><label for="b_mail">Adresse courriel:</label></td>
-		<td><input type="email" name="b_mail" id="b_mail" required value="<?php echo $addBarberInfo[3]; ?>"/></td>
+		<td><input type="email" name="b_mail" id="b_mail" value="<?php echo $addBarberInfo[3]; ?>"/></td>
 	</tr>
 	<tr>
 		<td><label for="b_pass">Mot de passe:</label></td>
@@ -39,7 +39,7 @@
 	</tr>
 	<tr>
 		<td><label for="b_des">Description:</label></td>
-		<td><textarea rows='3' col='80' name="b_des" id="b_des" required></textarea></td>
+		<td><textarea rows='3' col='80' name="b_des" id="b_des"></textarea></td>
 	</tr>
 	<tr>
 		<td><label>Jours disponibles:</label></td>

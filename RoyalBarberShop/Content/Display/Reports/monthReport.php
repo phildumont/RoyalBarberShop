@@ -3,49 +3,14 @@
 	
 	//Date info
 	setlocale(LC_ALL, "FR");
-	$year = '20'.date('y');
+	$year = $_GET["year"];
 	$month = $_GET["month"];
-	$monthNb = "";
+	$monthArr = array("Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre");
 	//Get monthNb
-	switch ($month){
-		case "Janvier":
-			$monthNb = '01';
-			break;
-		case "Février":
-			$monthNb = '02';
-			break;
-		case "Mars":
-			$monthNb = '03';
-			break;
-		case "Avril":
-			$monthNb = '04';
-			break;
-		case "Mai":
-			$monthNb = '05';
-			break;
-		case "Juin":
-			$monthNb = '06';
-			break;
-		case "Juillet":
-			$monthNb = '07';
-			break;
-		case "Août":
-			$monthNb = '08';
-			break;
-		case "Septembre":
-			$monthNb = '09';
-			break;
-		case "Octobre":
-			$monthNb = '10';
-			break;
-		case "Novembre":
-			$monthNb = '11';
-			break;
-		case "Décembre":
-			$monthNb = '12';
-			break;
+	if ($month < 10){
+		$month = '0'.$month;
 	}
-	$maxMonth = ($monthNb+1);
+	$maxMonth = ($month+1);
 	if ($maxMonth < 10){
 		$maxMonth = '0'.$maxMonth;
 	}
@@ -54,7 +19,7 @@
 		$maxMonth = '01';
 	}
 	$maxDate = ($year).'-'.$maxMonth.'-00';
-	$minDate = $year.'-'.$monthNb.'-00';
+	$minDate = $year.'-'.$month.'-00';
 		
 	//Retrieve appointments information
 	$appSql = "SELECT * FROM appointment WHERE appointment_date>'".$minDate."' AND appointment_date<'".$maxDate."'";
@@ -108,7 +73,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body id="printarea">
-	<h3>Rendez-vous en <?php echo $month.' '.$year; ?></h3>
+	<h3>Rendez-vous en <?php echo $monthArr[$_GET["month"]-1].' '.$year; ?></h3>
 	<input type="button" value="Imprimer" class="printB" onClick="PrintDoc()"/>
 	<br><br>
 	<?php 
@@ -116,7 +81,6 @@
 	?>
 	<table class="table table-bordered table-striped table-responsive">
 		<tr>
-			<th>Id</th>
 			<th>Date</th>
 			<th>Heure</th>
 			<th>Barbier</th>
@@ -128,7 +92,7 @@
 			if (count($apps) > 1){
 				foreach ($apps as $app){
 					echo "<tr>";
-					for ($i=0;$i<6;$i++){
+					for ($i=1;$i<6;$i++){
 						echo "<td>".$app[$i]."</td>";
 					}
 					if ($app[6] == "no"){
@@ -144,7 +108,7 @@
 	</table>
 		<?php  } 
 			else {
-				echo "<h3>Il n'y a pas de rendez-vous en ".$month." ".$year.".";
+				echo "<h3>Il n'y a pas de rendez-vous en ".$monthArr[$_GET["month"]]." ".$year.".";
 			}
 		?>
 	<script type="text/javascript" src="print.js"></script>

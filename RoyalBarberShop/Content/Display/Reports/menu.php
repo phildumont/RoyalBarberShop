@@ -5,6 +5,13 @@
 	$month = utf8_encode(strftime('%B', date('m')));
 	$monthArr = array("Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre");
 	
+	//Get past 5 years for array
+	$yearArr = array();
+	$yearArr[0] = $year;
+	for ($i=1;$i<5;$i++){
+		$newYear = $yearArr[$i-1]-1;
+		$yearArr[$i] = $newYear;
+	}
 	//Get services name
 	$serviceSql = "SELECT service_id, name FROM service";
 	$serviceRes = $conn->query($serviceSql);
@@ -41,7 +48,15 @@
 				<table>
 					<tr>
 						<form action='../Content/Display/Reports/yearlyReport.php' method='get' target="_blank">
-							<td>Rendez-vous de <?php echo $year; ?></td>
+							<td>Rendez-vous de
+								<select name='year'>
+								<?php 
+									foreach ($yearArr as $year){
+										echo "<option value='".$year."'>".$year."</option>";
+									}
+								?>
+								</select>
+							</td>
 							<td><button type="submit" class="btn btn-default">Générer</button></td>
 						</form>
 					</tr>
@@ -50,18 +65,34 @@
 							<td>Rendez-vous de 
 								<select name='month'>
 								<?php 
+									$j = 1;
 									foreach ($monthArr as $month){
-										echo "<option value='".$month."'>".$month."</option>";
+										echo "<option value='".$j."'>".$month."</option>";
+										$j++;
 									}
 								?>
 								</select>
-							<?php echo $year; ?></td>
+								<select name='year'>
+								<?php 
+									foreach ($yearArr as $year){
+										echo "<option value='".$year."'>".$year."</option>";
+									}
+								?>
+								</select>
 							<td><button type="submit" class="btn btn-default">Générer</button></td>
 						</form>
 					</tr>
 					<tr>
 						<form action='../Content/Display/Reports/monthlyReport.php' method='get' target="_blank">
-							<td>Nombre de rendez-vous par mois en <?php echo $year; ?></td>
+							<td>Nombre de rendez-vous par mois en
+							<select name='year'>
+								<?php 
+									foreach ($yearArr as $year){
+										echo "<option value='".$year."'>".$year."</option>";
+									}
+								?>
+								</select>
+							</td>
 							<td><button type="submit" class="btn btn-default">Générer</button></td>
 						</form>
 					</tr>
@@ -86,7 +117,7 @@
 						<td><strong>Veuillez choisir un barbier</strong></td>
 					</tr>
 					<tr>
-						<form action='../Content/Display/Reports/testReport.php' method='get' target="_blank">
+						<form action='../Content/Display/Reports/barberReport.php' method='get' target="_blank">
 							<td>
 								<select name='barber'>
 									<?php 

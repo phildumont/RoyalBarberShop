@@ -2,7 +2,7 @@
 	include("../../../Pages/connection.inc");
 	
 	//Date info
-	$year = '20'.date('y');
+	$year = $_GET["year"];
 	$monthArr = array("Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre");
 	
 	$maxDate = ($year+1).'-00-00';
@@ -19,11 +19,13 @@
 	}
 	//Count appointments per month
 	$appsPerMonth = array(0,0,0,0,0,0,0,0,0,0,0,0);
-	foreach ($apps as $app){
-		$appMonth = date('m', strtotime($app[0]));
-		for ($i=0;$i<12;$i++){
-			if ($appMonth == $i){
-				$appsPerMonth[$i-1]++;
+	if (count($apps) > 1){
+		foreach ($apps as $app){
+			$appMonth = date('m', strtotime($app[0]));
+			for ($i=0;$i<12;$i++){
+				if ($appMonth == $i){
+					$appsPerMonth[$i-1]++;
+				}
 			}
 		}
 	}

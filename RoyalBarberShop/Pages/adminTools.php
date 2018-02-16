@@ -112,7 +112,7 @@
 	<!-- Footer start -->
 	<?php include("../Content/Display/footer.php"); ?>
 	<?php
-		if (isset($_SESSION["openModalAgain"]) == "true" && $heyy == "true"){
+		if (isset($_GET["error"]) && $heyy == "false"){
 			echo "<script>
 					document.getElementById('addEmpB').click();
 				</script>";
