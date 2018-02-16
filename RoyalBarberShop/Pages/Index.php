@@ -33,18 +33,22 @@
 			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
 			<li data-target="#myCarousel" data-slide-to="1"></li>
 			<li data-target="#myCarousel" data-slide-to="2"></li>
+			<li data-target="#myCarousel" data-slide-to="3"></li>
 		</ol>
 
 		<!-- Wrapper for slides -->
 		<div class="carousel-inner carousel_img">
 			<div class="item active">
-				<img src="../Content/Images/Index/_MG_3100.jpg" alt="image1"/>				
+				<img src="../Content/Images/Index/1.jpg" alt="team"/>				
 			</div>
 			<div class="item">
-				<img src="../Content/Images/Index/_MG_3497.jpg" alt="image2"/>
+				<img src="../Content/Images/Index/3.jpg"  alt="shower"/>
 			</div>
 			<div class="item">
-				<img src="../Content/Images/Index/_MG_3532.jpg"  alt="image3"/>
+				<img src="../Content/Images/Index/4.jpg"  alt="cut"/>
+			</div>
+			<div class="item">
+				<img src="../Content/Images/Index/5.jpg"  alt="cut"/>
 			</div>
 		<!-- Left and right controls -->
 		<a class="left carousel-control" href="#myCarousel" data-slide="prev">
@@ -66,7 +70,13 @@
 				<div class="col-sm-8">
 					<h2 class="no_margin_top bold">À propos</h2>
 					<!-- TODO change text -->
-					<p>Chez Royal Barber Shop, la coiffure est notre passion. Transformer une corvée en une expérience sensationnelle. Se faire couper les cheveux n’aura jamais été aussi amusant et agréable. Toute personne désirant une coupe classique, un Mohawk, un dégradé, un désigne, etc. sont les biens venus. Nous attachons le plus grand soin à la qualité du service offert à tous nos clients, nous prenons le temps de vous écouter afin de vous proposer ce qui vous conviendra le mieux tout en respectant votre personnalité. Faites confiance à nos barbiers talentueux, qui mettront la main à la patte pour vous rendre ravissant et flamboyant.</p>
+					<p class="text-justify">Chez Royal Barber Shop, la coiffure est notre passion. 
+					Transformer une coupe de cheveux en une expérience captivant. Se faire couper les cheveux n’aura jamais été aussi 
+					divertissant et agréable. Toute personne désirant une coupe classique, un Mohawk, un dégradé, un design ou toutes 
+					autres styles de coupe seront les bienvenus. Nous attachons un grand soin à la qualité du service que nous vous 
+					offririons lors de votre rendez-vous. Nous prendrons le temps de vous écouter afin de vous proposer ce qui vous 
+					conviendra le mieux tout en respectant votre personnalité et vos attentes. Faites confiance à nos barbiers talentueux, 
+					qui mettront la main à la pâte pour vous rendre élégant et ravissant.</p>
 				</div>
 				<div class="col-sm-4">
 					<img src="../Content/Images/Index/IMG_3071.jpg" alt="aboutImage" class="homePicture hidden-sm img-responsive">
