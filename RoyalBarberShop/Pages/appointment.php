@@ -127,7 +127,13 @@
 					<?php
 						$i = 0;
 						foreach ($services as $serv){
-							if ($formInfo["service"] == $serv[2])
+							if (isset($_POST["service"])){
+								if ($_POST["service"] == $serv[2])
+									$service_selection = 'checked="checked"';
+								else
+									$service_selection = "";
+							}
+							else if ($formInfo["service"] == $serv[2])
 								$service_selection = 'checked="checked"';
 							else
 								$service_selection = "";
@@ -145,7 +151,13 @@
 				<ul class="app_ul">
 					<?php
 						foreach ($barbers as $barb){
-							if ($formInfo["barber"] == $barb[3])
+							if (isset($_POST["barber"])){
+								if ($_POST["barber"] == $barb[3])
+									$barber_selection = 'checked="checked"';
+								else
+									$barber_selection = "";
+							}
+							else if ($formInfo["barber"] == $barb[3])
 								$barber_selection = 'checked="checked"';
 							else
 								$barber_selection = "";
@@ -165,6 +177,9 @@
 				<h4>Veuillez choisir la date</h4>
 				<?php
 					$appDateValue = $formInfo["appDate"];
+					if (isset($_POST["appDate"])){
+						$appDateValue = $_POST["appDate"];
+					}
 				?>
 					<input type="date" name="appDate" id='appDate' min="<?php echo $minDate ?>" max="<?php echo $maxDate ?>" value="<?php echo $appDateValue ?>" required /><br>
 					<?php

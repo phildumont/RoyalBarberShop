@@ -60,14 +60,23 @@
 		</div>
 		<div class="row">
 			<div class="col-sm-1"></div>
-			<div class="col-sm-6">
+			<div class="col-sm-2">
 				<form action="appointmentConfirmation.php" method="post">
 					<input type="hidden" value="yes" name="confirmed">
 					<input type="hidden" value="<?php echo $barber_id ?>" name="barber">
 					<input type="hidden" value="<?php echo $service_id ?>" name="service">
 					<input type="hidden" value="<?php echo $date ?>" name="appDate">
+					<input type="hidden" value="<?php echo $time ?>" name="time"><input type="submit" value="Confirmer le rendez-vous" class="btn btn-default" style="width:auto" />
+				</form>
+			</div>
+			<div class="col-sm-3">
+				<form action="appointment.php" method="post">
+					<input type="hidden" value="yes" name="confirmed">
+					<input type="hidden" value="<?php echo $barber_id ?>" name="barber">
+					<input type="hidden" value="<?php echo $service_id ?>" name="service">
+					<input type="hidden" value="<?php echo $date ?>" name="appDate">
 					<input type="hidden" value="<?php echo $time ?>" name="time">
-					<div class="text-center"><input type="submit" value="Confirmer le rendez-vous" class="custom_button" style="width:auto"></div>
+					<input type="submit" value="Modifier le rendez-vous" class="btn btn-default" style="width:auto" />
 				</form>
 			</div>
 		</div>
@@ -126,9 +135,6 @@
 				$insertApp = "INSERT INTO appointment VALUES (0, '".$date."', '".$time."', '".$service_id."', '".$barber_id."', '".$customer_id."', null)";
 				if (mysqli_query($conn, $insertApp) === true){
 					echo "<script>document.getElementById('openAddedModal').click();</script>";
-					$msg = "testEmail";
-					$subject = "Test Email";
-					mail("phildumont8@gmail.com", $subject, $msg);
 				}
 				else {
 					echo mysqli_error($conn);
